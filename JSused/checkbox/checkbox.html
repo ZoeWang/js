@@ -1,0 +1,140 @@
+
+<html>
+	<head>
+		<title>
+			复选框全选、全不选、反选、必选一个
+		</title>
+		<meta http-equiv="content-type" content="text/html;charset=GBK"/>
+		<script language="javascript">
+			//表单验证
+			function check(){				
+				var ids = document.getElementsByName("ids");				
+				var flag = false ;				
+				for(var i=0;i<ids.length;i++){
+					if(ids[i].checked){
+						flag = true ;
+						break ;
+					}
+				}
+				if(!flag){
+					alert("请最少选择一项！");
+					return false ;
+				}
+			}
+			//全选
+			function iselect(){ //其中函数字不能为select 其为JS保留字
+				var ids = document.getElementsByName("ids");
+				var all = document.getElementById("all");				
+				for(var i=0;i<ids.length;i++){
+					ids[i].checked=all.checked;
+				}
+			}
+			//全选
+			function selectAll(){
+				var ids = document.getElementsByName("ids");							
+				for(var i=0;i<ids.length;i++){
+					ids[i].checked=true;
+				}
+			}
+			//全不
+			function selectNone(){
+				var ids = document.getElementsByName("ids");							
+				for(var i=0;i<ids.length;i++){
+					ids[i].checked=false;
+				}
+			}
+			//反选
+			function selectInvert(){
+				var ids = document.getElementsByName("ids");							
+				for(var i=0;i<ids.length;i++){
+					if(ids[i].checked)
+						ids[i].checked=false ;
+					else
+						ids[i].checked=true ;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<form action="#" onsubmit="return check();">
+		<table border="0">
+			<tr><td><input type="checkbox" id="all" onclick="iselect();"></td></tr>
+			<tr><td><input type="checkbox" name="ids">音乐</td></tr>
+			<tr><td><input type="checkbox" name="ids">短信</td></tr>
+			<tr><td><input type="checkbox" name="ids">图片</td></tr>
+			<tr><td><input type="checkbox" name="ids">电子书</td></tr>
+			<tr><td><input type="checkbox" name="ids">铃声</td></tr>
+			<tr><td><input type="checkbox" name="ids">漫画</td></tr>
+			<tr><td><input type="checkbox" name="ids">游戏</td></tr>
+			<tr><td><input type="checkbox" name="ids">杂志</td></tr>
+			<tr><td><input type="checkbox" name="ids">新闻</td></tr>
+			<tr>
+				<td>
+					<a href="#" onclick="selectAll();">全选</a> 
+					<a href="#" onclick="selectNone();">全不</a> 
+					<a href="#" onclick="selectInvert();">反选</a>
+				</td>
+			</tr>
+			<tr><td><input type="submit" value="提交"></td></tr>
+		</table>
+		</form>
+
+		<script>
+		function Check1()
+		{
+		var chks=document.getElementsByTagName('input');
+		var bl=true;
+		for(var i=0;i<chks.length;i++)
+		{
+		    if(chks[i].checked) 
+		    {
+		        bl=false;
+		        break;
+		    }
+		} 
+		if(bl) alert('最少选择一条信息');
+		}
+
+		function check2(){
+			var checks = document.getElementsByTagName("input"), cnt = 0, count = 0;
+		    for (var i = 0; i < checks.length; i++) {
+		        if (checks[i].type == "checkbox") {
+		            count += 1;
+		            if (checks[i].checked == false) {
+		                cnt += 1;
+		            }
+		        }
+		    }
+		    if(cnt==count){
+		        alert("最少选择一条信息");
+		    }
+		}
+
+		function Check3()
+		{
+		    var ck='最少选择一条信息';
+		    var   aa   =   document.getElementsByName("ck");
+		    for   (var i=0; i<aa.length; i++) if(aa[i].checked) ck='';
+		    if(ck!="") alert(ck);
+		}
+		</script>
+
+		<form name="f1" id="f1">
+		<input name="ck" type="checkbox" value="a">aaaa</input>
+		<input name="ck" type="checkbox" value="b">bbbb</input>
+		<input name="ck" type="checkbox" value="c">cccc</input>
+		<input name="ck" type="checkbox" value="d">dddd</input>
+		<input name="ck" type="checkbox" value="e">eeee</input>
+		<input type="button" value="提交" onclick="Check3()"></input>
+		</form>
+
+		<div id="divCheck">
+		<input type="checkbox">aaaa</input>
+		<input type="checkbox">bbbb</input>
+		<input type="checkbox">cccc</input>
+		<input type="checkbox">dddd</input>
+		<input type="checkbox">eeee</input>
+		<input type="button" value="提交" onclick="Check1()"></input>
+		</div>
+	</body>
+</html>

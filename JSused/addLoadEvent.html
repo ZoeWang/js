@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"> 
+<title>addLoadEvent() test</title> 
+<script type="text/javascript"> 
+function addLoadEvent(func) { 
+var oldonload = window.onload; 
+if (typeof window.onload != 'function') { 
+window.onload = func; 
+} else { 
+window.onload = function() { 
+oldonload(); 
+func(); 
+} 
+} 
+} 
+addLoadEvent(function() { 
+document.body.style.backgroundColor = 'yellow'; 
+//设置背景颜色 
+}) 
+addLoadEvent(function() { 
+document.body.appendChild(document.createTextNode('脚本之家'));; 
+}) 
+addLoadEvent(function() { 
+document.body.appendChild(document.createTextNode('www.jb51.net'));; 
+}) 
+</script> 
+</head> 
+<body> 
+<p>Here goes...</p> 
+</body> 
+</html>

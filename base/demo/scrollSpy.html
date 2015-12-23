@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+
+</head>
+
+<body>
+	<div class="bs-docs-section">
+  <h1 id="scrollspy" class="page-header">ScrollSpy <small>scrollspy.js</small></h1>
+
+  <h2 id="scrollspy-examples">例子navbar</h2>
+  <p>ScrollSpy插件自动更新导航目标基于滚动的位置。滚动navbar,看着下面的区域被激活class的变化。下拉子条目将突出显示。</p>
+  <div class="bs-example">
+    <nav id="navbar-example2" class="navbar navbar-default navbar-static" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-scrollspy">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project Name</a>
+        </div>
+        <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="#fat">@fat</a></li>
+            <li class=""><a href="#mdo">@mdo</a></li>
+            <li class="dropdown active">
+              <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
+                <li class="active"><a href="#one" tabindex="-1">one</a></li>
+                <li class=""><a href="#two" tabindex="-1">two</a></li>
+                <li class="divider"></li>
+                <li class=""><a href="#three" tabindex="-1">three</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+      <h4 id="fat">@fat</h4>
+      <p>@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容@fat下面的内容。</p>
+      <div class="section">
+        <h4 id="mdo">@mdo<a href="#" onclick="removeSection(this);">&times; 删除该部分</a></h4>
+        <p>@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容@mdo下面的内容</p>
+      </div>
+      <h4 id="one">one</h4>
+      <p>Dropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的one Dropdown 下面的one Dropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的oneDropdown 下面的one</p>
+      <h4 id="two">two</h4>
+      <p>In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven't heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
+      <h4 id="three">three</h4>
+      <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+      <p>Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.
+      </p>
+    </div>
+  </div><!-- /example -->
+
+
+  <h2 id="scrollspy-usage">使用</h2>
+
+  <h3>需要相对定位</h3>
+  <p>要实现此方法,scrollspy需要使用 <code>position: relative;</code> 你监视的元素。在大多数情况下是 <code>&lt;body&gt;</code>.</p>
+
+  <h3>通过data属性</h3>
+  <p>向您想要监听的元素（通常是<code>&lt;body&gt;</code>）添加 <code>data-spy="scroll"</code> 然后添加带有 <code>Bootstrap .nav </code>组件的父元素的 ID 或 class 的属性 <code>data-target</code>。为了它能正常工作，您必须确保页面主体中有匹配您所要监听链接的 ID 的元素存在。</p>
+<div class="highlight"><pre><code class="css"><span class="nt">body</span> <span class="p">{</span>
+  <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;body</span> <span class="na">data-spy=</span><span class="s">"scroll"</span> <span class="na">data-target=</span><span class="s">".navbar-example"</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"navbar-example"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav nav-tabs"</span> <span class="na">role=</span><span class="s">"tablist"</span><span class="nt">&gt;</span>
+      ...
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  ...
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div>
+
+  <h3>通过JavaScript 调用</h3>
+  <p>您可以通过 JavaScript 调用滚动监听，选取要监听的元素，然后调用 <code>.scrollspy()</code> 函数</p>
+<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">scrollspy</span><span class="p">({</span> <span class="nx">target</span><span class="o">:</span> <span class="s1">'.navbar-example'</span> <span class="p">})</span>
+</code></pre></div>
+
+  <div class="bs-callout bs-callout-danger">
+    <h4>可解析ID的要求</h4>
+    <p>Navbar 链接必须有目标id. For example, a <code>&lt;a href="#home"&gt;home&lt;/a&gt;</code> 必须有正确的 DOM 结构 <code>&lt;div id="home"&gt;&lt;/div&gt;</code>.</p>
+  </div>
+  <div class="bs-callout bs-callout-info">
+    <h4>Non-<code>:visible</code> 可见目标元素</h4>
+    <p>目标元素不是 <a href="http://api.jquery.com/visible-selector/"><code>:visible</code> 按照 jQuery</a> 它将被忽略和他们相应的导航项永远不会被突出显示。</p>
+  </div>
+
+  <h3>方法</h3>
+  <h4>.scrollspy('refresh')</h4>
+  <p>当通过 JavaScript 调用 scrollspy 方法时，您需要调用 .refresh 方法来更新 DOM。这在 DOM 的任意元素发生变更（即，您添加或移除了某些元素）时非常有用。下面是使用该方法的语法：</p>
+<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'[data-spy="scroll"]'</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">$spy</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollspy</span><span class="p">(</span><span class="s1">'refresh'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+ 
+
+  <h3>选项</h3>
+  <p>通过 data 属性或 JavaScript 来传递。下表列出了这些选项：data-offset="" data-</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+       <tr>
+         <th style="width: 100px;">Name</th>
+         <th style="width: 100px;">type</th>
+         <th style="width: 50px;">default</th>
+         <th>description</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>offset</td>
+         <td>number</td>
+         <td>10</td>
+         <td>当计算滚动位置时，距离顶部的偏移像素。</td>
+       </tr>
+      </tbody>
+    </table>
+  </div><!-- ./bs-table-responsive -->
+
+  <h3>事件</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+       <tr>
+         <th style="width: 150px;">Event Type</th>
+         <th>Description</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>activate.bs.scrollspy</td>
+         <td>每当一个新项目被滚动监听激活时，触发该事件。</td>
+      </tr>
+      </tbody>
+    </table>
+  </div><!-- ./bs-table-responsive -->
+<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myScrollspy'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'activate.bs.scrollspy'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// do something…</span>
+<span class="p">})</span>
+</code></pre></div>
+</div>
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="../bootstrap3.2.0/js/scrollspy.js"></script>
+  <script type="text/javascript" src="../bootstrap3.2.0/js/dropdown.js"></script>
+  <script type="text/javascript">
+   $(function(){
+    //方法
+   removeSection = function(e) {
+      $(e).parents(".section").remove();
+      $('[data-spy="scroll"]').each(function () {
+         var $spy = $(this).scrollspy('refresh')
+      });
+   }
+   $("#navbar-example2").scrollspy();
+
+   //选项
+});
+  </script>
+</body>
+</html>
+
+
+         

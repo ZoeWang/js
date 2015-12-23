@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+  <title>浏览器对象</title>  
+  <meta http-equiv="Content-Type" content="text/html; charset=gkb"/>   
+ </head>
+ <body>
+  <!--先编写好网页布局-->
+  
+  <h1>操作成功</h1>
+  <span id="num">5</span>秒后回到主页 <a href="javascript:;" onclick="goBack()">返回</a>
+ 
+  <script type="text/javascript">  
+ 
+   //获取显示秒数的元素，通过定时器来更改秒数。
+    var iNum = document.getElementById('num').innerHTML;
+    function time(){
+        iNum--;
+        document.getElementById('num').innerHTML=iNum;
+        if(iNum == 0){
+            location.assign("http://www.jikexueyuan.com");
+        }
+    }
+    setInterval(time,1000);
+   //通过window的location和history对象来控制网页的跳转。
+    function goBack(){
+
+        window.history.back();
+    }
+ </script> 
+</body>
+</html>

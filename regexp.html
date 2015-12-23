@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式</title>
+</head>
+<body>
+	<script>
+	// 正则对象 方法
+	/cat/.test('cats and dogs') // true
+
+	var r = /x/g;
+	var s = '_x_x';
+
+	r.lastIndex // 0
+	r.test(s) // true
+
+	r.lastIndex // 2
+	r.test(s) // true
+
+	r.lastIndex // 4
+	r.test(s) // false
+
+	如果正则模式是一个空字符串，则匹配所有字符串。
+
+	new RegExp('').test('abc')
+	// true
+
+	// 正则对象的exec方法，可以返回匹配结果。如果发现匹配，就返回一个数组，每个匹配成功的子字符串，就是数组成员，否则返回null。
+
+	var s = '_x_x';
+	var r1 = /x/;
+	var r2 = /y/;
+
+	r1.exec(s) // ["x"]
+	r2.exec(s) // null
+
+	// exec方法的返回数组还包含以下两个属性：
+	// input：整个原字符串。
+	// index：整个模式匹配成功的开始位置（从0开始）。
+	var r = /a(b+)a/;
+	var arr = regex.exec("_abbba_aba_");
+
+	arr // ["abbba", "bbb"]
+
+	arr.index // 1
+	arr.input // "_abbba_aba_"
+	</script>
+
+	<script>
+		// 字符串对象的方法
+
+		// 字符串对象的match方法对字符串进行正则匹配，返回匹配结果。
+		var s = "abba";
+		var r = /a/g;
+
+		s.match(r) // ["a", "a"]
+		r.exec(s) // ["a"]
+
+		// 字符串对象的search方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回-1。
+
+		'_x_x'.search(/x/)
+		// 1
+
+		// 字符串对象的replace方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容。
+
+		str.replace(search, replacement)
+
+		// replace方法的一个应用，就是消除字符串首尾两端的空格。
+
+		var str = '  #id div.class  ';
+
+		str.replace(/^\s+|\s+$/g, '')
+		// "#id div.class"
+
+		// replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。
+
+		// $& 指代匹配的子字符串。
+		// $` 指代匹配结果前面的文本。
+		// $' 指代匹配结果后面的文本。
+		// $n 指代匹配成功的第n组内容，n是从1的自然数。
+		// $$ 指代美元符号$。
+
+		"hello world".replace(/(\w+)\s(\w+)/,"$2 $1")
+		// "world hello"
+
+		"abc".replace("b", "[$`-$&-$']")
+		// "a[a-b-c]c"
+
+		// replace方法的第二个参数还可以是一个函数，将匹配内容替换为函数返回值。
+
+		"3 and 5".replace(/[0-9]+/g, function(match){
+		  return 2 * match; })
+		// "6 and 10"
+
+		var a = "The quick brown fox jumped over the lazy dog.";
+		var pattern = /quick|brown|lazy/ig;
+		a.replace( pattern, function replacer(match){
+		  return match.toUpperCase();
+		} );
+		// The QUICK BROWN fox jumped over the LAZY dog.
+
+		// 字符串对象的split方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组。
+
+		str.split(separator, [limit])
+
+		'a,  b,c, d'.split(',')
+		// [ 'a', '  b', 'c', ' d' ]
+
+		'a,  b,c, d'.split(/, */)
+		// [ 'a', 'b', 'c', 'd' ]
+
+		'a,  b,c, d'.split(/, */, 2)
+		[ 'a', 'b' ]
+
+		"aaa**a*".split(/a*/)
+		// ["", "*", "*", "*"]
+
+		// 如果正则表达式带有括号，则括号匹配的部分也会作为数组成员返回。
+
+		"aaa*a*".split(/(a*)/)
+		// [ '', 'aaa', '*', 'a', '*' ]
+
+		预定义模式指的是某些常见模式的简写方式。
+
+		\d 匹配0-9之间的任一数字，相当于[0-9]。
+		\D 匹配所有0-9以外的字符，相当于[^0-9]。
+		\w 匹配任意的字母、数字和下划线，相当于[A-Za-z0-9_]。
+		\W 除所有字母、数字和下划线以外的字符，相当于/[^A-Za-z0-9_]/ 。
+		\s 匹配空格（包括制表符、空格符、断行符等），相等于[\t\r\n\v\f]。
+		\S 匹配非空格的字符，相当于[^\t\r\n\v\f]。
+		\b 匹配词的边界。
+		\B 匹配非词边界，即在词的内部。
+
+		正则对象对一些不能打印的特殊字符，提供了表达形式。
+
+		\cX 表示 Ctrl-X
+		[\b] 匹配退格键(U+0008)，不要与\b混淆。
+		\n 匹配换行键。
+		\r 匹配回车键。
+		\t 匹配制表符tab（U+0009）。
+		\v 匹配垂直制表符（U+000B）。
+		\f 匹配换页符（U+000C）。
+		\0 匹配null字符（U+0000）。
+		\xhh 匹配一个以两位十六进制数表示的字符。
+		\uhhhh 匹配一个以四位十六进制数表示的unicode字符。
+	</script>
+</body>
+</html>

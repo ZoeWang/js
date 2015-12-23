@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>人才库生成</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/rck.css">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+</head>
+
+<body>
+	<!--top-->
+    <div class="header">
+        <div class="top">
+            <a href="#" class="logo">必联网</a>
+            <p class="nav">
+                <a href="#">必联首页<span class="line"></span></a>
+                <a href="#">公司简介</a>
+            </p>
+        </div>
+    </div>
+    <!--banner-->
+    <div class="banner">
+    	<div class="ban">
+        	<!--link-->
+            <div class="link">
+            	<div class="linkbox">
+                    <a id="01" href="#nav1" class="current">
+                        <span class="gr"></span>
+                        <p>个人信息</p>
+                    </a>
+                    <a id="02" href="#nav2">
+                        <span class="gz"></span>
+                        <p>工作经历</p>
+                    </a>
+                    <a id="03" href="#nav3">
+                        <span class="jy"></span>
+                        <p>教育经历</p>
+                    </a>
+                    <a id="04" href="#nav4">
+                        <span class="px"></span>
+                        <p>培训情况</p>
+                    </a>
+                    <a id="05" href="#nav5">
+                        <span class="jt"></span>
+                        <p>家庭成员</p>
+                    </a>
+                    <a id="06" href="#nav6">
+                        <span class="gx"></span>
+                        <p>自我个性描述</p>
+                    </a>
+                    <a id="07" href="#nav7" class="mrlast">
+                        <span class="dg"></span>
+                        <p>预计可到岗时间</p>
+                    </a>
+                 </div>
+            </div>
+    	
+        </div>
+    </div>
+    <!--con-->
+    
+    <div class="con">
+    	
+        <!--个人信息-->
+        <form action="#" method="post">
+        
+        <div class="nav_1 fn-clear">
+        <!--锚点-->
+        <a id="1" class="a1" name="nav1"></a>
+        	<h3 name=""><span></span>个人信息</h3>
+            <div class="nav_1box">
+                <!--头像-->
+                <form name="dataForm" enctype="multipart/form-data">
+                <div class="fl uploadpic">
+                    <img src="images/pic.png" width="170" height="170" alt=""  />
+                    <div class="picbox"></div>
+                    <input type="file" name="x" id="x" style="display:none;" />
+                    <a href="#" onclick="document.getElementById('x').click();return false;" class="upbtn">上传照片</a>
+                    
+                </div>
+                </form>
+                <ul class="fl infor_1">
+                    <li>
+                        <label><span>*</span> 姓名：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        <label><span>*</span> 民族：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 出生日期：</label><input type="text" value="" />
+                    </li>
+                    <li>
+                        
+                        <label><span>*</span> 身份证号码：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        <label><span>*</span> 婚姻状况：</label>
+                        <div class="select_box">
+                            <div id="marry" class="cs_select" tar="1">未婚</div>
+                            <input type="hidden" name="" id="marry_input" value="" />
+                            <ul id="marry_list" class="cs_list ft_list tar1">
+                                <li value="0" class="selected">未婚</li>
+                                <li value="1">已婚</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#marry");</script>
+                    </li> 
+                    <li>
+                        <label>出生地：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        <label>参加工作时间：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        <label>档案所在地：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 联系方式：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        <label>毕业学校：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label>最高学历：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label>所获职称/专业资格：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+
+                        <label>QQ：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+
+                        <label>部门：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                       
+                        <label>是否工伤：</label>
+                        <div class="select_box">
+                            <div id="wound" class="cs_select" tar="1">否</div>
+                            <input type="hidden" name="" id="wound_input" value="" />
+                            <ul id="wound_list" class="cs_list ft_list tar1">
+                                <li value="0" class="selected">否</li>
+                                <li value="1">是</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#wound");</script>
+                    </li>  
+                </ul>
+                
+                <ul class="fl infor_2">
+                    <li>
+                        
+                        <label><span>*</span> 应聘岗位：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 性别：</label>
+                         <div class="select_box2">
+                            <div id="sex" class="cs_select" tar="1">男</div>
+                            <input type="hidden" name="" id="sex_input" value="" />
+                            <ul id="sex_list" class="cs_list ft_list tar1">
+                                <li value="0" class="selected">男</li>
+                                <li value="1">女</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#sex");</script>
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 政治面貌：</label>
+                        <div class="select_box2">
+                            <div id="face" class="cs_select" tar="1">一般群众</div>
+                            <input type="hidden" name="" id="face_input" value="" />
+                            <ul id="face_list" class="cs_list ft_list tar1">
+                                <li value="0" class="selected">一般群众</li>
+                                <li value="1">党员</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#face");</script>
+                    </li>
+                    <li>
+                        
+                        <label><span>*</span> 在京是否参加国社保险：</label>
+                        <div class="select_box2">
+                            <div id="insurance" class="cs_select" tar="1">是</div>
+                            <input type="hidden" name="" id="insurance_input" value="" />
+                            <ul id="insurance_list" class="cs_list ft_list tar1">
+                                <li value="1" class="selected">是</li>
+                                <li value="2">否</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#insurance");</script>
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 是否生育：</label>
+                        <div class="select_box2">
+                            <div id="child" class="cs_select" tar="1">是</div>
+                            <input type="hidden" name="" id="child_input" value="" />
+                            <ul id="child_list" class="cs_list ft_list tar1">
+                                <li value="1" class="selected">是</li>
+                                <li value="2">否</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#child");</script>
+                    </li> 
+                    <li>
+                      
+                        <label>户口所在地：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                       
+                        <label>现居住地：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+
+                        <label>应急联系电话：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label><span>*</span> 电子邮箱：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label>所学专业：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                        
+                        <label>学习类型：</label>
+                        <div class="select_box2">
+                            <div id="study" class="cs_select" tar="1">统招</div>
+                            <input type="hidden" name="" id="study_input" value="" />
+                            <ul id="study_list" class="cs_list ft_list tar1">
+                                <li value="1" class="selected">统招</li>
+                                <li value="2">专升本</li>
+                                <li value="3">自考</li>
+                                <li value="4">成教</li>
+                                <li value="5">电大</li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">select_list("#study");</script>
+                    </li> 
+                    <li>
+
+                        <label>专业证书：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+                      
+                        <label>微信号：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+
+                        <label>岗位：</label><input type="text" value="" />
+                    </li> 
+                    <li>
+
+                        <label>入司日期：</label><input type="text" value="" />
+                    </li>  
+                </ul>
+              </div>
+        </div>
+        <!--工作经历-->
+        <div class="nav_2">
+        <!--锚点-->
+        <a id="2" class="a2" name="nav2"></a>
+        	<h3><span></span>工作经历</h3>
+            <a href="#" class="addbtn"><span></span>添加工作经历</a>
+            
+            <div class="boxlist">
+            	<ul class="ftitle fn-clear">
+                	<li class="w284">工作起始时间</li>
+                    <li class="w450">工作单位名称及地点</li>
+                    <li class="w200">部门</li>
+                    <li class="w186">职务</li>
+                </ul>
+                <ul class="flist">
+                	<li>
+                    	<span><input type="text" value="" class="w108 mr_0"/><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w406" /><input type="text" value="" class="w164" /><input type="text" value="" class="w164 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w108 mr_0"/><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w406" /><input type="text" value="" class="w164" /><input type="text" value="" class="w164 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w108 mr_0"/><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w406" /><input type="text" value="" class="w164" /><input type="text" value="" class="w164 mr_0" /></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--教育经历-->
+        <div class="nav_3">
+        <!--锚点-->
+        <a id="3" class="a3" name="nav3"></a>
+        	<h3><span></span>教育经历</h3>
+            <a href="#" class="addbtn"><span></span>添加教育经历</a>
+            
+            <div class="boxlist">
+            	<ul class="ftitle fn-clear">
+                	<li class="w284">学习起止时间</li>
+                    <li class="w410">学校名称及地点</li>
+                    <li class="w164">专业</li>
+                    <li class="w140">学历</li>
+                    <li class="w122">学位</li>
+                </ul>
+                <ul class="flist">
+                	<li>
+                    	<span><input type="text" value="" class="w108 mr_0" /><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w368" /><input type="text" value="" class="w118" /><input type="text" value="" class="w101" /><input type="text" value="" class="w101 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w108 mr_0" /><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w368" /><input type="text" value="" class="w118" /><input type="text" value=""class="w101" /><input type="text" value="" class="w101 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w108 mr_0" /><i class="calendar01"></i> 至 <i class="calendar02"></i><input type="text" value="" class="w108" / ><input type="text" value="" class="w368" /><input type="text" value="" class="w118" /><input type="text" value="" class="w101" /><input type="text" value="" class="w101 mr_0" /></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--培训情况-->
+        <div class="nav_4">
+        <!--锚点-->
+        <a id="4" class="a4" name="nav4"></a>
+        	<h3><span></span>培训情况</h3>
+            <a href="#" class="addbtn"><span></span>添加培训情况</a>
+            
+            <div class="boxlist">
+            	<ul class="ftitle fn-clear">
+                	<li class="w256">参加培训的课程</li>
+                    <li class="w342">培训机构</li>
+                    <li class="w200">培训时间</li>
+                    <li class="w322">所获证书</li>
+                </ul>
+                <ul class="flist">
+                	<li>
+                    	<span><input type="text" value="" class="w210" /><input type="text" value="" class="w307" /><input type="text" value="" class="w160" /><input type="text" value="" class="w300 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w210" /><input type="text" value="" class="w307" /><input type="text" value="" class="w160" /><input type="text" value="" class="w300 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w210" /><input type="text" value="" class="w307" /><input type="text" value="" class="w160" /><input type="text" value="" class="w300 mr_0" /></span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <!--家庭成员-->
+        <div class="nav_5">
+        <!--锚点-->
+        <a id="5" class="a5" name="nav5"></a>
+        	<h3><span></span>家庭成员</h3>
+            <a href="#" class="addbtn"><span></span>添加家庭成员</a>
+            
+            <div class="boxlist">
+            	<ul class="ftitle fn-clear">
+                	<li class="w158">与本人的关系</li>
+                    <li class="w158">姓名</li>
+                    <li class="w508">工作单位及地点</li>
+                    <li class="w290">联系电话</li>
+                </ul>
+                <ul class="flist">
+                	<li>
+                    	<span><input type="text" value="" class="w115" /><input type="text" value="" class="w115" /><input type="text" value="" class="w468" /><input type="text" value="" class="w272 mr_0" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w115" /><input type="text" value="" class="w115" /><input type="text" value="" class="w468" /><input type="text" value="" class="w272" /></span>
+                    </li>
+                    <li>
+                    	<span><input type="text" value="" class="w115" /><input type="text" value="" class="w115" /><input type="text" value="" class="w468" /><input type="text" value="" class="w272" /></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--自我个性描述-->
+        <div class="nav_6">
+        <!--锚点-->
+        <a id="6" class="a6" name="nav6"></a>
+        	<h3><span></span>自我个性描述</h3>
+            <textarea class="desc" id="desc">请输入自我个性描述...</textarea>
+        </div>
+        <!--预计可到岗时间-->
+        <div class="nav_7">
+        <!--锚点-->
+        <a id="7" class="a7" name="nav7"></a>
+        	<h3><span></span>预计可到岗时间</h3>
+            <div class="select_wrap">
+            	<div id="dgtime" class="cs_select" tar="1">随时</div>
+                <input type="hidden" name="" id="dgtime_input" value="" />
+                <ul id="dgtime_list" class="cs_list ft_list tar1">
+                	<li value="0" class="selected">随时</li>
+                	<li value="1">一个月内</li>
+                	<li value="2">一个月至三个月内</li>
+                    <li value="3">三个月以上</li>
+                </ul>
+            </div>
+            <script type="text/javascript">select_list("#dgtime");</script>
+            
+            <div class="boxyellow">
+            	<p>本人郑重声明本资料之各项内容均为属实，如有任何虚构，录用后愿接受无偿解雇。允许人力行政部经本人同意进行适当的背景调查。</p>
+                <p class="bold">填表人签字：<input type="text" value="" /></p>
+            </div>
+        </div>
+        <!--提交-->
+        <div class="boxbtn">
+        	<input type="submit" value="提交" class="subtn mr20" />
+            <input type="reset" value="修改" class="rebtn" />
+        </div>
+        </form>
+    </div>
+<script type="text/javascript">
+$(function(){
+	winScroll();	
+	clickScroll();
+	descMax();	
+	addrow();
+})
+</script>
+</body>
+</html>

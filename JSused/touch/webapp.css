@@ -1,0 +1,2270 @@
+*,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+textarea,
+button,
+select,
+img {
+  margin: 0;
+  padding: 0;
+  font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html {
+  font-size: 62.5%;
+}
+/*字体按比例可改变自适应大小*/
+body {
+  min-width: 320px;
+  font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+  color: #464646;
+}
+body,
+input,
+textarea,
+select,
+button,
+table {
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+}
+img,
+fieldset {
+  border: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+em,
+address,
+i {
+  font-style: normal;
+}
+a {
+  color: #464646;
+  text-decoration: none;
+}
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+button,
+select {
+  -webkit-appearance: none;
+}
+/*自定义box模型*/
+/*show hide*/
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+/*结构*/
+.h-col-2 {
+  float: left;
+  box-sizing: border-box;
+  width: 50%;
+}
+.h-col-4 {
+  float: left;
+  box-sizing: border-box;
+  width: 25%;
+}
+/*清浮动*/
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+/*浮动*/
+.h-left {
+  float: left;
+}
+.h-right {
+  float: right;
+}
+/*文本方向*/
+/*定义字号*/
+/*定义字体颜色*/
+/*定义背景颜色*/
+/*img路径*/
+/*按钮*/
+.h-btnfffbord {
+  color: #ffffff;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  font-size: 1.7rem;
+}
+.h-btngreybord {
+  color: #464646;
+  height: 43px;
+  line-height: 43px;
+  text-align: center;
+  border: 1px solid #464646;
+  border-radius: 3px;
+  font-size: 1.7rem;
+}
+.h-btngreen,
+.h-btnblue {
+  background: #00c24d;
+  color: #ffffff;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1.7rem;
+}
+.h-btnblue {
+  background: #00a3ff;
+}
+.h-pbfixed {
+  padding-bottom: 65px;
+}
+/*=======遮罩层========*/
+#bodymask {
+  position: fixed;
+  background: #000;
+  opacity: .1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+}
+/*=============背景图=============*/
+.h-icon-home {
+  width: 26px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -2px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-news {
+  width: 21px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -36px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-zyb {
+  width: 23px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -66px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-user {
+  width: 20px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -96px -1px;
+  background-size: cover;
+}
+.h-icon-home-grey {
+  width: 26px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -312px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-news-grey {
+  width: 21px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -345px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-zyb-grey {
+  width: 23px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -376px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-user-grey {
+  width: 20px;
+  height: 23px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -409px -1px;
+  background-size: 558px 24px;
+}
+.h-icon-map {
+  width: 19px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -254px 0;
+  background-size: 558px 24px;
+}
+.h-icon-search {
+  width: 22px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -221px 0;
+  background-size: 558px 24px;
+}
+.h-icon-heart-empty {
+  width: 24px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -158px 0;
+  background-size: 558px 24px;
+}
+.h-icon-heart {
+  width: 24px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -468px 0;
+  background-size: 558px 24px;
+}
+.h-icon-th {
+  width: 21px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -129px 0;
+  background-size: 558px 24px;
+}
+.h-icon-share {
+  width: 23px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -190px 0;
+  background-size: 558px 24px;
+}
+.h-icon-filter {
+  width: 23px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -500px 0;
+  background-size: 558px 24px;
+}
+.h-icon-reorder {
+  width: 23px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -283px 0;
+  background-size: 558px 24px;
+  display: block;
+}
+.h-icon-search2 {
+  width: 23px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -531px 0;
+  background-size: 558px 24px;
+}
+.h-icon-th-large {
+  width: 23px;
+  height: 24px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/icon.png) no-repeat;
+  background-position: -126px 0;
+  background-size: 558px 24px;
+}
+/*===================alert====================*/
+.msg-container {
+  padding: 20px 10px;
+}
+.h-alert {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.h-alert h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: inherit;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.h-alert > p,
+.h-alert > ul {
+  margin-bottom: 0;
+}
+.h-alert > P + P {
+  margin-top: 5px;
+}
+button.h-close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  outline: none;
+}
+.h-close {
+  float: right;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .2;
+  position: relative;
+  top: -5px;
+}
+.h-alert-ok {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.h-alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.h-alert-warn {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.h-alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+/*==============*/
+.h-head {
+  background: #00a2ff;
+  padding: 0 10px;
+}
+.h-head:before,
+.h-head:after {
+  content: " ";
+  display: table;
+}
+.h-head:after {
+  clear: both;
+}
+.h-head:before,
+.h-head:after {
+  content: " ";
+  display: table;
+}
+.h-head:after {
+  clear: both;
+}
+.h-logo {
+  float: left;
+  height: 50px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/logo.png) left center no-repeat;
+  background-size: 108px 26px;
+  width: 110px;
+}
+.h-nav {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+.h-nav a {
+  margin-left: 10px;
+  display: inline-block;
+  margin-top: 12px;
+}
+.h-region {
+  height: 24px;
+  padding: 8px 10px;
+  line-height: 2rem;
+  vertical-align: middle;
+  background: #f2f2f2;
+}
+.h-region:before,
+.h-region:after {
+  content: " ";
+  display: table;
+}
+.h-region:after {
+  clear: both;
+}
+.h-region:before,
+.h-region:after {
+  content: " ";
+  display: table;
+}
+.h-region:after {
+  clear: both;
+}
+.h-region-l {
+  float: left;
+  font-size: 1.8rem;
+}
+.h-region-r {
+  float: right;
+  text-align: right;
+}
+.h-region-r a {
+  font-size: 2.3rem;
+  margin-left: 12px;
+  color: #464646;
+  display: inline-block;
+}
+.h-sel {
+  height: 34px;
+  background: #e9e9e9;
+  border-top: 1px solid #d9d9d9;
+  padding: 0 10px;
+  overflow: hidden;
+}
+.h-sel:before,
+.h-sel:after {
+  content: " ";
+  display: table;
+}
+.h-sel:after {
+  clear: both;
+}
+.h-sel:before,
+.h-sel:after {
+  content: " ";
+  display: table;
+}
+.h-sel:after {
+  clear: both;
+}
+.h-sel div {
+  float: left;
+  width: 23%;
+  padding: 8px 0;
+  font-size: 1.4rem;
+}
+.h-sel div.h-all {
+  width: 30%;
+}
+.h-sel div.h-all span {
+  width: 70%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-sel div.h-choose a {
+  border-right: none;
+}
+.h-sel div a {
+  display: block;
+  border-right: 1px solid #bbb;
+  text-align: center;
+}
+.h-sel-list {
+  display: none;
+  position: absolute;
+  z-index: 1001;
+  background: #ffffff;
+  width: 100%;
+}
+.h-sel-list a {
+  display: block;
+}
+.h-sel-list li {
+  height: 3rem;
+  line-height: 3rem;
+  padding-left: 10px;
+  border-bottom: 1px solid #cdcdcd;
+}
+.h-inlist {
+  min-width: 320px;
+  width: 100%;
+  position: relative;
+}
+.h-inlist img {
+  min-width: 320px;
+  max-width: 640px;
+  width: 100%;
+  border: none;
+  display: block;
+  margin: 0 auto;
+}
+.h-inlist i {
+  position: absolute;
+  margin: 14px 0 0 10px;
+  color: #ffffff;
+  font-size: 2.4rem;
+}
+.h-inlist i.h-icon-heart {
+  color: #ff5d5d;
+}
+.h-inlist .h-bgtext {
+  width: 100%;
+  position: absolute;
+  margin-top: -50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+  line-height: 1.4rem;
+  color: #fff;
+}
+.h-inlist .h-bgtext div {
+  padding: 9px 10px;
+}
+.h-bgtext-l {
+  float: left;
+  width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-bgtext-l .h-fsb {
+  font-size: 1.5rem;
+}
+.h-bgtext-r {
+  float: right;
+  text-align: right;
+  width: 35%;
+}
+.h-bgtext-r .h-fsbc {
+  font-size: 1.7rem;
+  color: #fff58c;
+}
+.h-top {
+  height: 50px;
+  color: #ffffff;
+}
+.h-top:before,
+.h-top:after {
+  content: " ";
+  display: table;
+}
+.h-top:after {
+  clear: both;
+}
+.h-top:before,
+.h-top:after {
+  content: " ";
+  display: table;
+}
+.h-top:after {
+  clear: both;
+}
+.h-top h1 {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  margin-top: 11px;
+  padding: 0 28px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-browse-left {
+  font-size: 2.3rem;
+  color: #ffffff;
+  float: left;
+  padding-right: 10px;
+  margin-top: 13px;
+}
+.h-browse-left.icon-th-large {
+  text-align: right;
+}
+.h-navcl {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 7px 10px;
+  background: #f5f5f5;
+  height: 55px;
+  display: none;
+}
+.h-navcl:before,
+.h-navcl:after {
+  content: " ";
+  display: table;
+}
+.h-navcl:after {
+  clear: both;
+}
+.h-navcl:before,
+.h-navcl:after {
+  content: " ";
+  display: table;
+}
+.h-navcl:after {
+  clear: both;
+}
+.h-navcl:visited {
+  color: #464646;
+  text-decoration: none;
+}
+.h-navcl a {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+.h-navcl a i {
+  display: inline-block;
+}
+.h-photo {
+  position: relative;
+  color: #ffffff;
+}
+.h-photo .h-photo-n {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  font-size: 1rem;
+  line-height: 2rem;
+}
+.h-photo .h-p-link {
+  display: block;
+}
+.h-photo .h-p-link img {
+  min-width: 320px;
+  max-width: 640px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.h-photo .h-photo-rel {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 35px;
+  padding: 0 10px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 1.7rem;
+  line-height: 35px;
+}
+.h-photo .h-photo-rel:before,
+.h-photo .h-photo-rel:after {
+  content: " ";
+  display: table;
+}
+.h-photo .h-photo-rel:after {
+  clear: both;
+}
+.h-photo .h-photo-rel:before,
+.h-photo .h-photo-rel:after {
+  content: " ";
+  display: table;
+}
+.h-photo .h-photo-rel:after {
+  clear: both;
+}
+.h-photo .h-photo-rel span {
+  display: inline-block;
+  width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-photo .h-photo-rel a {
+  float: right;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+.h-photo .h-photo-rel a.icon-heart {
+  color: #ff5d5d;
+}
+.h-con {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  line-height: 1.8rem;
+}
+.h-con hr {
+  border: 1px solid #e7e7e7;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.h-house-intro {
+  padding: 15px 0;
+}
+.h-house-intro:before,
+.h-house-intro:after {
+  content: " ";
+  display: table;
+}
+.h-house-intro:after {
+  clear: both;
+}
+.h-house-intro:before,
+.h-house-intro:after {
+  content: " ";
+  display: table;
+}
+.h-house-intro:after {
+  clear: both;
+}
+.h-house-intro li {
+  width: 50%;
+}
+.h-house-intro li:first-child {
+  float: left;
+  margin-left: -1px;
+  border-right: 1px solid #c9c9c9;
+}
+.h-house-intro li:last-child {
+  text-align: right;
+  float: right;
+}
+.h-house-intro li:last-child .h-house-price {
+  color: #ff4900;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+.h-house-intro li span.h-sold-0 {
+  display: inline-block;
+  padding: 1px 7px;
+  background: #ff4900;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1rem;
+}
+.h-house-intro li span.h-sold-1 {
+  display: inline-block;
+  padding: 1px 7px;
+  background: #ff4900;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1rem;
+  background: #00a3ff;
+}
+.h-house-intro li span.h-sold-2 {
+  display: inline-block;
+  padding: 1px 7px;
+  background: #ff4900;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1rem;
+  background: #00c24d;
+}
+.h-house-box {
+  padding: 15px 0;
+}
+.h-house-box .icon-circle {
+  font-size: 1rem;
+  color: #00c24d;
+}
+.h-house-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+.h-fixed {
+  width: 100%;
+  padding: 10px 0;
+  background: #fff;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  z-index: 9;
+  text-align: center;
+}
+.h-fixed:before,
+.h-fixed:after {
+  content: " ";
+  display: table;
+}
+.h-fixed:after {
+  clear: both;
+}
+.h-fixed:before,
+.h-fixed:after {
+  content: " ";
+  display: table;
+}
+.h-fixed:after {
+  clear: both;
+}
+.h-fixed a {
+  width: 45%;
+  display: inline-block;
+}
+.h-fixed a:first-child {
+  /*.h-left();*/
+  background: #00c24d;
+  color: #ffffff;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 1.7rem;
+}
+.h-fixed a:last-child {
+  /*margin-right:20px;
+      .h-right();
+      .h-btnblue;*/
+}
+.h-contact {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.h-contact .h-sertel {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid #00c24d;
+  height: 45px;
+  line-height: 45px;
+  width: 100%;
+  text-align: center;
+  color: #00c24d;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+.h-contact .icon-remove-sign {
+  position: absolute;
+  margin-top: -32px;
+  right: 10px;
+}
+.h-contact input {
+  box-sizing: border-box;
+  outline: none;
+  display: block;
+  border: none;
+  height: 45px;
+  width: 100%;
+}
+.h-contact input:nth-child(2),
+.h-contact input.h-intel {
+  padding: 3px 5px;
+  border-bottom: 1px solid #00c24d;
+}
+.h-contact input:last-child {
+  margin-top: 15px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.h-item {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.h-item:before,
+.h-item:after {
+  content: " ";
+  display: table;
+}
+.h-item:after {
+  clear: both;
+}
+.h-item:before,
+.h-item:after {
+  content: " ";
+  display: table;
+}
+.h-item:after {
+  clear: both;
+}
+.h-item-thumb {
+  display: block;
+  float: left;
+  width: 100px;
+  margin-right: 15px;
+  height: 75px;
+}
+.h-item-r {
+  float: left;
+  width: 61%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-item-title {
+  font-size: 1.7rem;
+  margin-top: 1px;
+}
+.h-oprice {
+  font-size: 1.5rem;
+  color: #fe7b0c;
+}
+/*resurece 新闻页面*/
+.h-resu-line {
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-global span {
+  font-size: 1.8rem;
+}
+.h-global i {
+  font-size: 1.6rem;
+}
+.h-resu-top1 {
+  font-size: 1.7rem;
+  height: 50px;
+  color: #ffffff;
+  text-align: center;
+}
+.h-resu-top1 a {
+  color: #ffffff;
+}
+.h-resu-top1 h2 {
+  display: inline-block;
+  width: 39%;
+  font-size: 1.8rem;
+}
+.h-resu-top1 .h-resu-l {
+  width: 30%;
+  float: left;
+}
+.h-resu-r {
+  float: right;
+  margin-top: 9px;
+}
+.h-resu-r a {
+  margin: 2px 0 0 10px;
+  font-size: 2.3rem;
+  float: right;
+  color: #ffffff;
+}
+.h-navbox {
+  font-size: 1.5rem;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  line-height: 3.2rem;
+  border-bottom: 1px solid #e7e7e7;
+  background: #f9f9f9;
+  position: relative;
+}
+.h-navbox a {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin: 0 2px;
+  /*color:@grey2;*/
+  height: 40px;
+  -webkit-box-sizing: border-box;
+}
+.h-navbox .active {
+  border-bottom: 2px solid #00a3ff;
+  color: #00a3ff;
+}
+.h-navbox .h-nav-sl {
+  width: 320px;
+  height: 42px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  transition-duration: 1s;
+}
+.h-navbox .h-nav-a {
+  width: 80px;
+  float: left;
+}
+.h-navbox .h-nav-b {
+  width: 33%;
+  float: left;
+}
+.h-resu-news1 {
+  padding: 0 15px;
+  border-bottom: 2px solid #e7e7e7;
+}
+.h-resu-news1 li {
+  font-size: 1.5rem;
+  color: #464646;
+  height: 50px;
+  line-height: 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-resu-news1 .h-resu-line {
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-resu-in-list {
+  font-size: 1.5rem;
+  color: #464646;
+  height: 50px;
+  line-height: 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-resu-investbox {
+  border-bottom: 2px solid #e7e7e7;
+  padding: 0 15px;
+}
+.h-resu-investbox h2 {
+  height: 50px;
+  line-height: 4rem;
+  font-weight: bold;
+}
+.h-resu-in-image1 {
+  position: relative;
+  color: #ffffff;
+  text-align: center;
+}
+.h-resu-in-image1 img {
+  width: 100%;
+  max-width: 640px;
+}
+.h-resu-in-image1 .h-resu-in-tittle {
+  width: 100%;
+  position: absolute;
+  margin-top: -30px;
+  height: 28px;
+  color: #ffffff;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+}
+.h-resu-in-image1 h3 {
+  line-height: 2.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.5rem;
+  padding: 0 10px;
+}
+/*resurece 新闻页面*/
+.h-resu-news2 {
+  padding: 0 15px;
+}
+.h-resu-news2 li {
+  font-size: 1.5rem;
+  color: #464646;
+  height: 40px;
+  line-height: 3rem;
+  border-bottom: 1px solid #e7e7e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-resur-more {
+  text-align: center;
+  line-height: 5rem;
+  background: #f2f2f2;
+  border-top: 1px solid #fff;
+}
+.h-resu-in-image2 {
+  text-align: center;
+}
+.h-resu-in-image2 img {
+  width: 100%;
+  max-width: 640px;
+}
+.h-resu-in-image2 .h-resu-in-tittle {
+  width: 100%;
+  position: absolute;
+  margin-top: -38px;
+  height: 36px;
+  color: #ffffff;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+}
+.h-resu-in-image2 h3 {
+  line-height: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+}
+/*resurchthree 内容页面*/
+.h-tittle {
+  color: #464646;
+  font-size: 1.8rem;
+  padding: 22px 15px 0;
+  line-height: 2rem;
+}
+.h-tittlesrc {
+  padding: 0 15px;
+  padding-top: 10px;
+  color: #808080;
+}
+.h-tittlesrc .h-tittlesre-time {
+  padding-right: 10px;
+}
+.h-tittlesrc2 {
+  padding: 0 15px;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 1.5rem;
+}
+.h-tittlesrc2 .h-tittlesre-time {
+  padding-right: 10px;
+}
+.h-tittlesrc2 a {
+  color: #00a3ff;
+  padding-right: 12px;
+}
+.h-image2 {
+  margin: 0 15px;
+  padding-top: 15px;
+}
+.h-image2 img {
+  width: 100%;
+}
+.h-resrce-3content {
+  padding: 0 15px;
+  padding-top: 15px;
+  text-indent: 2rem;
+}
+.h-resrce-3content p {
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+}
+/* footer */
+.h-foot {
+  color: #e7e7e7;
+  background: #606060;
+  padding: 0 20px;
+}
+.h-foot a {
+  color: #e7e7e7;
+}
+.h-foot1 {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #747474;
+}
+.h-foot2 {
+  display: block;
+  position: absolute;
+  margin-top: -30px;
+  right: 20px;
+}
+.h-foot3 {
+  padding: 30px 0 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.8rem;
+}
+.h-foot3 .h-ICP {
+  color: #808080;
+  font-size: 1rem;
+}
+/*免责声明 disclaimer*/
+.h-bge7 {
+  background: #e7e7e7;
+}
+.h-discl {
+  padding: 20px 15px;
+}
+.h-discl p {
+  text-indent: 2em;
+  line-height: 2rem;
+}
+/*app 下载页*/
+.h-app {
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/bg.jpg) 0 0 no-repeat;
+  background-size: cover;
+  min-width: 320px;
+  max-width: 640px;
+  width: 100%;
+}
+.h-app .h-app-con {
+  text-align: center;
+  padding: 120px 33px;
+}
+.h-app .h-app-con h1 {
+  color: #ffffff;
+  font-size: 3rem;
+}
+.h-app .h-app-con p {
+  padding-top: 1.2rem;
+  padding-bottom: 4rem;
+  color: #c4c4c4;
+  line-height: 1.8rem;
+}
+.h-app .h-app-con a {
+  display: block;
+  color: #white;
+  color: #ffffff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  padding: 12px 33px;
+  margin-top: 2rem;
+  font-size: 1.8rem;
+}
+.icon-apple,
+.icon-android {
+  font-size: 2.2rem;
+}
+.icon-bar {
+  color: #e7e7e7;
+  margin: 0 23px;
+}
+/*search 搜索页面*/
+.h-search-box {
+  display: block;
+  padding: 10px 10px;
+  border-bottom: 1px solid #c4c4c4;
+  background: #f4f4f4;
+}
+.h-search-box .h-searchCon {
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: #000;
+  width: 80%;
+  margin-right: 10px;
+  height: 2rem;
+  line-height: 2rem;
+}
+.h-search-box .h-searchbtn {
+  border: none;
+  color: #464646;
+  background: transparent;
+}
+.h-search-box i {
+  position: absolute;
+  margin-left: -38px;
+  margin-top: 7px;
+  font-size: 1.8rem;
+  color: #e7e7e7;
+}
+.h-search-his {
+  margin: 10px 10px 0 10px;
+  font-size: 1.2rem;
+  color: #797979;
+  border-bottom: 1px solid #e7e7e7;
+  height: 45px;
+  line-height: 45px;
+}
+.h-search-item {
+  background: #ffffff;
+  padding: 0 10px;
+}
+.h-search-item li {
+  border-bottom: 1px solid #e7e7e7;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 45px;
+  line-height: 45px;
+}
+.h-search .h-btngreybord {
+  width: 60%;
+  display: block;
+  margin: 2rem auto;
+}
+/*筛选 choose0*/
+.h-chshis {
+  font-size: 1.5rem;
+}
+.h-chshis .h-btngreen {
+  display: block;
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.5rem;
+  position: absolute;
+  margin-top: -4rem;
+  right: 10px;
+}
+.h-chshis-tit {
+  color: #808080;
+  height: 5rem;
+  line-height: 5rem;
+}
+.h-chshis-list {
+  border-top: 1px solid #e7e7e7;
+}
+.h-chshis-list li {
+  line-height: 2rem;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 10px 0;
+}
+/*筛选 choose*/
+.h-chs {
+  font-size: 1.5rem;
+}
+.h-chs li {
+  height: 45px;
+  line-height: 45px;
+  padding-left: 80px;
+  border-bottom: 1px solid #e7e7e7;
+  position: relative;
+  box-sizing: border-box;
+}
+.h-chs li .h-chs-tit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #797979;
+}
+.h-chs li i {
+  position: absolute;
+  right: 0;
+  top: 30%;
+}
+.h-chs li select {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #ffffff;
+  -webkit-appearance: none;
+}
+.h-chs li input {
+  width: 35%;
+  height: 38px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #00c24d;
+  -webkit-appearance: none;
+}
+.h-chs-more {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  text-align: center;
+  border: 1px solid #c4c4c4;
+  color: #797979;
+  background: #eaeaea;
+  margin-top: 15px;
+}
+.h-chs-btn {
+  width: 100%;
+  padding-bottom: 4rem;
+}
+.h-chs-btn button,
+.h-chs-btn input {
+  margin-top: 20px;
+  width: 45%;
+  display: inline-block;
+}
+.h-chs-btn button {
+  height: 45px;
+  background: #fff;
+  outline: none;
+}
+.h-chs-btn input {
+  border: none;
+  outline: none;
+  float: right;
+  -webkit-appearance: none;
+}
+.h-chs-list {
+  display: none;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+  background: #ffffff;
+  padding: 0 10px;
+  width: 100%;
+}
+.h-btngrey2 {
+  width: 60%;
+  display: block;
+  margin: 2rem auto;
+}
+/*person 我的页面*/
+.h-per-topwrap {
+  height: 140px;
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/h-per-topbg.png") 0 0 no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.h-per-head {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  margin: 18px -32px 0;
+}
+.h-per-head img {
+  width: 100%;
+  height: 100%;
+}
+.h-per-log {
+  text-align: center;
+  padding-top: 98px;
+}
+.h-per-log a {
+  width: 97px;
+  height: 24px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 24px;
+  color: #ffffff;
+}
+.h-per-log .h-per-name {
+  border: none;
+  color: #ffffff;
+}
+.h-per-right {
+  height: 20px;
+  width: 10px;
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  margin: -10px -5px;
+  font-size: 2.4rem;
+  color: #ffffff;
+  color: #808080;
+}
+.h-per-list {
+  height: 55px;
+  margin-left: 20px;
+}
+.h-per-list dt {
+  height: 10%;
+  width: 43px;
+  margin-top: 15px;
+  float: right;
+}
+.h-per-list dt img {
+  width: 70%;
+  max-width: 50px;
+}
+.h-per-list dd {
+  height: 100%;
+  width: 85%;
+  float: right;
+  line-height: 4.5rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-per-list dd i {
+  float: right;
+  margin: 15px 15px 0 0;
+  font-size: 2.4rem;
+  color: #808080;
+}
+/*智业宝 recommend 推荐房源*/
+#h-wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+#h-blackblock {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  background: #ccc;
+  position: absolute;
+  display: none;
+}
+#h-swrap {
+  position: relative;
+  left: 0px;
+  width: 100%;
+}
+.h-recom-list {
+  overflow: hidden;
+  padding: 25px 15px;
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-recom-list dt {
+  width: 32%;
+  float: left;
+}
+.h-recom-list dt img {
+  width: 100%;
+}
+.h-recom-list dd {
+  width: 63%;
+  float: right;
+  color: #464646;
+  line-height: 1.5rem;
+}
+.h-recom-list dd h2 {
+  font-size: 1.5rem;
+  color: #464646;
+}
+.h-recom-list dd p {
+  color: #fe9a5c;
+  font-size: 1.3rem;
+}
+.h-recom-list dd span {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+.h-resu-movewrap {
+  position: absolute;
+  top: 0;
+  padding: 0 10px;
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .6s ease;
+  -o-transition: all .6s ease;
+  -ms-transition: all .6s ease;
+  transition: all .6s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.h-leftside {
+  width: 190px;
+  height: 100%;
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/h-pre-leftside.png") 0 0 no-repeat;
+  position: absolute;
+  left: -190px;
+  top: 0;
+}
+.h-leftside .h-leftside-content {
+  margin-top: 14px;
+}
+.h-leftside .h-leftside-content .h-rec-h2 {
+  color: #c4c4c4;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #5f5f5f;
+  height: 35px;
+  padding-left: 30px;
+}
+.h-leftside .h-leftside-content .h-city-wrap {
+  height: 300px;
+  overflow: auto;
+}
+.h-leftside .h-leftside-content .h-rec-city {
+  height: 95px;
+  padding-top: 25px;
+  border-bottom: 1px solid #5f5f5f;
+  font-size: 1.3rem;
+  color: #808080;
+  line-height: 1.7rem;
+  margin-left: 30px;
+}
+.h-leftside .h-leftside-content .h-rec-city h2 {
+  color: #c4c4c4;
+  font-size: 1.5rem;
+}
+.h-leftside .h-leftside-content .h-btnfffbord {
+  display: block;
+  width: 60%;
+  font-size: 1.5rem;
+  height: 30px;
+  line-height: 30px;
+  border-color: #00c24d;
+  color: #00c24d;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+}
+.h-resu-content2 {
+  padding-bottom: 5px;
+  display: none;
+  /*height:250px;*/
+  overflow: hidden;
+  position: relative;
+}
+.h-resu-content2 .xf-title {
+  line-height: 3rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.h-resu-content2 .xf-text {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+}
+.h-resu-content2 .xf-link a {
+  display: block;
+  color: #0BB130;
+  font-size: 1.5rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+}
+.h-resu-content2 .xf-box {
+  border-bottom: 1px solid #e7e7e7;
+  margin: 0 -15px;
+  padding: 18px 15px;
+}
+.h-container .more {
+  position: absolute;
+  margin-top: -30px;
+  right: 20px;
+}
+.h-container .indt2 {
+  margin: 0 -25px;
+  padding: 0px 42px 20px;
+}
+.h-container .list-paddingleft-2 {
+  margin: 0 -25px;
+  padding: 0px 42px 20px;
+}
+.h-reco-show {
+  display: block;
+}
+.h-xf-box {
+  border-bottom: 1px solid #e7e7e7;
+  margin: 0 -15px;
+  padding: 18px 15px;
+  height: 160px;
+}
+.h-xf-title {
+  line-height: 3rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+.h-xf-text {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+}
+.h-xf-link a {
+  display: block;
+  color: #0BB130;
+  font-size: 1.5rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+}
+.h-xf-link i {
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  vertical-align: text-bottom;
+  color: #939393;
+}
+.h-container {
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.h-container > div {
+  border-bottom: 1px solid #e7e7e7;
+  margin: 0 -25px;
+  padding: 13px 25px;
+}
+.h-orange {
+  color: #fe9a5c;
+}
+.h-indt2 {
+  text-indent: 2rem;
+}
+.h-more {
+  position: absolute;
+  margin-top: -30px;
+  right: 20px;
+}
+.h-gf p,
+.h-gf li {
+  font-size: 1.3rem;
+}
+.h-gf h1 {
+  font-size: 1.7rem;
+  font-weight: normal;
+  color: #808080;
+  line-height: 4rem;
+}
+.h-gf h1 span {
+  color: #00a3ff;
+}
+.h-gf h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 2rem;
+  color: #00a3ff;
+  margin-bottom: 5px;
+}
+.h-gf h2 .dot {
+  color: #01A2FF;
+  vertical-align: top;
+  line-height: 1.6rem;
+  font-size: 2.0rem;
+  background: #ffffff;
+  position: relative;
+}
+.h-reco-ul {
+  text-indent: 2rem;
+}
+.h-linediv:before {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  border-color: #01A2FF;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  bottom: 0;
+  content: "";
+  display: block;
+  left: 21px;
+  max-width: 1px;
+  position: absolute;
+  top: 45px;
+}
+/*我的收藏 mycollect*/
+.h-mycol-ul li {
+  height: 35px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ababab;
+}
+.h-mycol-ul li h2 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.7rem;
+  color: #464646;
+  height: 2rem;
+  line-height: 2rem;
+}
+.h-mycol-ul li span {
+  font-size: 1.4rem;
+  color: #b8b8b8;
+  margin-right: 16px;
+}
+.h-resu-a {
+  width: 100%;
+  display: block;
+}
+/*=====智业宝01=====*/
+.h-zhead {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  height: 80px;
+  background: url(http://hifang.local.com/main/resource/webapp/imgs/zybg157.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  color: #ffffff;
+}
+.h-zhead .h-top,
+.h-zhead p {
+  padding: 0 10px;
+}
+.h-zhead .h-top .h-zreset {
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  position: absolute;
+  top: 1rem;
+  right: 10px;
+  padding: 3px 6px;
+  color: #ffffff;
+  background: transparent;
+}
+.h-zhead p {
+  text-align: center;
+}
+.h-zyb {
+  padding: 0 10px;
+}
+.h-zyb h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+.h-zyb .h-zybtn {
+  margin: 20px 0 15px;
+  width: 100%;
+  display: block;
+  border: none;
+}
+.h-zyb .h-hotcity {
+  color: #c6c6c6;
+}
+.h-zyb .h-hotcity i {
+  color: #00c24d;
+}
+.h-zyb-list li {
+  box-sizing: border-box;
+  height: 45px;
+  line-height: 45px;
+  border-bottom: 1px solid #e7e7e7;
+  position: relative;
+  color: #808080;
+  font-size: 1.5rem;
+}
+.h-zyb-list li:before,
+.h-zyb-list li:after {
+  content: " ";
+  display: table;
+}
+.h-zyb-list li:after {
+  clear: both;
+}
+.h-zyb-list li:before,
+.h-zyb-list li:after {
+  content: " ";
+  display: table;
+}
+.h-zyb-list li:after {
+  clear: both;
+}
+.h-zyb-list li.h-zyb-list-pdl {
+  padding-left: 40px;
+}
+.h-zyb-list li .h-list-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.h-zyb-list li .h-zyb-sel {
+  background: #ffffff;
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 1.5rem;
+}
+.h-zyb-list li .h-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 2px;
+  width: 25px;
+  height: 25px;
+}
+.h-zyb-list li .h-checkbox input[type=checkbox] {
+  visibility: hidden;
+}
+.h-zyb-list li .h-checkbox label {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border: 1px solid #808080;
+  border-radius: 3px;
+}
+.h-zyb-list li .h-checkbox label:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 7px;
+  background: transparent;
+  top: 5px;
+  left: 5px;
+  border: 2px solid #00a3ff;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.h-zyb-list li .h-checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+.h-zyb-list li .h-radio {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 2px;
+}
+.h-zyb-list li .h-radio input[type=radio] {
+  visibility: hidden;
+}
+.h-zyb-list li .h-radio label {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid #808080;
+}
+.h-zyb-list li .h-radio label:after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  background: #fff;
+}
+.h-zyb-list li .h-radio input[type=radio]:checked + label:after {
+  background: #00a3ff;
+}
+/*登陆 log*/
+.h-login-bg {
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/bg.jpg") 0 0 no-repeat;
+  background-size: 100%;
+  overflow: hidden;
+}
+.h-log-form {
+  padding: 20px 10px;
+}
+.h-log-form label {
+  display: block;
+  padding: 0 10px;
+  height: 45px;
+  font-size: 1.5rem;
+  overflow: hidden;
+  line-height: 46px;
+  background: #ffffff;
+  margin-bottom: 5px;
+  clear: both;
+}
+.h-log-form label span {
+  float: left;
+  height: 100%;
+  width: 50px;
+  line-height: 44px;
+}
+.h-log-form label input {
+  border: none;
+  outline: none;
+}
+.h-log-form label .h-signin-input {
+  width: 52%;
+}
+.h-log-form .h-logbtn {
+  width: 100%;
+  height: 45px;
+  background: #00c24d;
+  float: left;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  margin-top: 10px;
+  outline: none;
+  color: #ffffff;
+}
+.h-log-form .h-log-forget {
+  float: right;
+  margin: 10px;
+  color: #ffffff;
+}
+.h-log-form .h-treaty {
+  color: #00c24d;
+}
+.h-signin-btn {
+  width: 75px;
+  float: right;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  background: #c4c4c4;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 7px;
+  border: none;
+}
+.h-signin-btn2 {
+  background: #ff5d5d;
+}
+/*浏览记录 browse*/
+.h-browse-clear {
+  float: right;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 3px 5px;
+  margin-top: 11px;
+  background: none;
+}
+/*===range 区间滑块===*/
+.h-range {
+  width: 300px;
+  background: #e7e7e7;
+  height: 8px;
+  position: relative;
+}
+.h-range .h-progress {
+  width: 275px;
+  background: #00a3ff;
+  height: 10px;
+  left: 25px;
+  position: absolute;
+  margin-top: -1px;
+}
+.h-range .h-range-l,
+.h-range .h-range-r {
+  width: 25px;
+  height: 40px;
+  position: absolute;
+  margin-top: -15px;
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/zybtn.png") 0 0 no-repeat;
+  background-size: 25px 40px;
+}
+.h-range .h-range-r {
+  right: 0;
+}
+.h-zscope {
+  position: relative;
+  width: 300px;
+  height: 90px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-zprice {
+  margin: 20px 0;
+  color: #00a3ff;
+  width: 300px;
+}
+.h-zprice .h-zprice-min {
+  float: left;
+}
+.h-zprice .h-zprice-max {
+  float: right;
+}
+/*====智业宝00====*/
+.h-zybg0 {
+  min-width: 320px;
+  max-width: 640px;
+  width: 100%;
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/zybg.png") #00a3ff;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.h-zyb0 {
+  color: #ffffff;
+}
+.h-zyb0 h1 {
+  font-size: 2.8rem;
+  margin: 77px auto 0;
+  text-align: center;
+}
+.h-zyb0 p {
+  font-size: 1.6rem;
+  margin: 20px auto;
+  text-align: center;
+}
+.h-zyb0 a {
+  display: block;
+  width: 150px;
+  margin: 150px auto 150px;
+}
+/*设置set*/
+.h-set-list {
+  padding: 0 20px;
+  background: #ffffff;
+}
+.h-set-list li {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #e7e7e7;
+}
+.h-set-list .h-set-li-border {
+  border: none;
+}
+.h-set-list i {
+  float: right;
+  margin-top: 10px;
+  font-size: 2.0rem;
+  color: #808080;
+}
+.h-set-list .h-set-inf {
+  font-size: 1.2rem;
+  margin: 0 ;
+}
+.h-body-grey {
+  background: #e7e7e7;
+}
+.h-exitbtn {
+  width: 100%;
+  height: 45px;
+  background: #00c24d;
+  float: left;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  margin-top: 10px;
+  outline: none;
+  color: #ffffff;
+  background: #ff5d5d;
+}
+/*注册页面 signin*/
+.h-signin-treaty {
+  float: left;
+  margin: 10px 0;
+  color: #ffffff;
+}
+.h-white {
+  color: #ffffff;
+}
+/*忘记密码*/
+.h-forgetsec {
+  width: 100%;
+  background: #ffffff;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+.h-forgetsec-sec {
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/h-forgetsec-sec.png") 20px 20px no-repeat;
+  padding-left: 66px;
+  color: #00c24d;
+  line-height: 74px;
+}
+.h-forgetsec-p {
+  padding: 0  20px;
+  line-height: 2rem;
+}
+/*个人中心  personlist*/
+.h-backgroundgrey {
+  background: #e7e7e7;
+}
+.h-personlist {
+  background: #fff;
+}
+.h-personlist li {
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+}
+.h-personlist li a {
+  display: block;
+  margin: 0 10px;
+  border-bottom: 1px solid #b8b8b8;
+  color: #464646;
+}
+.h-personlist li a .h-personlist-left {
+  padding-right: 20px;
+  color: #606060;
+}
+.h-personlist li a .h-personlist-right2,
+.h-personlist li a .h-personlist-right1 {
+  float: right;
+}
+.h-personlist li a .h-personlist-img1 {
+  width: 61px;
+  height: 61px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.h-personlist li a .h-personlist-img1 img {
+  width: 100%;
+}
+.h-personlist li a .h-personlist-right1 {
+  margin: 16px 0 0 10px;
+  font-size: 2.4rem;
+  color: #808080;
+}
+.h-personlist li a .h-personlist-img2 {
+  width: 16px;
+  height: 16px;
+  margin-top: 20px;
+}
+.h-personlist li a .h-personlist-img2 img {
+  width: 100%;
+  float: left;
+}
+.h-personlist li .h-noborder {
+  border: none;
+}
+.h-personlist .h-personlist-li1 {
+  height: 80px;
+  line-height: 80px;
+}
+.h-personlist .h-personlist-li1 .h-personlist-right1 {
+  margin: 28px 0 0 10px;
+  font-size: 2.4rem;
+}
+.h-personlist .h-personlist-li1 .h-personlist-right2 {
+  margin-top: 10px;
+}
+.h-personlist2 {
+  margin-top: 25px;
+}
+/*修改昵称 amend-name*/
+.h-name-form label {
+  line-height: 45px;
+  display: block;
+  margin-bottom: 15px;
+  height: 45px;
+  padding: 0 10px;
+  background: #ffffff;
+  overflow: hidden;
+}
+.h-name-form .h-amname-name {
+  padding-right: 10px;
+  float: left;
+}
+.h-name-form .h-amname-input {
+  border: none;
+  outline: none;
+  float: left;
+  padding: 13px 0;
+  line-height: 1.6rem;
+}
+.h-name-form .h-amname-clear {
+  float: right;
+  margin-top: 15px;
+  color: #b8b8b8;
+}
+/*上传头像*/
+.h-upload {
+  box-sizing: border-box;
+  position: relative;
+}
+.h-upload input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  min-height: 100%;
+}
+.h-upload .icon-remove-sign {
+  color: #b8b8b8;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+/*联系我们 h-contact*/
+.h-contactwrap {
+  padding: 0 10px;
+}
+.h-contactwrap li {
+  border-bottom: 1px solid #e7e7e7;
+  height: 40px;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 1.6rem;
+}
+.h-contactwrap li h3 {
+  height: 28px;
+  color: #464646;
+}
+.h-contactwrap li p {
+  color: #00c24d;
+}
+/*遮罩*/
+.h-mask-container {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.4;
+  z-index: 99999;
+  display: none;
+}
+.h-mask-gif {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin: -24px -24px 0;
+  width: 48px;
+  height: 48px;
+  background: url("http://hifang.local.com/main/resource/webapp/imgs/h-waiting.gif") no-repeat;
+  background-size: 100%;
+}

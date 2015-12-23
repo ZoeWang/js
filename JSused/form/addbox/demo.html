@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style type="text/css">
+		p{
+			border-bottom:1px solid #ccc; 
+		}
+		span{
+			padding:0 20px;
+			font-size: 0.8em ;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="results"></div>
+	<button name="" id="add_btn">Add</button>
+	<button name="" type="button" id="submit">Submit</button>
+
+	<form action="" id="test_form">
+		<p class="form_list">
+			username: <input type="text" name="username" class="username" value="22"> 
+			email: <input type="text" name="email" class="email" value="55">
+			<span class="username_error"></span>
+			<span class="email_error"></span>
+		</p>
+	</form>
+	<script src="jquery.js"></script>
+	<script type="text/javascript">
+	"use strict";
+	$(function(){
+		$('#add_btn').click(add_row);
+		$('#submit').click(check_empty);
+	});
+	function add_row(){
+		var form,str='';
+		form = $('#test_form');
+		str = '<p class="form_list">username: <input type="text" class="username"> email: <input type="text" class="email"><span class="username_error"></span><span class="email_error"></span></p>';
+		$(str).appendTo(form);
+	}
+	function check_empty(){
+		var form_list,username,email; 
+		form_list = $('.form_list');
+		form_list.each(function(){
+			username = $(this).find('.username').val();
+			email = $(this).find('.email').val();
+			if(!username){
+				$(this).find('.username_error').text('please input username!');
+			}
+			if(!email){
+				$(this).find('.email_error').text('please input eamil!');	
+			}
+
+		})
+		
+		
+
+	}
+	$("#results").append( "<tt>" + $("form").serialize() + "</tt>" );
+	</script>
+    <script>
+    //点击确定按钮 循环有错误
+	//$("#sure").click(function(){
+//		//验证确认
+//		var form_list = $("#CustomerList tr");
+//		form_list.each(function(){
+//			nameVal = $(this).find('.nameReg').val();
+//			telVal = $(this).find('.phoneReg').val();
+//			cardVal = $(this).find('.cardReg').val();
+//			if(!nameVal){
+//				errorMes.html("请输入客户姓名");
+//				$(this).bind("focus",function(){
+//					$("#error-text").text("");
+//       			})
+//				
+//			}else if(!telVal){
+//				errorMes.html("请输入电话号码");
+//				$(this).bind("focus",function(){
+//					$("#error-text").text("");
+//       			})
+//			}else if(!cardVal){
+//				errorMes.html("请输入身份证号");
+//				$(this).bind("focus",function(){
+//					$("#error-text").text("");
+//       			})
+//			}else{
+//				if(!phoneReg.test(telVal)){//如果正则不通过
+//					$("#error-text").text("手机号格式码不正确");
+//					$(this).bind("focus",function(){
+//						$("#error-text").text("");
+//					})
+//					$(this).css("background","red");
+//				}else{
+//					console.log(telVal);
+//					
+//				}
+//				if(!cardReg.test(cardVal)){
+//					$("#error-text").text("身份证号格式不正确");
+//					$(this).bind("focus",function(){
+//						$("#error-text").text("");
+//					})
+//					$(this).css("background","red");
+//				}else{
+//					console.log(cardVal);
+//					checkAjax('../site/verification',"card",cardVal,"身份证号码")
+//				}
+//			}
+//		})
+//	});
+    </script>
+</body>
+</html>

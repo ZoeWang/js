@@ -1,0 +1,30 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>文档碎片</title>
+	<meta charset="utf-8"/>
+	<style>
+	
+	</style>
+	<script>
+	//用于IE6-8 可用
+	window.onload=function(){
+		var iStart=new Date().getTime();
+		var oUl=document.getElementById('ul1');
+		var oFrag=document.createDocumentFragment();
+		for(var i=0;i<10000;i++){
+			var oLi=document.createElement('li');
+			oFrag.appendChild(oLi);
+		}
+		oUl.appendChild(oFrag);
+		alert(new Date().getTime()-iStart);
+	}
+	</script>
+</head>
+<body>
+<ul id="ul1">
+	
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>定时器</title>
+	<meta charset="utf-8"/>
+	<script>
+	function toDou(n){	//小于10 数字补0
+		if(n<10){
+			return '0'+n;
+		}else{
+			return ''+n;
+		}	
+	};
+
+	// charAt() 取字符串的某一位
+	window.onload=function(){
+		var aImg = document.getElementsByTagName('img');
+		function tick(){
+			var oDate=new Date();
+			var str =toDou(oDate.getHours())+toDou(oDate.getMinutes())+toDou(oDate.getSeconds());
+			for(var i=0; i<aImg.length; i++){
+				aImg[i].src='img/'+str.charAt(i)+'.png';
+			}
+		}
+		tick();
+		setInterval(tick,1000);
+		
+	};
+	</script>
+</head>
+<body style="background-color:black; color:#fff; font-size:50px;">
+<img src="img/0.png" alt="">
+<img src="img/0.png" alt="">
+:
+<img src="img/0.png" alt="">
+<img src="img/0.png" alt="">
+:
+<img src="img/0.png" alt="">
+<img src="img/0.png" alt="">
+
+
+</body>
+</html>

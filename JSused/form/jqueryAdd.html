@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>JQuery增加、删除表格div层文本内容的JS代码</title>
+<style type="text/css">
+em{ font-style: normal; }
+* {margin:0;padding:0;font-size:12px;list-style:none;border:0;}
+body{ margin:0px; padding:0px; background-color:#f0f0f0; font-family:Arial, Helvetica, sans-serif;}
+a{ text-decoration:none;}
+.top{ width:970px; height:30px; border-bottom:1px solid #dbdbdb; margin:0px auto;}
+.logo{ width:300px; height:30px; line-height:30px; float:left; font-size:14px; margin:0px 5px;}
+.logo a{ color:#666666;}
+.denglu{ height:30px; line-height:30px; float:right; font-size:14px;}
+.denglu a{ color:#666666; margin:0px 10px;}
+.clear{ display:block; height:0px; line-height:0px; font-size:0px; clear:both;}
+.box{ width:950px; height:auto; margin:0px auto; border-top:1px solid #f9f9f9; padding:30px 10px;}
+.ck{ width:950px; height:auto; padding-top:10px;}
+.ck_list{ width:950px; height:22px; padding:10px 0px; color:#555555; font-size:12px; border-bottom:1px solid #dddddd;}
+.ck_list input{ color:#555555; overflow:hidden;}
+.ck_list_xm{ height:22px; display:block; padding:0px 7px 0px 14px; line-height:22px; float:left;}
+.ck_list_xm em{ color:#ff005b; font-family:"宋体"; margin-left:10px;}
+.ck_input_a{ width:100px; height:20px; float:left; border:1px solid #bababa; padding:0px 2px; _height:17px; _padding:3px 2px 0px 2px; margin-right:4px;}
+.ck_list_lb,.span_fd{width:98px;}
+.ck_list_zj,.span_fd_zj{ width:68px;}
+.ck_list_bx,.span_fd_bx{ width:58px;}
+.ck_list_fd{ height:20px; border:1px solid #bababa; display:block; float:left; background:url(/jscss/demoimg/201401/bg_mj.png) no-repeat right -620px;}
+.touming_jq{ position:relative; z-index:1;}
+.ck_input_b{width:70px;}
+.ck_input_c{width:40px;}
+.ck_input_e{width:30px;}
+.ck_input_b,.ck_input_c,.ck_input_e{ float:left; border:0px; height:20px;padding:0px 3px; _height:17px; _padding:3px 3px 0px 3px; cursor:pointer;}
+.span_lb{ width:22px; height:20px; float:left; cursor:pointer;}
+.span_fd,.span_fd_zj,.span_fd_bx{ height:auto; border-width:0px 1px 1px 1px; border-style:solid; border-color:#bababa; position:absolute; left:-1px; top:21px; z-index:999; display:none; background-color:#FFFFFF;}
+.span_fd span{width:92px;}
+.span_fd_zj span{ width:62px;}
+.span_fd_bx span{ width:52px;}
+.span_fd span,.span_fd_zj span,.span_fd_bx span{height:20px; line-height:20px; padding:2px 3px; display:block; cursor:pointer;}
+.ck_input_d{ width:165px; height:20px; float:left; border:1px solid #bababa; padding:0px 2px; _height:17px; _padding:3px 2px 0px 2px; margin:0px 36px 0px 6px;}
+.shanchu{ width:14px; height:14px; margin:3px 17px; display:block; float:right; background:url(/jscss/demoimg/201401/bg_mj.png) no-repeat 0px -661px; cursor:pointer;}
+.zj{ width:922px; height:22px; padding:10px 14px; font-size:12px;}
+.zj_an{ display:block; width:83px; height:22px; float:left; background:url(/jscss/demoimg/201401/bg_mj.png) no-repeat 0px -695px; cursor:pointer;}
+.zj_ts{display:block; height:22px; float:left; color:#ff075b; line-height:22px; padding-left:10px;}
+.zj_input_a{float:right; margin:5px 5px 0px 0px; _margin:1px 1px 0px 0px;}
+.zj_bc{display:block; height:22px; float:right; line-height:22px; color:#555555;}
+</style>
+<script type="text/javascript" src="/ajaxjs/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("*").click(function(){
+	$(".jq_lb").hide();
+});
+$(".zj_an").click(function(){
+  var x = $(".ck_list").size();
+ $(".ck").append('<div class="ck_list" id="'+(x+1)+'"><span class="ck_list_xm">姓名<em>*</em></span><input name="xingming_'+(x+1)+'" type="text" class="ck_input_a" value="xingming_'+(x+1)+'" /><span class="ck_list_lb ck_list_fd"><input name="leixing_'+(x+1)+'" type="text" class="ck_input_b jq_val" value="成人(>12岁)" readonly="readonly" onclick="lbxx('+(x+1)+'); xxcss();"/><div class="span_lb jq_ck" onclick="lbxx('+(x+1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd jq_lb"><span>成人(＞12岁)</span><span>儿童(2-12岁)</span></div></span><span class="ck_list_xm">证件号码<em>*</em></span><span class="ck_list_zj ck_list_fd"><input name="zhengjian_'+(x+1)+'" type="text" class="ck_input_c jq_val" value="身份证" readonly="readonly" onclick="zjxx('+(x+1)+'); xxcss();"/><div class="span_lb jq_ck"  onclick="zjxx('+(x+1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd_zj jq_lb"><span>身份证</span><span>护照</span><span>其它</span></div></span><input name="zhengjianhaoma_'+(x+1)+'" type="text" class="ck_input_d" value="zhengjianhaoma_'+(x+1)+'" /><span class="ck_list_xm">保险</span><span class="ck_list_bx ck_list_fd"><input name="baoxiang_'+(x+1)+'" type="text" class="ck_input_e jq_val" value="0份" readonly="readonly" onclick="bxxx('+(x+1)+'); xxcss();"/><div class="span_lb jq_ck" onclick="bxxx('+(x+1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd_bx jq_lb"><span>0份</span><span>1份</span><span>2份</span></div></span><span class="ck_list_xm">￥20/份</span><span class="shanchu" onclick="shanchu('+(x+1)+');"></span><span class="clear"></span></div>');
+	$(".zj_ts").html("");
+	});
+  });
+  var lbxx = function(index){
+        $("#"+index).find(".span_fd").slideToggle(100);
+		$(".ck_list_fd").removeClass("touming_jq");
+		$("#"+index).find(".ck_list_fd").addClass("touming_jq");
+  }
+  var zjxx = function(index){
+        $("#"+index).find(".span_fd_zj").slideToggle(100);
+		$(".ck_list_fd").removeClass("touming_jq");
+		$("#"+index).find(".ck_list_fd").addClass("touming_jq");
+  }
+  var bxxx = function(index){
+        $("#"+index).find(".span_fd_bx").slideToggle(100);
+		$(".ck_list_fd").removeClass("touming_jq");
+		$("#"+index).find(".ck_list_fd").addClass("touming_jq");
+  }
+  var xxcss = function(){
+		$(".jq_lb span").hover(function(){
+		$(this).css({"background-color":"#0066CC","color":"#FFFFFF"})
+		},function(){
+		$(this).css({"background-color":"#ffffff","color":"#555555"})
+		});
+		$(".jq_lb span").click(function(){
+		 $(this).parent().siblings(".jq_val").val($(this).html())
+		});
+  }
+  var shanchu = function(index){
+      var x = $(".ck_list").size();
+	  var i = "";
+	      if (x > 1) {
+             $("#"+index).remove();
+		  for(i=index+1;i<=x;i++){
+		     $("#"+i).replaceWith(
+				 '<div class="ck_list" id="'+(i-1)+'"><span class="ck_list_xm">姓名<em>*</em></span><input name="xingming_'+(i-1)+'" type="text" class="ck_input_a" value="xingming_'+(i-1)+'" /><span class="ck_list_lb ck_list_fd"><input name="leixing_'+(i-1)+'" type="text" class="ck_input_b jq_val" value="成人(>12岁)" readonly="readonly" onclick="lbxx('+(i-1)+'); xxcss();"/><div class="span_lb jq_ck" onclick="lbxx('+(i-1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd jq_lb"><span>成人(＞12岁)</span><span>儿童(2-12岁)</span></div></span><span class="ck_list_xm">证件号码<em>*</em></span><span class="ck_list_zj ck_list_fd"><input name="zhengjian_'+(i-1)+'" type="text" class="ck_input_c jq_val" value="身份证" readonly="readonly" onclick="zjxx('+(i-1)+'); xxcss();"/><div class="span_lb jq_ck"  onclick="zjxx('+(i-1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd_zj jq_lb"><span>身份证</span><span>护照</span><span>其它</span></div></span><input name="zhengjianhaoma_'+(i-1)+'" type="text" class="ck_input_d" value="zhengjianhaoma_'+(i-1)+'" /><span class="ck_list_xm">保险</span><span class="ck_list_bx ck_list_fd"><input name="baoxiang_'+(i-1)+'" type="text" class="ck_input_e jq_val" value="0份" readonly="readonly" onclick="bxxx('+(i-1)+'); xxcss();"/><div class="span_lb jq_ck" onclick="bxxx('+(i-1)+'); xxcss();"></div><div class="clear"></div><div class="span_fd_bx jq_lb"><span>0份</span><span>1份</span><span>2份</span></div></span><span class="ck_list_xm">￥20/份</span><span class="shanchu" onclick="shanchu('+(i-1)+');"></span><span class="clear"></span></div>');
+	  }
+      } else {
+          $(".zj_ts").html("一个订单至少保留1位乘机人");
+      }
+}
+</script>
+</head>
+<body>
+<div class="box">
+<div class="ck">
+<div class="ck_list" id="1">
+<span class="ck_list_xm">姓名<em>*</em></span>
+<input name="xingming_1" type="text" class="ck_input_a" value="xingming_1" />
+<span class="ck_list_lb ck_list_fd">
+<input name="leixing_1" type="text" class="ck_input_b jq_val" value="成人(>12岁)" readonly="readonly" onclick="lbxx(1); xxcss();"/>
+<div class="span_lb jq_ck" onclick="lbxx(1); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd jq_lb"><span>成人(＞12岁)</span><span>儿童(2-12岁)</span></div>
+</span>
+<span class="ck_list_xm">证件号码<em>*</em></span>
+<span class="ck_list_zj ck_list_fd">
+<input name="zhengjian_1" type="text" class="ck_input_c jq_val" value="身份证" readonly="readonly" onclick="zjxx(1); xxcss();"/>
+<div class="span_lb jq_ck" onclick="zjxx(1); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd_zj jq_lb"><span>身份证</span><span>护照</span><span>其它</span></div>
+</span>
+<input name="zhengjianhaoma_1" type="text" class="ck_input_d" value="zhengjianhaoma_1" />
+<span class="ck_list_xm">保险</span>
+<span class="ck_list_bx ck_list_fd">
+<input name="baoxiang_1" type="text" class="ck_input_e jq_val" value="0份" readonly="readonly" onclick="bxxx(1); xxcss();"/>
+<div class="span_lb jq_ck" onclick="bxxx(1); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd_bx jq_lb"><span>0份</span><span>1份</span><span>2份</span></div>
+</span>
+<span class="ck_list_xm">￥20/份</span>
+<span class="shanchu" onclick="shanchu(1);"></span>
+<span class="clear"></span></div>
+<div class="ck_list" id="2">
+<span class="ck_list_xm">姓名<em>*</em></span>
+<input name="xingming_2" type="text" class="ck_input_a" value="xingming_2" />
+<span class="ck_list_lb ck_list_fd">
+<input name="leixing_2" type="text" class="ck_input_b jq_val" value="成人(>12岁)" readonly="readonly" onclick="lbxx(2); xxcss();"/>
+<div class="span_lb jq_ck" onclick="lbxx(2); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd jq_lb"><span>成人(＞12岁)</span><span>儿童(2-12岁)</span></div>
+</span>
+<span class="ck_list_xm">证件号码<em>*</em></span>
+<span class="ck_list_zj ck_list_fd">
+<input name="zhengjian_2" type="text" class="ck_input_c jq_val" value="身份证" readonly="readonly" onclick="zjxx(2); xxcss();"/>
+<div class="span_lb jq_ck" onclick="zjxx(2); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd_zj jq_lb"><span>身份证</span><span>护照</span><span>其它</span></div>
+</span>
+<input name="zhengjianhaoma_2" type="text" class="ck_input_d" value="zhengjianhaoma_2" />
+<span class="ck_list_xm">保险</span>
+<span class="ck_list_bx ck_list_fd">
+<input name="baoxiang_2" type="text" class="ck_input_e jq_val" value="0份" readonly="readonly" onclick="bxxx(2); xxcss();"/>
+<div class="span_lb jq_ck" onclick="bxxx(2); xxcss();"></div>
+<div class="clear"></div>
+<div class="span_fd_bx jq_lb"><span>0份</span><span>1份</span><span>2份</span></div>
+</span>
+<span class="ck_list_xm">￥20/份</span>
+<span class="shanchu" onclick="shanchu(2);"></span>
+<span class="clear"></span></div>
+</div>
+<div class="zj">
+<span class="zj_an"></span>
+<span class="zj_ts"></span>
+<span class="zj_bc">保存至常用联系人</span>
+<input name="" type="checkbox" value="" class="zj_input_a" />
+<span class="clear"></span>
+</div>
+</div>
+</body>
+</html>

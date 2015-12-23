@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+	<meta charset="UTF-8">
+	<title>js比较日期大小</title>
+</head>
+<body>
+	<h1>第一种</h1>
+	<form action="" id="searchform">
+		开始日期：<input type="text" id="startTime" /> 格式为yyyyMMdd， 如：20150428 <br>
+		结束日期：<input type="text" id="endTime" /> 格式yyyyMMdd， 如：20150528 <br>
+		<input type="button" value="比较" onclick="dateValid()" />
+	</form>
+	<script>
+	function dateValid () {
+
+		var bd = document.getElementById("startTime").value;
+		var beginDate = new Date(bd.replace(/^(\d{4})(\d{2})$/,"$1/$2/$3"));	// 正则么成功
+
+		var ed = document.getElementById("endTime").value;
+		var endDate = new Date(ed.replace(/^(\d{4})(\d{2})$/,"$1/$2/$3/"));
+
+		if(beginDate >= endDate){
+			alert("结束时间必须大于开始时间！");
+			return false;
+		}else{
+			document.getElementById('searchform').submit();
+		}
+	}
+	</script>
+	<h1>第二种</h1>
+	<form action="" id="searchform">
+		开始日期：<input type="text" id="startTime2" /> 格式为yyyy-MM-dd， 如：2015-04-28 <br>
+		结束日期：<input type="text" id="endTime2" /> 格式yyyy-MM-dd， 如：2015-05-28 <br>
+		<input type="button" value="比较" onclick="dateValid2()" />
+	</form>
+	<script>
+	function dateValid2 () {
+
+		var bd = document.getElementById("startTime2").value;
+		var beginDate = new Date(bd.replace(/-/g,"/"));	
+
+		var ed = document.getElementById("endTime2").value;
+		var endDate = new Date(ed.replace(/-/g,"/"));
+
+		if(beginDate >= endDate){
+			alert("结束时间必须大于开始时间2！");
+			return false;
+		}else{
+			document.getElementById('searchform2').submit();
+		}
+	}
+	</script>
+
+	<h1>第三种</h1>
+	<form action="" id="searchform3">
+		开始日期：<input type="text" id="startTime3" /> 格式为yyyy/MM/dd， 如：2015/04/28 <br>
+		结束日期：<input type="text" id="endTime3" /> 格式yyyy/MM/dd， 如：2015/05/28 <br>
+		<input type="button" value="比较" onclick="dateValid3()" />
+	</form>
+	<script>
+	function dateValid3 () {
+
+		var bd = document.getElementById("startTime3").value;
+		var ed = document.getElementById("endTime3").value;
+
+		if(bd >= ed){
+			alert("结束时间必须大于开始时间3！");
+			return false;
+		}else{
+			document.getElementById('searchform3').submit();
+		}
+	}
+	</script>
+</body>
+</html>

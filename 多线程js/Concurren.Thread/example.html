@@ -1,0 +1,21 @@
+<script type="text/javascript" src="Concurrent.Thread.js"> </script>
+<script type="text/javascript">
+		var i = 0
+    function f(){
+        while ( i < 1000 ) {
+            document.body.innerHTML += (i++) + " - ";
+        }
+    }
+    function g( thread ){
+    	sleep(100);
+    	document.body.innerHTML += "<br> i = " + i + "<br>"
+    	if(i > 100 ){
+    		try{
+    			thread.kill();
+    		}	catch( e ){
+    		}
+    	}
+    }
+    var thread1 = Concurrent.Thread.create(f);
+    Concurrent.Thread.create(g, thread1);
+</script>

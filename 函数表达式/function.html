@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数表达式</title>
+</head>
+<body>
+<script>
+// 递归
+var factorial = (function f(num){
+	if(num <= 1){
+		return 1;
+	}else{
+		return num * f(num - 1);
+	}
+});
+factorial(5);
+//120
+// 以上创建一个名为f()的命名函数表达式，赋值给变量factorial
+// f()赋值给另一个变量，f依然有效
+
+// 闭包
+// 闭包是指有权访问另一个函数作用域中得变量的函数
+
+</script>
+</body>
+</html>

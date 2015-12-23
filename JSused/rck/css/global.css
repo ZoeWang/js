@@ -1,0 +1,104 @@
+@charset "utf-8";
+
+/* 
+  @名称: global
+  @功能: 公用样式, 复用性较强的样式
+*/
+
+/* 清理浮动 */
+.fn-clear:after {
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0;
+}
+.fn-clear {
+	zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏、显示, 通常用来与 JS 配合 */
+.hide {
+	display:none;
+}
+.show {
+	display:block;
+}
+
+/* 浮动左右, 设置内联, 减少浮动带来的bug */
+.fl,.fr {
+	display:inline;
+}
+.fl {
+	float:left;
+}
+.fr {
+	float:right;
+}
+
+/* 盒子模型 */
+.mg-t5{margin-top:5px;}
+.mg-t10{margin-top:10px;}
+.mg-t15{margin-top:15px;}
+.mg-t20{margin-top:20px;}
+.mg-t25{margin-top:25px;}
+.mg-b5{margin-bottom:5px;}
+.mg-b10{margin-bottom:10px;}
+.mg-b15{margin-bottom:15px;}
+.mg-b20{margin-bottom:20px;}
+.mg-b25{margin-bottom:25px;}
+.mg-l5{margin-left:5px;}
+.mg-l10{margin-left:10px;}
+.mg-l15{margin-left:15px;}
+.mg-l20{margin-left:20px;}
+.mg-l25{margin-left:25px;}
+.mg-r5{margin-right:5px;}
+.mg-r10{margin-right:10px;}
+.mg-r15{margin-right:15px;}
+.mg-r20{margin-right:20px;}
+.mg-r25{margin-right:25px;}
+.pd-t5{padding-top:5px;}
+.pd-t10{padding-top:10px;}
+.pd-t15{padding-top:15px;}
+.pd-t20{padding-top:20px;}
+.pd-t25{padding-top:25px;}
+.pd-b5{padding-bottom:5px;}
+.pd-b10{padding-bottom:10px;}
+.pd-b15{padding-bottom:15px;}
+.pd-b20{padding-bottom:20px;}
+.pd-b25{padding-bottom:25px;}
+.pd-l5{padding-left:5px;}
+.pd-l10{padding-left:10px;}
+.pd-l15{padding-left:15px;}
+.pd-l20{padding-left:20px;}
+.pd-l25{padding-left:25px;}
+.pd-r5{padding-right:5px;}
+.pd-r10{padding-right:10px;}
+.pd-r15{padding-right:15px;}
+.pd-r20{padding-right:20px;}
+.pd-r25{padding-right:25px;}
+
+/* 字体设置 */
+.msyh {/* 微软雅黑，IE6用黑体代替 */
+	font-family: "Microsoft YaHei", SimHei, sans-serif;  
+	_font-family: SimHei, sans-serif;
+}
+.bold{font-weight:bold;}
+
+/* 字体大小 */
+.px12{font-size: 12px;}
+.px14{font-size: 14px;}
+.px16{font-size: 16px;}
+.px18{font-size: 18px;}
+.px22{font-size: 22px;}
+.px24{font-size: 24px;}
+.px26{font-size: 26px;}
+.px28{font-size: 28px;}
+
+/* 字体颜色、链接色 */
+.blue-2a5 {/* 例：链接蓝 */
+	color: #2a5bc5;}
+	a.blue-2a5:link{color:#2a5bc5; text-decoration:none;} 
+	a.blue-2a5:visited{color:#2a5bc5; text-decoration:none;}
+	a.blue-2a5:hover{color:#2a5bc5; text-decoration:underline;}

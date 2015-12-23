@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="move.js"></script>
+	<script>
+	window.onload=function()
+	{
+		var oBox=document.getElementById('box')
+		
+		startMove(oBox, {left: 900}, {type: 'ease-out', time: 900})
+
+		// startMove(oBox, {opacity: 0.2}, {type: 'ease-out', time: 900,end:function(){
+		// 	startMove(oBox, {left: 900}, {type: 'ease-out', time: 900})
+		// }})
+
+	}
+	</script>
+</head>
+<body>
+	<div  id='box' style="width:200px; height:200px; background:red; position:absolute; opacity:1;left:0"></div>
+</body>
+</html>

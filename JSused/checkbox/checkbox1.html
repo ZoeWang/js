@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../jquery-1.8.2.js"></script>
+    <script type="text/javascript">
+        //name 是html表单专用于区别各组 chechbox 的属性， 不要用id(必须唯一)或者其它属性
+        function getValues() {
+            var aV = getCheckboxValues("a");
+            var bV = getCheckboxValues("b");
+            var cV = getCheckboxValues("c");
+
+            var result = "a组选中值: " + (aV=="" ? "未选中任何值" : aV) + "\n" +
+                "b组选中值: " + (bV == "" ? "未选中任何值" : bV) + "\n" +
+                "c组选中值: " + (cV == "" ? "未选中任何值" : cV);
+
+            alert(result);
+        }
+
+        function getCheckboxValues(name) {
+            return $(":checkbox[name="+name+"]:checked").map(function(){  
+                return $(this).val(); 
+            }).get().join(",");
+        }
+
+        function chkAll(obj) {
+            var name = $(obj).attr("name");
+            //也许你觉得我写得太复杂， 但jquery 版本众多， 可以学点东西总是好的
+            //1. jquery 1.6 以上
+            //$(":checkbox[name=" + name.substring(0, 1) + "]").prop("checked", $(obj).prop("checked"));
+            //2. jquery 1.6 以下
+            //$(":checkbox[name=" + name.substring(0, 1) + "]").attr("checked", $(obj).attr("checked"));
+            //3. 通用写法
+            $(":checkbox[name=" + name.substring(0, 1) + "]").each(function () {
+                this.checked = obj.checked;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div >
+        <span>第1组(a)：<input type="checkbox" name="aAll" onclick="chkAll(this)" />全选/全不选</span>
+        <input type="checkbox" name="a" value="a1" checked="checked" />a1
+        <input type="checkbox" name="a" value="a2" checked="checked"  />a2
+        <input type="checkbox" name="a" value="a3" />a3
+        <input type="checkbox" name="a" value="a4" />a4<br />
+
+        <span>第2组(b)：<input type="checkbox" name="bAll" onclick="chkAll(this)" />全选/全不选</span>
+        <input type="checkbox" name="b" value="b1" />b1
+        <input type="checkbox" name="b" value="b2" checked="checked" />b2
+        <input type="checkbox" name="b" value="b3" checked="checked"  />b3
+        <input type="checkbox" name="b" value="b4" />b4<br />
+
+        <span>第3组(c)：<input type="checkbox" name="cAll" onclick="chkAll(this)" />全选/全不选</span>
+        <input type="checkbox" name="c" value="c1" />c1
+        <input type="checkbox" name="c" value="c2" />c2
+        <input type="checkbox" name="c" value="c3" checked="checked" />c3
+        <input type="checkbox" name="c" value="c4" checked="checked"  />c4<br />
+
+        <br />
+        <input type="button" value="查找每组的选中的值" onclick="getValues()" />
+    </div>
+</body>
+</html>

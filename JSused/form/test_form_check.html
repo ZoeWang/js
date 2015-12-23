@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<style type="text/css">
+	*{margin:0 ; padding:0;}
+	ul{margin:20px;}
+	input{float: left; margin-left: 10px; padding:3px;}
+	li{list-style: none;  margin:10px; overflow: hidden;}
+	.bordererr{border: 1px solid red}
+	.borderok{border:1px solid green;}
+	p{color:red; font-size: 12px; float: left; margin-left: 10px;}
+	label{float:left; width:100px; text-align: right;}
+	.errMsgP{color:#a94442}
+	.red{border:1px solid #a94442;}
+</style>
+<script type="text/javascript" src='jquery-1.9.1.js'></script>
+<script type="text/javascript" src='check_rules.js'></script>
+<!--<script type="text/javascript" src='zx.js'></script>-->
+
+<body>
+	<form method="get" action="/customer/editcustomer" id='addressEditForm'>
+		<ul>
+			<!-- <li><label>qq</label><input type='text' id='inputqq' /><p></p></li> -->
+			<li><label>email</label><input type='text' id='inputemail'/></li>
+			<li><label>姓名</label><input type='text' id='inputname' /></li>
+			<li><label>phone</label><input type='text' id='inputphone' /></li>
+			<li><label>传真</label><input type='text' id='inputfix' /></li>
+			<li><label>身份证</label><input type='text' id='inputid' /></li>
+			<li><label>客户地址</label><input type='text' id='inputaddress' /></li>
+			<li><label>账号</label><input type='text' id='account' /></li> <!-- 需求不明确 -->
+			<li><label>密码</label><input type='text' id='inputpassword' /></li>
+			<li><label>组织机构代码</label><input type='text' id='inputinstit' /><p></p></li>
+		  	<li><label>户型名称</label><input type='text' id='housename' /><p></p></li>
+		  	<li><label>户型面积</label><input type='text' id='housesq' /><p></p></li>
+		  	<li><label>所在地</label><input type='text' id='' /><p></p></li><!-- 需求不明确 -->
+		  	<li><label>人数</label><input type='text' id='inputperson' /><p></p></li>
+		  	<li><label>活动名称</label><input type='text' id='' /><p></p></li>
+		  	<li><label>已报名人数</label><input type='text' id='' /><p></p></li>
+
+			<li><label>名字（字数范围）</label><input type='text' id='range' /><p></p></li>
+			<li>
+		  	<select size="1" name="Building[building_province]" id="inputsel" class="form-control">
+                <option value="0">请选择</option>                                                    
+                <option value="1">北京市</option>                                                         
+                <option value="2">天津市</option>                                                       
+                <option value="3">河北省</option>                                             
+              </select>
+
+		  	<p></p></li>
+		  	<li><input type="submit" value='提交' id='btn'></li>
+	  	</ul>
+    </form>
+</body>
+</html>
+<script>
+
+
+$('#addressEditForm').submit(function() {
+	$(this).siblings('.error').hide();
+	$('input, button', this).blur();
+	var items = {
+		inputname : [{type:'null', errMsg:zhff.langs.errTpl.noText.stringFormat('名字')}, {type:'custName', errMsg: zhff.langs.errTpl.invalidName}],
+		inputemail : [{type:'null', errMsg:zhff.langs.errTpl.noText.stringFormat('邮箱')}, {type:'email', errMsg: zhff.langs.errTpl.shippingAddress.stringFormat('邮箱')}],
+		inputphone  : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('电话号码')},{type:'number', minlength:7, errMsg:zhff.langs.errTpl.isNumber},{type:'digitMinlength', minlength:7, errMsg:zhff.langs.errTpl.shortShippingAddress.stringFormat(7)},{type:'phone', errMsg: zhff.langs.errTpl.shippingAddress.stringFormat('电话号码')}],
+		inputfix  :  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('传真')},{type:'fax', errMsg : zhff.langs.errTpl.shippingAddress.stringFormat('传真')}],
+		inputid : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('身份证')},{type:'numAbc',errMsg:zhff.langs.errTpl.numAbc},{type:'digitMinlength', minlength:15, errMsg:zhff.langs.errTpl.shortShippingAddress.stringFormat(15)},{type:'cardId',errMsg: zhff.langs.errTpl.shippingAddress.stringFormat('身份证')}],
+		inputaddress : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('客户地址')},{type:'maxlength', maxlength:30, errMsg: zhff.langs.errTpl.moreShippingAddress.stringFormat(30)}],
+		inputpassword : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('密码')},{type:'numabc', errMsg: zhff.langs.errTpl.numabc},{type:'minlength', minlength:8, errMsg:zhff.langs.errTpl.shortShippingAddress.stringFormat(8)},{type:'maxlength', maxlength:16, errMsg:zhff.langs.errTpl.moreShippingAddress.stringFormat(16)}],
+		inputinstit : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('组织机构代码')}, {type:'numAbc', errMsg:zhff.langs.errTpl.numAbc},{type:'rightlength', rightlength:9, errMsg:zhff.langs.errTpl.instit.stringFormat(9)}],
+		housename : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('户型名称')},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.range.stringFormat(3+'-'+20)}],
+		housesq : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('户型面积')},{type:'number', errMsg: zhff.langs.errTpl.isNumber}],
+		inputperson : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('人数')},{type:'number', errMsg: zhff.langs.errTpl.isNumber}],
+		inputsel :[{type:'select',errMsg:zhff.langs.errTpl.select.stringFormat('城市')}],
+		range :  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('楼盘名称')},{type:'maxlength', maxlength:10, errMsg:zhff.langs.errTpl.range.stringFormat(3+'-'+10)},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.range.stringFormat(3+'-'+10)}],
+	};
+	return $('#addressEditForm').formCheck(items, {
+		submitBtn:"btn",//提交按钮id
+		errinfoFinder: function(obj) {
+
+			return obj;
+		},
+	});
+
+
+});
+
+
+
+
+
+</script>

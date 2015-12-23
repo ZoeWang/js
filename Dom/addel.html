@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script language="JavaScript">
+<!--
+function moveOption(e1, e2){
+	try{
+		for(var i=0;i<e1.options.length;i++){
+			if(e1.options[i].selected){
+				var e = e1.options[i];
+				e2.options.add(new Option(e.text, e.value));
+				e1.remove(i);
+				i=i-1
+			}
+		}
+	document.myform.city.value=getvalue(document.myform.list2);
+	}
+	catch(e){}
+}
+function getvalue(geto){
+	var allvalue = "";
+	for(var i=0;i<geto.options.length;i++){
+		allvalue +=geto.options[i].value + ",";
+	}
+	return allvalue;
+}
+function changepos(obj,index){
+	if(index==-1){
+		if (obj.selectedIndex>0){
+			swapNode(obj.options(obj.selectedIndex),obj.options(obj.selectedIndex-1));
+		}
+	}else if(index==1){
+		if (obj.selectedIndex<obj.options.length-1){
+			swapNode(obj.options(obj.selectedIndex),options(obj.selectedIndex+1));
+		}
+	}
+}
+
+function swapNode(node1,node2)
+{
+	var _parent1=node1.parentNode;
+	var _parent2=node2.parentNode;
+	var _t1=node1.nextSibling;
+	var _t2=node2.nextSibling;
+	if(_t1)
+	   _parent1.insertBefore(node2,_t1);
+	else
+	   _parent1.appendChild(node2);
+	if(_t2)
+	   _parent2.insertBefore(node1,_t2);
+	else
+	   _parent2.appendChild(node1);
+}
+//-->
+</script>
+HTML代码片段
+<form method="post" name="myform">
+<table border="0" width="300">
+<tr>
+<td width="40%">
+<select style="WIDTH:100%" multiple name="list1" size="12" ondblclick="moveOption(document.myform.list1, document.myform.list2)">
+<option value="北京">北京</option>
+<option value="上海">上海</option>
+<option value="山东">山东</option>
+<option value="安徽">安徽</option>
+<option value="重庆">重庆</option>
+<option value="福建">福建</option>
+<option value="甘肃">甘肃</option>
+<option value="广东">广东</option>
+<option value="广西">广西</option>
+<option value="贵州">贵州</option>
+<option value="海南">海南</option>
+<option value="河北">河北</option>
+<option value="黑龙江">黑龙江</option>
+</select>
+</td>
+<td width="20%" align="center">
+<input type="button" value="添加" onclick="moveOption(document.myform.list1, document.myform.list2)"><br/>
+<br/>
+<input type="button" value="删除" onclick="moveOption(document.myform.list2, document.myform.list1)">
+</td>
+<td width="40%">
+<select style="WIDTH:100%" multiple name="list2" size="12" ondblclick="moveOption(document.myform.list2, document.myform.list1)">
+</select>
+</td>
+<td>
+<button onclick="changepos(document.myform.list2,-1)" type="button">上移</button>
+<br/>
+<button onclick="changepos(document.myform.list2,1)" type="button">下移</button>
+</td>
+</tr>
+</table>
+值：<input type="text" name="city" size="40">
+</form>
+</body>
+</html>

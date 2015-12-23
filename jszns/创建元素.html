@@ -1,0 +1,38 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>创建元素</title>
+	<meta charset="utf-8"/>
+	<style>
+	
+	</style>
+	<script>
+	
+	window.onload=function(){
+		var oBtn=document.getElementById('btn1');
+		var oUl=document.getElementById('ul1');
+		var oTxt=document.getElementById('txt1');
+		oBtn.onclick=function(){
+			var oLi=document.createElement('li');
+			var aLi=oUl.getElementsByTagName('li');
+
+			oLi.innerHTML=oTxt.value;
+			//父级.appendChild(子节点);
+			//oUl.appendChild(oLi);
+			if(aLi.length>0){
+				// 父级.insertBefore(子节点,在谁之前);
+				oUl.insertBefore(oLi, aLi[0]);
+			}else{
+				oUl.appendChild(oLi);
+			}
+			
+		}
+	}
+	</script>
+</head>
+<body>
+<input type="text" id="txt1">
+<input type="button" id="btn1" value="创建元素">
+<ul id="ul1"></ul>
+</body>
+</html>

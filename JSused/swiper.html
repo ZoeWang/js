@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .swiper-list{
+            width: 700px;
+            height:200px;
+
+            position: relative;
+            border:1px solid #ccc;
+
+            overflow: hidden;
+        }
+        .inner-swiper-list{
+            height: 200px;
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+        }
+        .swiper-slide{
+            width: 700px;
+            height: 200px;
+            float: left;
+        }
+        .yellowgreen{
+            background: yellowgreen;
+        }
+        .yellow{
+            background: yellow;
+        }
+        .darkcyan{
+            background: darkcyan;
+        }
+    </style>
+</head>
+<body>
+<div class="swiper-list">
+    <div class="inner-swiper-list" id="swiper">
+        <div class="swiper-slide yellow">1</div>
+        <div class="swiper-slide yellowgreen">2</div>
+        <div class="swiper-slide darkcyan">3</div>
+        <div class="swiper-slide yellow">4</div>
+        <div class="swiper-slide yellowgreen">5</div>
+        <div class="swiper-slide darkcyan">6</div>
+    </div>
+</div>
+<button id="prev">prev</button>
+<button id="next">next</button>
+<script src="jquery-1.9.1.js"></script>
+<script>
+//    function init (){
+//        var box = $('#swiper');
+//
+//        window.setInterval(function(){
+//            console.log('c');
+//            move(box);
+//        },5000);
+//
+//    }
+//
+//    function move(box,direct){
+//        var left,d = direct||-1;
+//        left = box.width()/2*d+'px';
+//
+//        box.stop().animate({left:left},1000,function(){
+//            if(d<0){
+//                box.append(box.children().eq(0));
+//            }
+//            box.css({left:0})
+//        });
+//    }
+//    $(function(){
+//        init();
+//    })
+function Swiper(){
+    this.box = $('#swiper');
+    this.start = 0;
+    this.subsLength = this.box.children().length;
+    this.prevHandle = $('#prev');
+    this.nextHandle = $('#next');
+
+    this.setBoxWidth = function(){
+        this.box.width(this.subsLength*this.box.width());
+    }
+
+    this.next = function(){
+        this.start++;
+        if(this.start>=this.subsLength){
+            this.start = 0;
+        }
+        this.move();
+    }
+    this.prev = function(){
+        this.start--;
+        if(this.start<0){
+            this.start=0;
+            return;
+        }
+        this.move()
+    }
+    this.move = function(){
+        var left = this.box.width()/this.subsLength*this.start*-1+'px';
+        this.box.stop().animate({left:left},1000);
+    }
+    this.play = function() {
+        var self = this;
+        window.setInterval(function () {
+            self.next();
+        }, 5000)
+    }
+
+    this.init = function(){
+        var self = this;
+        this.prevHandle.bind('click',function(){
+            self.prev();
+        });
+
+        this.nextHandle.bind('click',function(){
+            self.next();
+        });
+        this.setBoxWidth();
+        this.play();
+    }
+    this.init();
+}
+$(function(){
+    var sp = new Swiper();
+})
+</script>
+</body>
+</html>

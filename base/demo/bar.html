@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+<style type="text/css"> 
+body{ 
+text-align:center; 
+} 
+.barWarp,.bar{
+	height: 51px;
+	width: 100%;
+	padding: 11px 0;
+}
+.barBox,.barx{
+	height:6px;
+	width:143px;
+	margin: 8px auto 0;
+	border-radius:5px;
+	background:#cccccc;
+}
+.barBg,.barg{
+	width:0%;
+	height:6px;
+	border-radius:5px;
+	background:#2ca817;
+}
+
+</style> 
+</head>
+
+<body>
+	<div class="barWarp">
+		<div>当前进度 <i class="going">80</i>%</div>
+		<div class="barBox" dataRel="80">
+	    	<div class="barBg" style="width: 80%;"></div>
+	    </div>
+    </div>
+
+    <div class="bar">
+		<div>当前进度 <i class="go">80</i>%</div>
+		<div class="barx" data-rel="50">
+	    	<div class="barg" style="width: 50%;"></div>
+	    </div>
+    </div>
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.barWarp').bar();
+        $('.bar').bar({
+        	'barBox': '.barx',
+        	'barBg': '.barg',
+        	'going': '.go',
+        	'dataRel': 'data-rel'
+        });
+    });
+    </script>
+   
+</body>
+</html>
+

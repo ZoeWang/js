@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+
+</head>
+
+<body>
+	
+    <div class="bs-docs-section">
+  <h1 id="tooltips" class="page-header">工具提示 <small>tooltip.js</small></h1>
+  <p>当您想要描述一个链接的时候，工具提示（Tooltip）就显得非常有用。工具提示（Tooltip）插件是受 Jason Frame 写的 jQuery.tipsy 的启发。工具提示（Tooltip）插件做了很多改进，例如不需要依赖图像，而是改用 CSS 实现动画效果，用 data 属性存储标题信息。</p>
+  <p>工具提示在零长度的标题时显示不出来。</p>
+
+  <h2 id="tooltips-examples">Examples</h2>
+  <p>悬停在工具提示下面的链接</p>
+  <div class="bs-example tooltip-demo">
+    <p class="muted" style="margin-bottom: 0;">Tight pants next level keffiyeh <a href="#" data-toggle="tooltip" title="" data-original-title="Default tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-toggle="tooltip" title="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A really ironic artisan <a href="#" data-toggle="tooltip" title="Another one here too">whatever keytar</a>, scenester farm-to-table banksy Austin <a href="#" data-toggle="tooltip" title="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.
+    </p>
+  </div><!-- /example -->
+
+  <h3>静态工具提示</h3>
+  <p>四个选项是可用的: top, right, bottom, and left 对齐.</p>
+  <div class="bs-example bs-example-tooltip">
+    <div class="tooltip left" role="tooltip">
+      <div class="tooltip-arrow"></div>
+      <div class="tooltip-inner">
+        Tooltip on the left
+      </div>
+    </div>
+    <div class="tooltip top" role="tooltip">
+      <div class="tooltip-arrow"></div>
+      <div class="tooltip-inner">
+        Tooltip on the top
+      </div>
+    </div>
+    <div class="tooltip bottom" role="tooltip">
+      <div class="tooltip-arrow"></div>
+      <div class="tooltip-inner">
+        Tooltip on the bottom
+      </div>
+    </div>
+    <div class="tooltip right" role="tooltip">
+      <div class="tooltip-arrow"></div>
+      <div class="tooltip-inner">
+        Tooltip on the right
+      </div>
+    </div>
+  </div>
+
+  <h3>4个方向</h3>
+  <div class="zero-clipboard"><span class="btn-clipboard with-example">Copy</span></div><div class="bs-example tooltip-demo">
+    <div class="bs-example-tooltips">
+      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+    </div>
+  </div><!-- /example -->
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">data-toggle=</span><span class="s">"tooltip"</span> <span class="na">data-placement=</span><span class="s">"left"</span> <span class="na">title=</span><span class="s">"Tooltip on left"</span><span class="nt">&gt;</span>Tooltip on left<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">data-toggle=</span><span class="s">"tooltip"</span> <span class="na">data-placement=</span><span class="s">"top"</span> <span class="na">title=</span><span class="s">"Tooltip on top"</span><span class="nt">&gt;</span>Tooltip on top<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">data-toggle=</span><span class="s">"tooltip"</span> <span class="na">data-placement=</span><span class="s">"bottom"</span> <span class="na">title=</span><span class="s">"Tooltip on bottom"</span><span class="nt">&gt;</span>Tooltip on bottom<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-default"</span> <span class="na">data-toggle=</span><span class="s">"tooltip"</span> <span class="na">data-placement=</span><span class="s">"right"</span> <span class="na">title=</span><span class="s">"Tooltip on right"</span><span class="nt">&gt;</span>Tooltip on right<span class="nt">&lt;/button&gt;</span>
+</code></pre></div>
+
+  <div class="bs-callout bs-callout-danger">
+    <h4>可选 功能</h4>
+    <p>由于性能关系， the Tooltip 工具提示 and Popover 弹出框 data-apis 是可选的, 意味着 <strong>你必须自己初始化他们</strong>.</p>
+  </div>
+  <div class="bs-callout bs-callout-warning">
+    <h4>工具提示在按钮组button groups和输入组input groups需要特殊设置</h4>
+    <p>当我们使用tooltips 在一个 <code>.btn-group</code> or an <code>.input-group</code>元素上,你必须指定选项 <code>container: 'body'</code> (以下有记录),以避免不必要的副作用(如元素日益广泛和/或工具提示触发时失去其圆角)。</p>
+  </div>
+  <div class="bs-callout bs-callout-warning">
+    <h4>不要试图隐藏元素显示工具提示</h4>
+    <p>调用 <code>$(...).tooltip('show')</code> 当目标元素 <code>display: none;</code> 会导致错误定位的工具提示。</p>
+  </div>
+  <div class="bs-callout bs-callout-info">
+    <h4>工具提示在禁用元素需要包装器元素</h4>
+    <p>添加tooltip在 <code>disabled</code> or <code>.disabled</code> 元素, 把这个元素放到一个<code>&lt;div&gt;</code> 中，应用这个 tooltip 在 <code>&lt;div&gt;</code> 上而不是有disabled的元素.</p>
+  </div>
+
+  <h2 id="tooltips-usage">Usage</h2>
+  <p>工具提示（Tooltip）插件根据需求生成内容和标记，默认情况下是把工具提示（tooltip）放在它们的触发元素后面。</p>
+  <p>触发tooltip 通过 JavaScript:</p>
+<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#example'</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+</code></pre></div>
+
+  <h3>标记</h3>
+  <p>所需的工具提示仅仅是一个标记<code>data</code> 属性 和 <code>title</code> 在 HTML 你希望有 tooltip的元素上. 生成的标记工具提示是相当简单的,但需要一个位置(默认时, 插件设置的是 <code>top</code> 位置).</p>
+  <div class="bs-callout bs-callout-warning">
+    <h4>多重线链接</h4>
+    <p>有时你想添加一个提示一个超链接包装多个行. 工具提示插件的默认行为是横向和纵向中心。添加 <code>white-space: nowrap;</code> 到你的锚点,以避免这个问题。</p>
+  </div>
+<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="html"><span class="c">&lt;!-- HTML to write --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">data-toggle=</span><span class="s">"tooltip"</span> <span class="na">title=</span><span class="s">"Some tooltip text!"</span><span class="nt">&gt;</span>Hover over me<span class="nt">&lt;/a&gt;</span>
+
+<span class="c">&lt;!-- Generated markup by the plugin --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tooltip top"</span> <span class="na">role=</span><span class="s">"tooltip"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tooltip-arrow"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tooltip-inner"</span><span class="nt">&gt;</span>
+    Some tooltip text!
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+  <h3>选项</h3>
+  <p>选项能够通过 data 属性 or JavaScript. 对于 data 属性, 加入选项名称 <code>data-</code>, as in <code>data-animation=""</code>.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th style="width: 100px;">Name</th>
+          <th style="width: 100px;">Type</th>
+          <th style="width: 50px;">Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>animation</td>
+          <td>boolean</td>
+          <td>true</td>
+          <td>应用一个CSS褪色过渡到工具提示</td>
+        </tr>
+        <tr>
+          <td>container</td>
+          <td>string | false</td>
+          <td>false</td>
+          <td>
+            <p>将工具提示附加到一个特定的元素. Example: <code>container: 'body'</code>. 这个选项特别有用,因为它允许您触发元素位置附近的文档流中的工具提示——这将防止工具提示浮离触发元素在一个窗口的大小。</p>
+          </td>
+        </tr>
+        <tr>
+          <td>delay</td>
+          <td>number | object</td>
+          <td>0</td>
+          <td>
+            <p>延迟显示和隐藏工具提示(ms)并不适用于手动触发类型</p>
+            <p>如果提供一个数字,延迟应用hide/show</p>
+            <p>对象结构 是: <code>delay: { "show": 500, "hide": 100 }</code></p>
+          </td>
+        </tr>
+        <tr>
+          <td>html</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>插入HTML工具提示. If false, jQuery's <code>text</code> 方法将用于将内容插入到DOM。如果你担心XSS攻击请使用文本。</td>
+        </tr>
+        <tr>
+          <td>placement</td>
+          <td>string | function</td>
+          <td>'top'</td>
+          <td>
+            <p>如何定位工具提示 - top | bottom | left | right | auto.<br>当 "auto" 指定,它会动态地调整工具提示。For example, 如果 placement 是 "auto left", 工具提示将尽可能的显示在左边, 在情况不允许的情况下它才会显示在右边。.</p>
+            <p>当一个函数是用来确定位置,它的第一个参数是调用DOM节点 ，第二个参数是触发元素DOM节点 . 这个 <code>this</code> 是工具提示的实例。</p>
+          </td>
+        </tr>
+        <tr>
+          <td>selector</td>
+          <td>string</td>
+          <td>false</td>
+          <td>如果提供了一个选择器, 工具提示对象将委派给指定的目标. 在实践中,这是用于启用动态HTML内容提示补充道。 See <a href="https://github.com/twbs/bootstrap/issues/4215">this</a> and <a href="http://jsbin.com/zopod/1/edit">an informative example</a>.</td>
+        </tr>
+        <tr>
+          <td>template</td>
+          <td>string</td>
+          <td><code>'&lt;div class="tooltip" role="tooltip"&gt;&lt;div class="tooltip-arrow"&gt;&lt;/div&gt;&lt;div class="tooltip-inner"&gt;&lt;/div&gt;&lt;/div&gt;'</code></td>
+          <td>
+            <p>基于HTML创建工具提示时使用。</p>
+            <p>The tooltip's <code>title</code> 将注入 <code>.tooltip-inner</code>.</p>
+            <p><code>.tooltip-arrow</code> 将成为the tooltip's arrow.</p>
+            <p>最外层的包装器元素应该有 <code>.tooltip</code> class.</p>
+          </td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>string | function</td>
+          <td>''</td>
+          <td>
+            <p>如果未指定 <code>title</code> 属性，则 title 选项是默认的 title 值.</p>
+            <p>如果给出一个函数, 它将被称为 <code>this</code> 参考设置工具提示附加的元素。</p>
+          </td>
+        </tr>
+        <tr>
+          <td>trigger</td>
+          <td>string</td>
+          <td>'hover focus'</td>
+          <td>定义如何触发工具提示： click| hover | focus | manual。您可以传递多个触发器，每个触发器之间用空格分隔。</td>
+        </tr>
+        <tr>
+          <td>viewport</td>
+          <td>string | object</td>
+          <td>{ selector: 'body', padding: 0 }</td>
+          <td>
+            <p>保持工具提示这个元素的范围内. Example: <code>viewport: '#viewport'</code> or <code>{ "selector": "#viewport", "padding": 0 }</code></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+  <div class="bs-callout bs-callout-info">
+    <h4>Data 属性的个人工具提示</h4>
+    <p>选择个人工具提示可以另外的通过使用data属性指定,如上所述。</p>
+  </div>
+
+  <h3>方法</h3>
+
+  <h4>$().tooltip(options)</h4>
+  <p>高度提示工具处理程序元素集合。</p>
+
+  <h4>.tooltip('show')</h4>
+  <p>显示一个元素的提示</p>
+  <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#element'</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">'show'</span><span class="p">)</span>
+</code></pre></div>
+
+  <h4>.tooltip('hide')</h4>
+  <p>隐藏一个元素的提示</p>
+  <div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#element'</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">'hide'</span><span class="p">)</span>
+</code></pre></div>
+
+  <h4>.tooltip('toggle')</h4>
+  <p>切换一个元素的提示.</p>
+  <div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#element'</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">'toggle'</span><span class="p">)</span>
+</code></pre></div>
+
+  <h4>.tooltip('destroy')</h4>
+  <p>隐藏和破坏一个元素的提示.</p>
+  <div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#element'</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span><span class="s1">'destroy'</span><span class="p">)</span>
+</code></pre></div>
+
+  <h3>事件</h3>
+  <p>下表列出了工具提示（Tooltip）插件中要用到的事件。这些事件可在函数中当钩子使用。</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th style="width: 150px;">Event Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>show.bs.tooltip</td>
+          <td>当调用 <code>show </code>实例方法时立即触发该事件。</td>
+        </tr>
+        <tr>
+          <td>shown.bs.tooltip</td>
+          <td>当工具提示对用户可见时触发该事件（将等待 CSS 过渡效果完成）。</td>
+        </tr>
+        <tr>
+          <td>hide.bs.tooltip</td>
+          <td>当调用 <code>hide</code> 实例方法时立即触发该事件。</td>
+        </tr>
+        <tr>
+          <td>hidden.bs.tooltip</td>
+          <td>当工具提示对用户隐藏时触发该事件（将等待 CSS 过渡效果完成）。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myTooltip'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'hidden.bs.tooltip'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// do something…</span>
+<span class="p">})</span>
+</code></pre></div>
+</div>
+
+<!-- 事件的实例 -->
+<h4>工具提示（Tooltip）插件 - 锚</h4>
+这是一个 <a href="#" class="tooltip-show" data-toggle="tooltip" 
+   title="默认的 Tooltip">默认的 Tooltip
+</a>
+<!-- Tooltip方法实例 -->
+<div style="padding: 100px 100px 10px;">
+   这是一个 <a href="#" class="tooltip-show1" data-toggle="tooltip" 
+      title="show">Tooltip 方法 show
+   </a>.
+
+   这是一个 <a href="#" class="tooltip-hide" data-toggle="tooltip" 
+      data-placement="left" title="hide">Tooltip 方法 hide
+   </a>.
+
+   这是一个 <a href="#" class="tooltip-destroy" data-toggle="tooltip" 
+      data-placement="top" title="destroy">Tooltip 方法 destroy
+   </a>.
+
+   这是一个 <a href="#" class="tooltip-toggle" data-toggle="tooltip" 
+      data-placement="bottom" title="toggle">Tooltip 方法 toggle
+   </a>.
+   <br><br><br><br><br><br>
+   <p class="tooltip-options" >
+      这是一个 <a href="#" data-toggle="tooltip" title="<h2>‘am Header2</h2>">Tooltip 方法 options</a>.
+      <p>这个方法调用有问题</p>
+   </p>
+
+   
+<div>
+
+	  <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/tooltip.js"></script>
+    <script type="text/javascript">
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    //事件的实例
+    // $(function () { $('.tooltip-show').tooltip('show');});
+    // $(function () { $('.tooltip-show').on('show.bs.tooltip', function () {
+    //    alert("Alert message on show");
+    // })});
+    </script>
+    <!-- Tooltip方法实例 -->
+    <script>
+      $(function () { $('.tooltip-show1').tooltip('show');});
+      $(function () { $('.tooltip-hide').tooltip('hide');});
+      $(function () { $('.tooltip-destroy').tooltip('destroy');});
+      $(function () { $('.tooltip-toggle').tooltip('toggle');});
+      $(function () { $(".tooltip-options a").tooltip({ html : true });});
+   </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+<style>
+    /*.element {
+	  width: 100px;
+	  background: red;
+		
+	  height: 100px;
+	  -webkit-transition: height 2s linear;
+	  -ms-transition: height 2s linear;
+	  transition: height 2s linear;
+	}
+	
+	.element:hover {
+	  height: 200px;
+	}*/
+	.element {
+	  width: 100px;
+	  height: 100px;
+	  background: red;
+		
+	  opacity: 0.0;
+	  -webkit-transform: scale(0.95) translate3d(0,100%,0);
+	  -webkit-transition: -webkit-transform 400ms ease, opacity 400ms ease;
+	}
+	
+	.element.active {
+	  opacity: 1.0;
+	  -webkit-transform: scale(1.0) translate3d(0,0,0);
+	}
+	
+	.element.inactive {
+	  opacity: 0.0;
+	  -webkit-transform: scale(1) translate3d(0,0,0);
+	}
+</style>
+</head>
+
+<body>
+<div>
+	<h2 id="transitions" class="page-header">过渡效果 <small>transition.js</small></h2>
+  <h3>关于过渡效果</h3>
+  <p>对于简单的过渡效果，只需将 <code>transition.js</code> 和其它 JS 文件一起引入即可。如果你使用的是编译（或压缩）版的 <code>bootstrap.js</code> 文件，就无需再单独将其引入了。</p>
+  <h3>包含的内容</h3>
+  <p>Transition.js 是针对 <code>transitionEnd</code> 事件的一个基本辅助工具，也是对 CSS 过渡效果的模拟。它被其它插件用来检测当前浏览器对是否支持 CSS 的过渡效果。</p>
+
+	<div class="element"></div>
+</div>
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/transition.js"></script>
+</body>
+</html>
+
+
+         

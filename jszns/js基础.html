@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title> </title>
+	<meta charset="utf-8"/>
+
+</head>
+<body>
+	任何元素都可以加id 包括 link
+	任何元素的属性都可以改
+	html 怎么写，js里面就怎么写
+
+	样式优先级
+	<!-- *<标签<class<id<行间 -->
+	innerHTML
+	
+	ECMAScript: 翻译   核心   解释器
+
+	计算机：0 1
+
+	DOM Document Object Model	HTML document	
+		操作HTML的能力
+
+	BOM Browser Object Model	浏览器 window
+
+	ECMA  	几乎没有兼容性问题
+	DOM		有一些操作不兼容
+	BOM		没有兼容问题（完全不兼容）
+
+	类型转换
+	parseInt 强制转换成整数字 不是数字 返回 NaN
+	parseFloat 强制转换成浮点数 不是数字 返回 NaN
+	NaN not a Number 非数字
+	NaN 和 NaN 不相等
+	isNaN() 唯一判断是否是NaN 的唯一方法
+	
+	隐士类型转换
+	== 先转换类型，在比较
+	=== 不转换类型，直接比较
+	- 减法 先转换类型，在执行减法
+
+	变量作用域
+	局部变量：只能在定义它的函数内使用
+	全局变量：在任何地方都能用
+
+	闭包：子函数可以使用父函数的局部变量
+	
+	break 中断整个循环
+	continue 中断本次循环
+
+	真：true 非0数字  非空字符串 非空对象
+	假：false 数字0  空字符串 空对象 null  undefined
+
+	var json={a:12, b:5, c:7};
+	var arr=[12,5,7];
+ 
+	json['a'];	json 下标 字符串  没有length
+	arr[0];	数组 下标 数字 有 length
+
+	循环
+	数组：for 0-len
+	json: for in
+
+	函数 return; return 空的 undefined
+	函数没有 返回值 也是 undefined
+
+	arguments 可变参 不定参 是个类数组 有length 属性
+
+	取非行间的样式
+	IE oDiv.currentStyle.width 	
+	Chrome、FF
+	getComputedStyle(oDiv, null).width		//第二个参数随便
+
+	复合样式：background border
+	单一样式：width height
+
+	数组length 可获取，可设置
+	快速清空数组 直接length=0
+
+	push(4) 向数组末尾添加元素4
+	pop() 尾部删除
+	shift() 头部删除元素
+	unshift(5) 头部添加元素
+
+	删除 splice(起点, 长度)
+	插入 splice(起点, 长度, 元素...)
+	
+	a.concat(数组2) 将数组合并产生新数组
+
+	join('-') 将数组用-链接起来变成字符串
+	sort();数组排序  只认字符串
+
+	var arr=[12, 8, 99, 19, 112];
+
+	arr.sort(function (n1, n2){
+		return n1-n2;
+		/*
+		if(n1<n2)
+			return -1;
+		else if(n1>n2)
+			return 1;
+		else 
+			return 0;
+		*/
+	});
+
+
+</body>
+</html>

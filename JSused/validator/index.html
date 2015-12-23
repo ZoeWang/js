@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<style type="text/css">
+	*{margin:0 ; padding:0;}
+	ul{margin:20px;}
+	input{float: left; margin-left: 10px; padding:3px;}
+	li{list-style: none;  margin:10px; overflow: hidden;}
+	.bordererr{border: 1px solid red}
+	.borderok{border:1px solid green;}
+	p{color:red; font-size: 12px; float: left; margin-left: 10px;}
+	label{float:left; width:300px; text-align: right;}
+	.errMsgP{color:#a94442}
+	.red{border:1px solid #a94442;}
+	#btn{padding:10px 50px; margin:10px 0 0 320px;}
+</style>
+<!-- <script type="text/javascript" src='js/jquery-1.7.2.js'></script> -->
+<script type="text/javascript" src='js/zepto.js'></script>
+<script type="text/javascript" src='js/check_rules.js'></script>
+<!--<script type="text/javascript" src='zx.js'></script>-->
+
+<body>
+	<form method="get" action="/customer/editcustomer" id='addressEditForm'>
+		<ul>
+			<li><label>email</label><input type='text' id='inputemail'/></li>
+
+			<li><label>固定电话(带区号不带区号都行)</label><input type='text' id='telephone' /></li>
+			<li><label>固定电话(无区号)</label><input type='text' id='telephone2' /></li>
+			<li><label>固定电话(有区号)</label><input type='text' id='telephone3' /></li>
+			<li><label>手机号</label><input type='text' id='cellphone' /></li>
+		 	<li><label>固定电话与手机混合</label><input type='text' id='inputtelephone' /></li>
+			<li><label>传真</label><input type='text' id='inputfix' /></li>
+
+			<li><label>身份证</label><input type='text' id='inputid' /></li>
+			<li><label>客户地址</label><input type='text' id='inputaddress' /></li>
+			<li><label>账号</label><input type='text' id='account' /></li>
+			<li><label>密码</label><input type='text' id='inputpassword' /></li>
+
+			<li><label>组织机构代码</label><input type='text' id='inputinstit' /><p></p></li>
+
+		  	<li><label>户型名称</label><input type='text' id='housename' /><p></p></li>
+		  	<li><label>户型面积</label><input type='text' id='housesq' /><p></p></li>
+		  	<li><label>人数</label><input type='text' id='inputperson' /><p></p></li>
+		  	<li><label>楼盘名称(汉字3-25位)</label><input type='text' id='range2' /><p></p></li>
+		  	<li><label>楼盘名称2</label><input type='text' id='range3' /><p></p></li>
+			<li><label>名字（字数范围）</label><input type='text' id='inputname' /><p></p></li>
+			<li><label>公司名称</label><input type='text' id='Company_name' /><p></p></li>
+
+			<li><label>3-10位文本(纯汉字)</label><input type='text' id='inputchinese' /></li>
+			<li><label>3-10位文本(纯字母)</label><input type='text' id='inputenglish' /></li>
+			<li><label>整数</label><input type='text' id='inputNum' /><p></p></li>
+
+		 	<li><label>2-5位整数(最大值10000)</label><input type='text' id='inputnum2' /><p></p></li>
+
+		 	<li>
+		  		<select size="1" name="Building[building_province]" id="inputsel" class="form-control">
+                <option value='0'>请选择</option>
+                                                                             
+                <option value="1">北京市</option>
+                                                                               
+                <option value="2">天津市</option>
+                                                                               
+                <option value="3">河北省</option>
+   
+                                                                    
+              </select>
+
+		  	<p></p></li> 
+		  	<li><input type="submit" value='提交' id='btn'></li>
+	  	</ul>
+    </form>
+</body>
+</html>
+<script>
+
+
+$('#addressEditForm').submit(function() {
+	$(this).siblings('.error').hide();
+	$('input, button', this).blur();
+	var items = {
+		
+		inputemail : [{type:'null', errMsg:zhff.langs.errTpl.noText.stringFormat('邮箱')}, {type:'email', errMsg: zhff.langs.errTpl.rightText.stringFormat('邮箱')}],
+
+		telephone:[{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('固定电话(带区号不带区号都行)')},{type:'numbers',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'minlength', minlength:7, errMsg:zhff.langs.errTpl.shortNumber.stringFormat(7)},{type:'telephone', minlength:7, errMsg:zhff.langs.errTpl.rightText.stringFormat('固定电话(带区号不带区号都行)')}],
+		telephone2:[{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('固定电话(无区号)')},{type:'number',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'minlength', minlength:7, errMsg:zhff.langs.errTpl.shortNumber.stringFormat(7)},{type:'telephone2', minlength:7, errMsg:zhff.langs.errTpl.rightText.stringFormat('固定电话(无区号)')}],
+		telephone3:[{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('固定电话(有区号)')},{type:'numbers',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'minlength', minlength:10, errMsg:zhff.langs.errTpl.shortNumber.stringFormat(10)},{type:'telephone3',errMsg:zhff.langs.errTpl.rightText.stringFormat('固定电话(有区号)')}],
+		 cellphone:[{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('手机rightText号')},{type:'number',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'rightlength',rightlength:'11',errMsg:zhff.langs.errTpl.rightnumber.stringFormat(11)},{type:'cellphone',errMsg:zhff.langs.errTpl.rightText.stringFormat('手机号')}],
+
+		inputtelephone:[{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('固定电话或手机混合')},{type:'numbers',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'minlength', minlength:7, errMsg:zhff.langs.errTpl.shortCharacter.stringFormat(7)},{type:'phone',errMsg:zhff.langs.errTpl.rightText.stringFormat('固定电话或手机混合')}],
+
+		inputfix  : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('传真')},{type:'numbers',errMsg:zhff.langs.errTpl.noText.stringFormat('数字')},{type:'minlength', minlength:7, errMsg:zhff.langs.errTpl.shortNumber.stringFormat(7)},{type:'telephone', minlength:7, errMsg:zhff.langs.errTpl.rightText.stringFormat('传真')}],
+
+		inputid : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('身份证')},{type:'numberx',errMsg:zhff.langs.errTpl.isNumber},{type:'digitMinlength', minlength:15, errMsg:zhff.langs.errTpl.shortCharacter.stringFormat(15)},{type:'cardId',errMsg: zhff.langs.errTpl.rightText.stringFormat('身份证')}],
+
+		inputaddress : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('客户地址')},{type:'maxlength', maxlength:25, errMsg:zhff.langs.errTpl.characters.stringFormat(4,25)},{type:'minlength', minlength:4, errMsg:zhff.langs.errTpl.characters.stringFormat(4,25)}],
+		account : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('账号')},{type:'account', errMsg:zhff.langs.errTpl.account},{type:'maxlength', maxlength:16, errMsg:zhff.langs.errTpl.characters.stringFormat(4,16)},{type:'minlength', minlength:4, errMsg:zhff.langs.errTpl.characters.stringFormat(4,16)}],
+
+		inputpassword : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('密码')},{type:'numAbcs', errMsg: zhff.langs.errTpl.numOrabc},{type:'minlength', minlength:8, errMsg:zhff.langs.errTpl.shortCharacter.stringFormat(8)},{type:'maxlength', maxlength:16, errMsg:zhff.langs.errTpl.moreCharacter.stringFormat(16)},{type:'numAabc', errMsg: zhff.langs.errTpl.numOrabc}],
+
+		inputinstit : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('组织机构代码')}, {type:'numOabc', errMsg:zhff.langs.errTpl.numAabc},{type:'rightlength', rightlength:9, errMsg:zhff.langs.errTpl.instit.stringFormat(9)}],
+
+		housename : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('户型名称')},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.characters.stringFormat(3,20)}],
+
+		housesq : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('户型面积')},{type:'numd', errMsg: zhff.langs.errTpl.isNumber},{type:'min', min:10, errMsg: zhff.langs.errTpl.numbers.stringFormat(2,5)},{type:'max', max:99999, errMsg: zhff.langs.errTpl.numbers.stringFormat(2,5)},{type:'double', errMsg: zhff.langs.errTxt.housesq}],
+
+		inputperson : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('人数')},{type:'number', errMsg: zhff.langs.errTpl.isNumber},{type:'min', min:2, errMsg: zhff.langs.errTxt.lest.stringFormat('人数',2)},{type:'max', max:5, errMsg: zhff.langs.errTxt.most.stringFormat('人数',5)}],
+
+		range2 :  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('楼盘名称')},{type:'chinese', errMsg:zhff.langs.errTpl.isChinese},{type:'maxlength', maxlength:25, errMsg:zhff.langs.errTpl.characters.stringFormat(3,25)},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.characters.stringFormat(3,25)}],
+		range3 :  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('楼盘名称2')},{type:'maxlength', maxlength:25, errMsg:zhff.langs.errTpl.characters.stringFormat(3,25)},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.characters.stringFormat(3,25)}],
+
+		inputname : [{type:'null', errMsg:zhff.langs.errTpl.noText.stringFormat('名字')}, {type:'custName', errMsg: zhff.langs.errTpl.invalidName}],
+		 Company_name :  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('公司名称')},{type:'maxlength', maxlength:25, errMsg:zhff.langs.errTpl.characters.stringFormat(4,25)},{type:'minlength', minlength:4, errMsg:zhff.langs.errTpl.characters.stringFormat(4,25)}],
+		inputchinese:  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('3-10位文本(纯汉字)')},{type:'chinese', errMsg:zhff.langs.errTpl.isChinese},{type:'maxlength', maxlength:10, errMsg:zhff.langs.errTpl.chineses.stringFormat(3,10)},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.chineses.stringFormat(3,10)}],
+		inputenglish:  [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('3-10位文本(纯字母)')},{type:'english', errMsg:zhff.langs.errTpl.isEnglish},{type:'maxlength', maxlength:10, errMsg:zhff.langs.errTpl.letter.stringFormat(3,10)},{type:'minlength', minlength:3, errMsg:zhff.langs.errTpl.letter.stringFormat(3,10)}],
+		inputNum : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('整数')},{type:'number', errMsg: zhff.langs.errTpl.isNumber},{type:'min', min:2, errMsg: zhff.langs.errTxt.lest.stringFormat('整数',2)},{type:'max', max:5, errMsg: zhff.langs.errTxt.most.stringFormat('整数',5)}],
+		inputnum2 : [{type:'null',errMsg:zhff.langs.errTpl.noText.stringFormat('内容')},{type:'number', errMsg: zhff.langs.errTpl.isNumber},{type:'minlength', minlength:2, errMsg: zhff.langs.errTpl.numbers.stringFormat(2,5)},{type:'maxlength', maxlength:5, errMsg: zhff.langs.errTpl.numbers.stringFormat(2,5)},{type:'min', min:10, errMsg: zhff.langs.errTxt.small.stringFormat(10)},{type:'max', max:10000, errMsg: zhff.langs.errTxt.big.stringFormat(10000)}],
+
+   		
+   		
+
+   		 inputsel :[{type:'select',errMsg:zhff.langs.errTpl.select.stringFormat('城市')}],
+	};
+	return $('#addressEditForm').formCheck(items, {
+		
+		submitBtn:"btn",//提交按钮id
+		// showErrType1:function(obj,msg){
+		// 	alert("1"+msg);
+		// },
+		errinfoFinder: function(obj) {
+
+
+			return obj;
+		},
+		// errinfoFinder2: function(obj) {
+
+		// 	return obj;
+		// },
+	});
+});
+
+
+</script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>实践题 - 选项卡</title>
+    <link  rel="icon" href="../img/logo.png">
+    <style type="text/css">
+    /* CSS样式制作 */
+    
+    body {
+        font-family: "微软雅黑";
+        font-size: 14px;
+    }
+    ul#menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        clear: both;
+        height: 36px;
+    }
+    #menu>li {
+        width: 80px;
+        height: 35px;
+        line-height: 35px;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        float: left;
+        margin-left: 5px;
+        text-align: center;
+        background-color: #fff;
+        cursor: pointer;
+    }
+    #menu>li.active {
+        border-top: 2px solid red;
+        padding-bottom: 1px;
+        position: relative;
+        z-index: 10;
+    }
+    #cnt {
+        width: 350px;
+        border: 1px solid blue;
+        border-top: 2px solid red;
+        padding: 5px 10px;
+        position: relative;
+        z-index: 1;
+    }
+    #cnt p {
+        display: none;
+    }
+    #cnt>p:first-child {
+        display: block;
+    }
+    </style>
+    <script type="text/javascript">
+    // JS实现选项卡切换
+    window.onload = function() {
+        var menu = document.getElementById('menu').getElementsByTagName('li'),
+            cnt = document.getElementById('cnt').getElementsByTagName('p'),
+            i, j, len = menu.length,bindclick;
+        bindclick = function(i) {
+            menu[i].onclick = function() {
+                for (j = 0; j < len; j++) {
+                    menu[j].className = menu[j].className.replace('active', '');
+                    cnt[j].style.display = 'none';
+                }
+                cnt[i].style.display = 'block';
+                menu[i].className += 'active';
+            }
+        };
+        for (i = 0; i < len; i++) {
+            bindclick(i);
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- HTML页面布局 -->
+    <ul id="menu">
+        <li class="active">房产</li>
+        <li>家具</li>
+        <li>二手房</li>
+    </ul>
+    <div id="cnt">
+        <p>275万购昌平邻铁三居 总价20万买一居 200万内购五环三居 140万安家东三环 北京首现零首付楼盘 53万购东5环50平 京楼盘直降5000 中信府 公园楼王现房</p>
+        <p>40平出租屋大改造 美少女的混搭小窝 经典清新简欧爱家 90平老房焕发新生 新中式的酷色温情 66平撞色活泼家居 瓷砖就像选好老婆 卫生间烟道的设计</p>
+        <p> 通州豪华3居260万 二环稀缺2居250w甩 西3环通透2居290万 130万2居限量抢购 黄城根小学学区仅260万 121平70万抛! 独家别墅280万 苏州桥2居优惠价248万</p>
+    </div>
+</body>
+</html>

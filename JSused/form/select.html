@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title>select Page</title> 
+<script type="text/javascript" src="addbox/jquery.js"></script> 
+<script type="text/javascript" language="javascript"> 
+$(function(){ 
+	//Bind the change event 
+	$("#dropLang").unbind("change", eDropLangChange).bind("change", eDropLangChange); 
+	$("#dropFrame").unbind("change", eDropFrameChange).bind("change", eDropFrameChange); 
+}); 
+
+//The change event of language dropdown-list 
+var eDropLangChange = function(){ 
+//The selected value of the language dropdown-list. 
+var selectedValue = $(this).val(); 
+
+//show all options. 
+$("#dropFrame").children("span").each(function(){ 
+	$(this).children().clone().replaceAll($(this)); //use the content of the <span> replace the <span> 
+}); 
+
+//Filter the data through selected value of language dropdown-list except <Please Select>. 
+//If the option is <Please Select>, it only needs to show all and hide nothing. 
+if(parseInt(selectedValue) != 0){ 
+//hide the option whose parentid is not equal with selected value of language dropdown-list. 
+//The <Please Select> option should not be hidden. 
+$("#dropFrame").children("option[parentid!='" + selectedValue + "'][value!='0']").each(function(){ 
+$(this).wrap("<span style='display:none'></span>"); //add a <span> around the <option> and hide the <span>. 
+}); 
+} 
+}; 
+
+//The change event of frame dropdown-list. 
+var eDropFrameChange = function(){ 
+//Find the selected option of frame dropdown-list. set the value of language dropdown-list by selected parentid. 
+$("#dropLang").val($(this).children("option:selected").attr("parentid")); 
+}; 
+</script> 
+</head> 
+<body> 
+<div> 
+<select id="dropLang"> 
+<option selected="selected" value="0"><Please Select></option> 
+<option value="1">Javascript</option> 
+<option value="2">Java</option> 
+<option value="3">C#</option> 
+</select> 
+<select id="dropFrame"> 
+<option selected="selected" value="0"><Please Select></option> 
+<option value="1" parentid="1">JQuery</option> 
+<option value="2" parentid="1">Prototype</option> 
+<option value="3" parentid="2">Struts</option> 
+<option value="4" parentid="2">Spring</option> 
+<option value="5" parentid="2">Velocity</option> 
+<option value="6" parentid="2">Hibernate</option> 
+<option value="7" parentid="3">ASP.NET MVC</option> 
+<option value="8" parentid="3">Castle</option> 
+</select> 
+</div> 
+</body> 
+</html> 

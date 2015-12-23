@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>form 表单验证</title>
+      <meta name="author" content="Hifang.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes"><!--  网站开启对 web app 程序的支持 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">  <!-- 指定的iphone中safari顶端的状态条的样式 -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-itunes-app" content="app-id=432274380" /><!--  iPhone显示下载AppStore的banner --> 
+        <style>
+        input{
+            display: block;
+            margin: 20px;
+            width: 80%;
+        }
+        </style>  
+    </head>
+    <body>
+        
+        <section>
+        <form action="">
+            <input id="name" type="text" placeholder="请输入姓名" required autofocus>
+            <input id="telEmail" type="text" placeholder="请输入电话号码/邮箱" required>
+            <input id="mobile" type="tel" placeholder="请输入电话号码" required>
+            <input id="num" type="Number" placeholder="请输入数字" required>
+            <input id="btn" type="submit" name="" value="提交" />
+            <!-- <input id="btn" type="submit" name="" value="提交" onclick="checkForm()"  /> -->
+            <input type="reset" name="" value="重置" />
+        </form>
+        </section>
+        <!-- 通用js -->
+        <script src="zepto.js"></script>
+        <script src="app.js"></script>
+
+        <script>
+        
+        $('#btn').click(function(){
+            var opName = {obj:$('#name'), id:'name',cn_name:'姓名',minLen:2,maxLen:18};
+            if(checkEle(opName) == false) return false;
+
+            var opTelEmail = {obj:$('#telEmail'), id:'telEmail', cn_name:'用户名'};
+            if(checkEle(opTelEmail) == false) return false;
+
+            var opMobile = {obj:$('#mobile'), id:'mobile', cn_name:'手机号码'};
+            if(checkEle(opMobile) == false) return false;
+
+            var opNum = {obj:$('#num'), cn_name:'数字'}
+            if(checkEle(opNum) == false) return false;                           
+        })
+
+        // function checkForm(){
+        //     var opName = {obj:$id('name'), id:'name',cn_name:'用户名',minLen:2,maxLen:18};
+        //     if(checkEle(opName) == false) return false;
+
+        //     var opMobile = {obj:$id('mobile'), id:'mobile', cn_name:'手机号码'};
+        //     if(checkEle(opMobile) == false) return false;
+
+        //     var opNum = {obj:$id('num'), cn_name:'数字'}
+        //     if(checkEle(opNum) == false) return false;    
+        // }
+        
+        </script>
+    </body>
+</html>

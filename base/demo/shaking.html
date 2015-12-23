@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+<style type="text/css">
+.gain{width:320px;height:270px;overflow:hidden;position:absolute;right:0;top:-600px}
+.gain .opacity{width:320px;height:270px;position:absolute;left:0;top:0;z-index:1;background:#000;opacity:0.5}
+.gain-cont a,.gain-cont a:visited{color:#fff;text-decoration:underline}
+.gain-cont a:hover{text-decoration:none}
+.gain-cont{position:relative;z-index:5;color:#fff;padding:0 35px}
+.gain-cont .light-fc{color:#fc8026;font-family:Tahoma,Geneva,sans-serif}
+.gain-cont em{color:#fc8026;font-size:20px;font-family:Tahoma,Geneva,sans-serif}
+.gain-cont h2{font-size:18px;padding-top:15px;font-weight:normal}
+.gain-cont .f{color:#fc8026;font-size:34px;height:50px;line-height:50px;overflow:hidden;font-family:Tahoma,Geneva,sans-serif}
+.gain-cont .f em{font-size:40px}
+.gain-cont .reg{height:46px;padding:10px 0 5px}
+.gain-cont .reg a{height:46px;line-height:46px;display:block;text-align:center;font-size:18px;background:#fc8026;text-decoration:none}
+.gain-cont .tar{text-align:right;padding-bottom:25px;margin-top:7px;}
+</style>
+</head>
+
+<body>
+	
+    <div class="gain" id="userGain" style="z-index: 9; top: -300px; right: 0px;">
+            
+            
+        <div class="gain-cont">
+            <h2>房否年化收益率</h2>
+            <p class="f"><span style="color:#fff; font-size:13px">最高</span><em>12.</em>22%</p>
+            <p><em>中心中弘</em>国际商务花园,是北京 <span class="light-fc"><em>60</em></span>项重点工程之一</p>
+            <p class="reg"><a href="/secure/register/">招商加盟</a></p>
+            <p class="tar">已有账号? <a href="/secure/login/">立即登录</a></p>
+            
+        </div>
+        <div class="opacity" style="opacity: 0.3;"></div>
+        
+        
+        
+    </div>
+
+    
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript">
+    $(function(){
+       shaking($('.gain'));
+    });
+    </script>
+</body>
+</html>
+
+
+         

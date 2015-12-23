@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span class="tit">物业类型</span>
+            <div class="opt" id="hType">
+                <label for="">
+                    <input type="checkbox" checked="checked">公寓
+                </label>
+                <label for="">
+                    <input type="checkbox">别墅
+                </label>
+                <label for="">
+                    <input type="checkbox">土地
+                </label>
+                <label for="">
+                    <input type="checkbox">商业用房
+                </label>
+            </div>
+        </li>
+        <li>
+            <span class="tit">置业用途</span>
+            <div class="opt" id="use">
+                <label for="">
+                    <input type="checkbox" checked="checked">投资
+                </label>
+                <label for="">
+                    <input type="checkbox">移民
+                </label>
+                <label for="">
+                    <input type="checkbox">留学
+                </label>
+                <label for="">
+                    <input type="checkbox">度假
+                </label>
+            </div>
+        </li>
+         <li>
+            <span class="tit">置业用途</span>
+            <div class="opt" id="use2">
+                <label for="">
+                    <input type="checkbox" checked="checked">投资
+                </label>
+                <label for="">
+                    <input type="checkbox">移民
+                </label>
+                <label for="">
+                    <input type="checkbox">留学
+                </label>
+                <label for="">
+                    <input type="checkbox">度假
+                </label>
+            </div>
+        </li>
+         <li>
+            <span class="tit">置业用途</span>
+            <div class="opt" id="use3">
+                <label for="">
+                    <input type="checkbox" checked="checked">投资
+                </label>
+                <label for="">
+                    <input type="checkbox">移民
+                </label>
+                <label for="">
+                    <input type="checkbox">留学
+                </label>
+                <label for="">
+                    <input type="checkbox">度假
+                </label>
+            </div>
+        </li>
+         <li>
+            <span class="tit">置业用途</span>
+            <div class="opt" id="use4">
+                <label for="">
+                    <input type="checkbox">投资
+                </label>
+                <label for="">
+                    <input type="checkbox">移民
+                </label>
+                <label for="">
+                    <input type="checkbox">留学
+                </label>
+                <label for="">
+                    <input type="checkbox">度假
+                </label>
+            </div>
+        </li>
+    </ul>
+    <button id="submit" type="submit">Submit</button>
+<script src="jquery.min.js"></script>
+<script>
+	$(function(){
+		'use strict';
+		var is_submit,check,hander,init;
+		 check = function(obj){
+		 	var cked=0;
+		 	obj.each(function(){
+		 		if(!!$(this).attr('checked')){
+
+		 			cked ++;
+		 		}
+		 	});		 	
+			return cked>0;
+		}
+
+		hander = function(arr){
+			for(var i=0,len=arr.length;i<len;i++){
+				arr[i].click(function(){
+					if(!!$(this).attr('checked')){
+						$(this).attr('checked',true);
+					}else{
+						$(this).removeAttr('checked');
+					}
+					is_submit(arr);
+				})
+			}
+		}
+
+		is_submit=function(arr){
+			for(var i=0,len=arr.length;i<len;i++){
+				if(check(arr[i]) === false){
+					$('#submit').attr('disabled',true);
+					return;
+				}
+			}
+			$('#submit').removeAttr('disabled');
+		}
+
+		init=function(){
+			var arr = [$('#use input'),$('#hType input'),$('#use2 input'),$('#use3 input'),$('#use4 input')];
+			is_submit(arr);
+			hander(arr);
+		}
+
+		init();
+	})
+</script>
+</body>
+
+</html>

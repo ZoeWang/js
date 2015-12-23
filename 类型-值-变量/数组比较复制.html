@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组比较、复制</title>
+</head>
+<body>
+	<script>
+		//复制数组
+		var a =['a','b','c'];	// 待复制的数组
+		var b = [];				// 复制到目标空数组
+		for(var i = 0; i < a.length; i++) {		// 遍历a[]中每个元素
+			b[i] = a[i];				// 将元素复制到b中
+		}
+
+		// 比较数组 
+		function equalArrays(a,b) {
+			if (a.length != b.length) return false; 	// 两个长度不同的数组不相等
+			for(var i = 0; i < a.length; i++)			// 循环遍历所有元素
+				if (a[i] !== b[i]) return false; 		// 如果有任意元素不等，则数组不相等
+			return true;	// 否则它们相等
+		}
+	</script>
+</body>
+</html>

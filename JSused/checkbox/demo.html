@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span class="tit">物业类型</span>
+            <div class="opt" id="hType">
+                <label for="">
+                    <input type="checkbox" checked="checked">公寓
+                </label>
+                <label for="">
+                    <input type="checkbox">别墅
+                </label>
+                <label for="">
+                    <input type="checkbox">土地
+                </label>
+                <label for="">
+                    <input type="checkbox">商业用房
+                </label>
+            </div>
+        </li>
+        <li>
+            <span class="tit">置业用途</span>
+            <div class="opt" id="use">
+                <label for="">
+                    <input type="checkbox" checked="checked">投资
+                </label>
+                <label for="">
+                    <input type="checkbox">移民
+                </label>
+                <label for="">
+                    <input type="checkbox">留学
+                </label>
+                <label for="">
+                    <input type="checkbox">度假
+                </label>
+            </div>
+        </li>
+    </ul>
+    <button id="submit" type="submit">Submit</button>
+<script src="jquery.min.js"></script>
+<script>
+	$(function(){
+		'use strict';
+		var is_submit,check,hType,use;
+		 check = function(cks){
+		 	console.log(cks.length);
+			return cks.length>0;
+		}
+		use = $('#use input[checked="checked"]');
+		$('#hType input,#use input').click(function(){
+			if(!!$(this).attr('checked')){
+				$(this).attr('checked',true);
+			}else{
+				$(this).removeAttr('checked');
+			}
+			hType = $('#hType input[checked="checked"]');
+			use = $('#use input[checked="checked"]');
+			if(check(hType) && check(use)){
+				$('#submit').removeAttr('disabled');
+			}else{
+				$('#submit').attr('disabled',true);
+			}
+		});
+	})
+</script>
+</body>
+
+</html>

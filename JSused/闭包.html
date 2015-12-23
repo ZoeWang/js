@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Demo</title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<div id="test">
+			<a href="javascript:;">1</a>
+			<a href="javascript:;">2</a>
+			<a href="javascript:;">3</a>
+			<a href="javascript:;">4</a>
+			<a href="javascript:;">5</a>
+		</div>
+		<script>
+			window.onload = function(){
+				var a = document.getElementById('test').getElementsByTagName('a');
+				for(var i=0;i<a.length;i++){
+					a[i].onclick = function(i){
+						return function(){
+							alert(i);
+						}
+					}(i);
+				}
+			}			
+
+		</script>
+		<script>
+
+;
+(function(window, undefined) {
+	var JKbanner = function() {
+		this.config=[
+		{"img":"images/web-banner.jpg","src":"http://jiuye.jikexueyuan.com/train/web?huodong=jiuye_web_bigbanner","jktag":"0001|0.1|15000402"},
+		]
+	};
+	JKbanner.prototype = {
+		gitConfig:function(postion){
+			var $self = this;
+			switch (postion){
+				case "web":
+					console.log($self.config[0])
+					return $self.config[0];
+					break;
+				default:
+					break;
+			}
+		},
+		creatWebBanner: function(banner) {  //创建弹出广告
+			var Banner = '<div id="guide-blacklayer"></div>';
+			Banner += '<div id="guide-login">';
+			Banner += '<span class="login-close">x</span>';
+			Banner += '<a href="'+banner.src+'" target="_blank" jktag="'+banner.jktag+'">';
+			Banner += '<img src="'+banner.img+'" class="web-banner" />';
+			Banner += '</a></div>';
+			console.log(Banner)
+			$('body').append(Banner);
+			console.log("ok")
+			console.log(document.getElementsByTagName('body')[0])
+//			if ($(document).height() > $(window).height()) {
+//				$('#guide-blacklayer').height($(document).height())
+//			}
+		}
+	}
+	
+	var mybanner = new JKbanner();
+	mybanner.creatWebBanner(mybanner.gitConfig("web"))
+}(window))
+		</script>
+	</body>
+</html>

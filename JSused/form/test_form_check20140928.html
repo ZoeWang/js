@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<style type="text/css">
+	*{margin:0 ; padding:0;}
+	ul{margin:20px;}
+	input{float: left; margin-left: 10px; padding:3px;}
+	li{list-style: none;  margin:10px; overflow: hidden;}
+	.bordererr{border: 1px solid red}
+	.borderok{border:1px solid green;}
+	span{color:red; font-size: 12px; float: left; margin-left: 10px;}
+	label{float:left; width:100px; text-align: right;}
+</style>
+<script type="text/javascript" src='jquery-1.9.1.js'></script>
+<script type="text/javascript" src='check_rules.js'></script>
+<!--<script type="text/javascript" src='zx.js'></script>-->
+
+<body>
+	<form method="post" action="#" id='addressEditForm'>
+		<ul>
+			<!-- <li><label>qq</label><input type='text' id='inputqq' /><p></p></li> -->
+			<li><label>email</label><input type='text' id='inputemail'/><span></span></li>
+
+			<li><label>姓名</label> <input type='text' id='inputname' /><span></span></li>
+			<li><label>phone</label> <input type='text' id='inputphone' /><span></span></li>
+			<li><label>传真</label> <input type='text' id='inputfix' /><span></span></li>
+			<li><label>身份证</label> <input type='text' id='inputid' /><span></span></li>
+<!-- 			<li><label>客户地址</label> <input type='text' id='inputaddress' /><span></span></li>
+			<li><label>账号</label> <input type='text' id='' /><span></span></li>
+			<li><label>密码</label> <input type='text' id='inputpassword' /><span></span></li>
+			<li><label>组织机构代码</label> <input type='text' id='inputinstit' /><span></span></li>
+		  	<li><label>户型名称</label> <input type='text' id='housename' /><span></span></li>
+		  	<li><label>户型面积</label> <input type='text' id='housesq' /><span></span></li>
+		  	<li><label>所在地</label> <input type='text' id='' /><span></span></li>
+		  	<li><label>人数</label> <input type='text' id='inputperson' /><span></span></li>
+		  	<li><label>活动名称</label> <input type='text' id='' /><span></span></li>
+		  	<li><label>已报名人数</label> <input type='text' id='' /><span></span></li> -->
+
+		  	<li><input type="submit" name="button" id="btn" value='提交'></li>
+	  	</ul>
+    </form>
+</body>
+</html>
+<script>
+
+
+$('#addressEditForm').submit(function() {
+	//e.preventDefault();
+	var items = {
+		inputemail : [{type:'null', errMsg:zhffTip.langs.errTpl.noText.stringFormat('邮箱')}, {type:'email', errMsg: zhffTip.langs.errTpl.shippingAddress.stringFormat('邮箱')}],
+		inputname : [{type:'null', errMsg:zhffTip.langs.errTpl.noText.stringFormat('姓名')}, {type:'zhoren', errMsg: zhffTip.langs.errTpl.invalidName}],
+
+	};
+
+	return $('#addressEditForm').formCheck(items, {
+		submitBtn:"btn",	//提交按钮id
+		errinfoFinder: function(obj) { 
+			return obj.next("span");
+		 },
+	});
+});
+
+
+
+</script>

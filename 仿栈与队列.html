@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://img.mukewang.com/down/540812440001e40e00000000.js" type="text/javascript"></script>
+<title></title>
+</head>
+<body>
+    
+
+
+<ul>
+  <li id="a">aoo</li>
+  <li id="b">bar</li>
+  <li id="c">car</li>
+</ul>
+
+打印出$$("li").get(1)
+<div id="aaron"></div>
+
+<script type="text/javascript">
+
+
+var $$ = ajQuery = function(selector) {
+    return new ajQuery.fn.init(selector);
+}
+
+ajQuery.fn = ajQuery.prototype = {
+    init: function(selector) {
+		this.selector = selector;
+		//模拟出数组格式
+		var results = document.querySelectorAll(selector);
+		for (var i = 0; i < results.length; i++) {
+			this[i] = results[i];
+		}
+		return this;
+	},
+	constructor: ajQuery
+}
+
+ajQuery.fn.init.prototype = ajQuery.fn
+
+ajQuery.extend = ajQuery.fn.extend = function() {
+	var options, src, copy,
+		target = arguments[0] || {},
+		i = 1,
+		length = arguments.length;
+
+	//只有一个参数，就是对jQuery自身的扩展处理
+	//extend,fn.extend
+	if (i === length) {
+		target = this; //调用的上下文对象jQuery/或者实例
+		i--;
+	}
+	for (; i < length; i++) {
+		//从i开始取参数,不为空开始遍历
+		if ((options = arguments[i]) != null) {
+			for (name in options) {
+				copy = options[name];
+				//覆盖拷贝
+				target[name] = copy;
+			}
+		}
+	}
+	return target;
+}
+
+ajQuery.fn.extend({
+	get: function(num) {
+		if (num != null) {
+			return (num < 0 ? this[num + this.length] : this[num])
+		} else {
+			return [].slice.call(this);
+		}
+	},
+	setName: function(myName) {
+		this.myName = myName
+		return this;
+	},
+	getName: function() {
+		$("#aaron").html(this.myName)
+		return this;
+	}
+})
+
+$("#aaron").html(  $$("li").get(1)  )
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

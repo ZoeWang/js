@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bootstrap 附加导航（Affix）插件</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+<style type="text/css">
+    /* Custom Styles */
+    ul.nav-tabs{
+        width: 140px;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    }
+    ul.nav-tabs li{
+        margin: 0;
+        border-top: 1px solid #ddd;
+    }
+    ul.nav-tabs li:first-child{
+        border-top: none;
+    }
+    ul.nav-tabs li a{
+        margin: 0;
+        padding: 8px 16px;
+        border-radius: 0;
+    }
+    ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+        color: #fff;
+        background: #0088cc;
+        border: 1px solid #0088cc;
+    }
+    ul.nav-tabs li:first-child a{
+        border-radius: 4px 4px 0 0;
+    }
+    ul.nav-tabs li:last-child a{
+        border-radius: 0 0 4px 4px;
+    }
+    ul.nav-tabs.affix{
+        top: 130px; /* Set the top position of pinned element */
+    }
+</style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+
+<div class="bs-docs-section">
+  <h1 id="affix" class="page-header">Affix <small>affix.js</small></h1>
+
+  <h2 id="affix-examples">Example</h2>
+  <p>页面最下面有例子</p>
+
+  <hr class="bs-docs-separator">
+
+  <h2 id="affix-usage">Usage</h2>
+  <p>使用 affix plugin 通过 data 属性 或是JavaScript调用. <strong class="text-danger">这两种方法, 你必须为你贴的位置和宽度提供CSS的内容。</strong></p>
+
+  <h3>通过CSS定位</h3>
+  <p> affix plugin 在3个 class之间切换,每个代表一个特定状态: <code>.affix</code>, <code>.affix-top</code>, and <code>.affix-bottom</code>. 你自己必须为这些类提供的样式 (独立于这个插件) 以处理实际的位置。</p>
+  <p>affix plugin 是如何工作的:</p>
+  <ol>
+    <li>开始, 这个插件添加 <code>.affix-top</code> 显示元素的顶部位置，这里不需要css定位.</li>
+    <li>滚动到附加导航affix的位置。 这里 <code>.affix</code> 替换 <code>.affix-top</code> and设置 <code>position: fixed;</code> (由 Bootstrap's CSS 提供).</li>
+    <li>如果定义了一个 bottom , 滚动过去将 <code>.affix</code> 替换为 <code>.affix-bottom</code>. 偏移量是可选的,设置一个你需要的适当的CSS . 在这种情况下, 添加 <code>position: absolute;</code> 当你需要时. 这个插件通过data属性或JavaScript option 来确定不同位置的元素.</li>
+  </ol>
+  <p>按照上面的步骤设置CSS的使用options如下.</p>
+
+  <h3>通过 data 属性</h3>
+  <p>非常简单添加 affix 动作 给任何元素, 只要添加 <code>data-spy="affix"</code> 你想监视的元素. 使用偏移量来定义当切换元素的时候.</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">data-spy=</span><span class="s">"affix"</span> <span class="na">data-offset-top=</span><span class="s">"60"</span> <span class="na">data-offset-bottom=</span><span class="s">"200"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+  <h3>通过 JavaScript调用</h3>
+  <p>调用 affix 插件 通过 JavaScript:</p>
+<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myAffix'</span><span class="p">).</span><span class="nx">affix</span><span class="p">({</span>
+  <span class="nx">offset</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.footer'</span><span class="p">).</span><span class="nx">outerHeight</span><span class="p">(</span><span class="kc">true</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+
+  <h3>选项</h3>
+  <p>选项能通过 data 属性 或JavaScript. 对于 data 属性, 添加属性名称到 <code>data-</code>, 就像在 <code>data-offset-top="200"</code>.</p>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+       <tr>
+         <th style="width: 100px;">Name</th>
+         <th style="width: 100px;">type</th>
+         <th style="width: 50px;">default</th>
+         <th>description</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>offset</td>
+         <td>number | function | object</td>
+         <td>10</td>
+         <td>通过屏幕像素偏移量计算滚动的位置. 如果提供的是一个数字,偏移量将被应用在顶部和底部的两个方向. 提供唯一的值, 底部和顶部偏移量每个都有一个对象 如<code>offset: { top: 10 }</code> 或是 <code>offset: { top: 10, bottom: 5 }</code>. 您也可以使用一个函数动态地计算一个偏移量.</td>
+       </tr>
+       <tr>
+         <td>target</td>
+         <td>selector | node | jQuery element</td>
+         <td>the <code>window</code> object</td>
+         <td>特别的目标元素的附加导航 affix.</td>
+       </tr>
+
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+
+
+  <h3>事件</h3>
+  <p>Bootstrap's affix 插件提供了一些事件用于into affix 功能.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th style="width: 150px;">Event Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>affix.bs.affix</td>
+          <td>这个事件立即触发在affixed元素前执行 .</td>
+        </tr>
+        <tr>
+          <td>affixed.bs.affix</td>
+          <td>这个事件是在触发affixed元素后执行 .</td>
+        </tr>
+        <tr>
+          <td>affix-top.bs.affix</td>
+          <td>这个事件立即触发在affixed-top元素之前.</td>
+        </tr>
+        <tr>
+          <td>affixed-top.bs.affix</td>
+          <td>这个事件是在触发affixed-top元素后执行.</td>
+        </tr>
+       <tr>
+        <td>affix-bottom.bs.affix</td>
+          <td>这个事件立即触发在affixed-bottom元素之前.</td>
+        </tr>
+        <tr>
+          <td>affixed-bottom.bs.affix</td>
+          <td>这个事件是在触发 affixed-bottom元素后执行.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+</div>
+
+<!-- 例子 -->
+<div class="container">
+    <div class="jumbotron">
+        <h1>Bootstrap Affix</h1>
+    </div>
+    <div class="row">
+        <!-- data-spy="affix" data-offset-top="125" -->
+    <div class="col-xs-3" id="myScrollspy">
+        <ul class="nav nav-tabs nav-stacked" id="myNav" id="myAffix" >
+            <li class="active"><a href="#section-1">第一部分</a></li>
+            <li><a href="#section-2">第二部分</a></li>
+            <li><a href="#section-3">第三部分</a></li>
+            <li><a href="#section-4">第四部分</a></li>
+            <li><a href="#section-5">第五部分</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-9">
+    <h2 id="section-1">第一部分</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum. Vivamus fermentum in arcu in aliquam. Quisque aliquam porta odio in fringilla. Vivamus nisl leo, blandit at bibendum eu, tristique eget risus. Integer aliquet quam ut elit suscipit, id interdum neque porttitor. Integer faucibus ligula.</p>
+    <hr>
+    <h2 id="section-2">第二部分</h2>
+    <p>Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.</p>
+    <hr>
+    <h2 id="section-3">第三部分</h2>
+    <p>Integer pulvinar leo id risus pellentesque vestibulum. Sed diam libero, sodales eget sapien vel, porttitor bibendum enim. Donec sed nibh vitae lorem porttitor blandit in nec ante. Pellentesque vitae metus ipsum. Phasellus sed nunc ac sem malesuada condimentum. Etiam in aliquam lectus. Nam vel sapien diam. Donec pharetra id arcu eget blandit. Proin imperdiet mattis augue in porttitor. Quisque tempus enim id lobortis feugiat. Suspendisse tincidunt risus quis dolor fringilla blandit. Ut sed sapien at purus lacinia porttitor. Nullam iaculis, felis a pretium ornare, dolor nisl semper tortor, vel sagittis lacus est consequat eros. Sed id pretium nisl. Curabitur dolor nisl, laoreet vitae aliquam id, tincidunt sit amet mauris.</p>
+    <hr>
+    <h2 id="section-4">第四部分</h2>
+    <p>Suspendisse a orci facilisis, dignissim tortor vitae, ultrices mi. Vestibulum a iaculis lacus. Phasellus vitae convallis ligula, nec volutpat tellus. Vivamus scelerisque mollis nisl, nec vehicula elit egestas a. Sed luctus metus id mi gravida, faucibus convallis neque pretium. Maecenas quis sapien ut leo fringilla tempor vitae sit amet leo. Donec imperdiet tempus placerat. Pellentesque pulvinar ultrices nunc sed ultrices. Morbi vel mi pretium, fermentum lacus et, viverra tellus. Phasellus sodales libero nec dui convallis, sit amet fermentum sapien auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu elementum nibh, quis varius libero.</p>
+    <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Ut tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio. Phasellus auctor velit at lacus blandit, commodo iaculis justo viverra. Etiam vitae est arcu. Mauris vel congue dolor. Aliquam eget mi mi. Fusce quam tortor, commodo ac dui quis, bibendum viverra erat. Maecenas mattis lectus enim, quis tincidunt dui molestie euismod. Curabitur et diam tristique, accumsan nunc eu, hendrerit tellus.</p>
+    <hr>
+    <h2 id="section-5">第五部分</h2>
+    <p>Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra libero egestas sit amet. Etiam porttitor dolor non eros pulvinar malesuada. Vestibulum sit amet est mollis nulla tempus aliquet. Praesent luctus hendrerit arcu non laoreet. Morbi consequat placerat magna, ac ornare odio sagittis sed. Donec vitae ullamcorper purus. Vivamus non metus ac justo porta volutpat.</p>
+    <p>Vivamus mattis accumsan erat, vel convallis risus pretium nec. Integer nunc nulla, viverra ut sem non, scelerisque vehicula arcu. Fusce bibendum convallis augue sit amet lobortis. Cras porta urna turpis, sodales lobortis purus adipiscing id. Maecenas ullamcorper, turpis suscipit pellentesque fringilla, massa lacus pulvinar mi, nec dignissim velit arcu eget purus. Nam at dapibus tellus, eget euismod nisl. Ut eget venenatis sapien. Vivamus vulputate varius mauris, vel varius nisl facilisis ac. Nulla aliquet justo a nibh ornare, eu congue neque rutrum.</p>
+    </div>
+</div> -->
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/scrollspy.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/affix.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $("#myNav").affix({
+            offset: { 
+                top: 1625 
+            }
+        });
+
+        // $('#myAffix').affix({
+        //    offset: {
+        //       top: 100, bottom: function () {
+        //          return (this.bottom = 
+        //             $('.bs-footer').outerHeight(true))
+        //          }
+        //       }
+        // })
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+
+</head>
+
+<body>
+	<input type="submit" name="sub" id="sub" class="btn" value="type = submit 提交" />
+	<input type="button" name="btn" class="btn" value=" type = button 提交" />
+    <input type="button" name="btn" id="btn" value=" type = button 提交" />
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        //用class同时控制多个按钮
+        $(".btn").click(function(){
+            $(".btn").setBtnTimer({
+                'time': 5
+            });
+        });
+        //用id 控制一个按钮
+        $("#btn").click(function(){
+            $("#btn").setBtnTimer({
+                'time': 5
+            });
+        });
+        
+    });
+    </script>
+</body>
+</html>
+
+
+         

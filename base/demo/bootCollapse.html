@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+
+</head>
+
+<body>
+
+<div class="bs-docs-section">
+  <h1 id="collapse" class="page-header">Collapse 折叠 <small>collapse.js</small></h1>
+
+  <h3>About</h3>
+  <p>得到基本风格和灵活的支持可折叠的组件(比如手风琴和导航)。</p>
+
+  <div class="bs-callout bs-callout-danger">
+    <h4>Plugin 依赖</h4>
+    <p>Collapse 需要 the <a href="#transitions">transitions plugin</a> 包含在你的Bootstrap版本里 .</p>
+  </div>
+
+  <h2 id="collapse-examples">Example accordion</h2>
+  <p>使用collapse plugin, 我们建造一个简单的 accordion 通过扩展组件的面板.</p>
+
+  <div class="zero-clipboard"><span class="btn-clipboard with-example">Copy</span></div><div class="bs-example">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapsed">
+              Collapsible Group Item #1
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" style="height: 0px;">
+          <div class="panel-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">
+              Collapsible Group Item #2
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" style="height: 0px;">
+          <div class="panel-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">
+              Collapsible Group Item #3
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" style="height: 0px;">
+          <div class="panel-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /example -->
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-group"</span> <span class="na">id=</span><span class="s">"accordion"</span> <span class="na">role=</span><span class="s">"tablist"</span> <span class="na">aria-multiselectable=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel panel-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-heading"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"panel-title"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-parent=</span><span class="s">"#accordion"</span> <span class="na">href=</span><span class="s">"#collapseOne"</span> <span class="na">aria-expanded=</span><span class="s">"true"</span> <span class="na">aria-controls=</span><span class="s">"collapseOne"</span><span class="nt">&gt;</span>
+          Collapsible Group Item #1
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/h4&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"collapseOne"</span> <span class="na">class=</span><span class="s">"panel-collapse collapse in"</span> <span class="na">role=</span><span class="s">"tabpanel"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-body"</span><span class="nt">&gt;</span>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel panel-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-heading"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"panel-title"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-parent=</span><span class="s">"#accordion"</span> <span class="na">href=</span><span class="s">"#collapseTwo"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-controls=</span><span class="s">"collapseTwo"</span><span class="nt">&gt;</span>
+          Collapsible Group Item #2
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/h4&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"collapseTwo"</span> <span class="na">class=</span><span class="s">"panel-collapse collapse"</span> <span class="na">role=</span><span class="s">"tabpanel"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-body"</span><span class="nt">&gt;</span>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel panel-default"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-heading"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"panel-title"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-parent=</span><span class="s">"#accordion"</span> <span class="na">href=</span><span class="s">"#collapseThree"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-controls=</span><span class="s">"collapseThree"</span><span class="nt">&gt;</span>
+          Collapsible Group Item #3
+        <span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/h4&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"collapseThree"</span> <span class="na">class=</span><span class="s">"panel-collapse collapse"</span> <span class="na">role=</span><span class="s">"tabpanel"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"panel-body"</span><span class="nt">&gt;</span>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+<p>您还可以使用插件没有accordion的标记。让一个按钮切换另一个元素的扩展和收缩。</p>
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-danger"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#demo"</span> <span class="na">aria-expanded=</span><span class="s">"true"</span> <span class="na">aria-controls=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+  simple collapsible
+<span class="nt">&lt;/button&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">class=</span><span class="s">"collapse in"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+  <div class="bs-callout bs-callout-warning">
+    <h4>使展开/折叠控制访问</h4>
+    <p>确定添加 <code>aria-expanded</code> 去控制这个元素. 这个属性显式地定义了可折叠的元素的当前状态屏幕阅读器和类似的辅助技术. 如果折叠元素在默认情况下是关闭的, 它应该有一个值 <code>aria-expanded="false"</code>. 如果你想设置默认折叠面板时打开的，给打开的元素添加 <code>in</code> class, 设置 <code>aria-expanded="true"</code> 控制. 插件会自动切换这个属性基于折叠元素是否已被打开或关闭.</p>
+    <p>另外, 如果你的控制元素是一个可折叠的元素– i.e. the <code>data-target</code> 属性是指向一个 <code>id</code> 选择器 – 你可以添加一个额外的 <code>aria-controls</code> 属性控制元素, 包含 这个 <code>id</code> 所在的折叠元素. 现代屏幕阅读器和类似的辅助技术利用这个属性直接为用户提供附加的快捷键来导航可折叠元素本身.</p>
+  </div>
+
+  <h2 id="collapse-usage">Usage</h2>
+  <p>The collapse plugin 利用 几个 classes处理繁重的生存过程:</p>
+  <ul>
+    <li><code>.collapse</code> 隐藏内容</li>
+    <li><code>.collapse.in</code> 显示内容</li>
+    <li><code>.collapsing</code> 当转换开始时添加它, 当转换结束后移除它。</li>
+  </ul>
+  <p>这些class都在 <code>component-animations.less</code>里面.</p>
+
+  <h3>通过 data 属性</h3>
+  <p>只需要添加 <code>data-toggle="collapse"</code> 和一个 <code>data-target</code> 给一个元素去自动标记控制一个折叠的元素. 这个<code>data-target</code> 属性 接受一个 CSS 选择器给折叠应用. 确定添加一个 class <code>collapse</code> 给要折叠的元素.如果你想让他默认是打开的, 添加一个额外的 class <code>in</code>.</p>
+  <p>添加一个就像组管理的折叠元素, 添加这个 data 属性 <code>data-parent="#selector"</code>. 参考的例子在上面.</p>
+
+  <h3>通过 JavaScript 调用</h3>
+  <p>手动启用:</p>
+<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'.collapse'</span><span class="p">).</span><span class="nx">collapse</span><span class="p">()</span>
+</code></pre></div>
+
+  <h3>选项</h3>
+  <p>选项能通过 data 属性或 JavaScript. 如果是 data 属性, 附加选项名称给 <code>data-</code>, 就像 <code>data-parent=""</code>.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+       <tr>
+         <th style="width: 100px;">Name</th>
+         <th style="width: 50px;">type</th>
+         <th style="width: 50px;">default</th>
+         <th>description</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>parent</td>
+         <td>selector</td>
+         <td>false</td>
+         <td>如果提供了一个选择器,当前可折叠项目显示时，在其指定父元素下的所有其他可折叠的元素将被关闭. (类似的传统的手风琴行为 - 他依赖于 <code>panel</code> class)</td>
+       </tr>
+       <tr>
+         <td>toggle</td>
+         <td>boolean</td>
+         <td>true</td>
+         <td>切换可折叠元素时调用</td>
+       </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+
+  <h3>方法</h3>
+
+  <h4>.collapse(options)</h4>
+  <p>激活你的内容作为一个可折叠的元素。接受一个可选的选项 <code>object</code>.
+</p><div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myCollapsible'</span><span class="p">).</span><span class="nx">collapse</span><span class="p">({</span>
+  <span class="nx">toggle</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">})</span>
+</code></pre></div>
+
+  <h4>.collapse('toggle')</h4>
+  <p>切换可折叠元素来显示或隐藏。.</p>
+
+  <h4>.collapse('show')</h4>
+  <p>显示一个可折叠元素.</p>
+
+  <h4>.collapse('hide')</h4>
+  <p>隐藏一个可折叠元素.</p>
+
+  <h3>事件</h3>
+  <p>下表列出了Bootstrap's折叠（Collapse）插件中要用到的事件。这些事件可在函数中当钩子使用。.</p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+       <tr>
+         <th style="width: 150px;">Event Type</th>
+         <th>Description</th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>show.bs.collapse</td>
+         <td>当调用 <code>show</code> 事件时，立即触发该事件.</td>
+       </tr>
+       <tr>
+         <td>shown.bs.collapse</td>
+         <td>当折叠元素对用户可见完成时触发该事件（将等待 CSS 过渡效果完成）。.</td>
+       </tr>
+       <tr>
+         <td>hide.bs.collapse</td>
+         <td>当调用 <code>hide</code> 事件时，立即触发该事件.</td>
+       </tr>
+       <tr>
+         <td>hidden.bs.collapse</td>
+         <td>当折叠元素对用户隐藏完成时触发该事件（将等待 CSS 过渡效果完成）。.</td>
+       </tr>
+      </tbody>
+    </table>
+  </div><!-- /.table-responsive -->
+<div class="highlight"><pre><code class="js"><span class="nx">$</span><span class="p">(</span><span class="s1">'#myCollapsible'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'hidden.bs.collapse'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// do something…</span>
+<span class="p">})</span>
+</code></pre></div>
+</div>
+
+
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/collapse.js"></script>
+    <script type="text/javascript" src="../bootstrap3.2.0/js/transition.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#collapseOne').collapse('show')
+    })
+    </script>
+</body>
+</html>
+
+
+         

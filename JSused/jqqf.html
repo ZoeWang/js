@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>写了一个小的demo,底层库用的是JQ把配置，方法，事件很好的进行了区分</title>
+<style>
+.tabs input.active{ background:red; }
+.tabs div{ width:200px; height:200px; border:1px #000 solid; display:none;}
+</style>
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script>
+
+$(function(){
+    var t1 = new CreateTab();
+    t1.init({
+        id : 'div1'
+    });
+    var t2 = new CreateTab();
+    t2.init({
+        id : 'div2',
+        events : 'mouseover'
+    });
+    var t3 = new CreateTab();
+    t3.init({
+        id : 'div3',
+        events : 'mouseover',
+        delay : 300
+    });
+    
+    $('#input1').click(function(){
+        t3.select(2);
+        alert( t3.currentContent() );
+    });
+    
+    var t4 = new CreateTab();
+    t4.init({
+        id : 'div4',
+        events : 'click'
+    });
+    $(t4).on('toBeforeChange',function(){
+        //alert( t4.currentContent() );
+    });
+    $(t4).on('toChange',function(){
+        //alert( t4.currentContent() );
+        alert( t4.currentTitle() );
+    });
+    
+    $.extend(CreateTab.prototype,{   //插件扩展
+        currentTitle : function(){
+            return $(this.id).find('input').eq( this.iNow ).val();
+        }
+    });
+    
+    
+    
+});
+
+function CreateTab(){  //组件开发
+    this.id = null;
+    this.aInput = null;
+    this.aDiv = null;
+    this.iNow = 0;
+    this.defaults = {
+        events : 'click',
+        delay : 0
+    };
+}
+CreateTab.prototype = {
+    init : function(options){
+        var This = this;
+        options = $.extend(this.defaults,options);
+        this.id = '#' + options.id;
+        $(this.id).find('input').on(options.events,function(){
+            var obj = this;
+            if(options.events=='mouseover' && options.delay){
+                obj.timer = setTimeout(function(){
+                    This.change(obj);
+                },options.delay);
+                
+                $(obj).mouseout(function(){
+                    clearTimeout(obj.timer);
+                });
+            }
+            else{
+                This.change(obj);
+            }
+            
+        });
+    },
+    change : function(obj){
+        
+        $(this).trigger('toBeforeChange');
+        
+        $(this.id).find('input').attr('class','');
+        $(this.id).find('div').css('display','none');
+        
+        $(obj).attr('class','active');
+        $(this.id).find('div').eq( $(obj).index() ).css('display','block');    
+        
+        this.iNow = $(obj).index();
+        
+        $(this).trigger('toChange');
+        
+    },
+    select : function(index){
+        $(this.id).find('input').attr('class','');
+        $(this.id).find('div').css('display','none');
+        
+        $(this.id).find('input').eq(index).attr('class','active');
+        $(this.id).find('div').eq(index).css('display','block');    
+        
+        this.iNow = index;
+        
+    },
+    currentContent : function(){
+        return $(this.id).find('div').eq( this.iNow ).html();
+    }
+};
+</script>
+</head>
+
+<body>
+<div id="div1" class="tabs">
+    <input class="active" type="button" value="1" />
+    <input type="button" value="2" />
+    <input type="button" value="3" />
+    <div style="display:block">111</div>
+    <div>222</div>
+    <div>333</div>
+</div>
+<div id="div2" class="tabs">
+    <input class="active" type="button" value="1" />
+    <input type="button" value="2" />
+    <input type="button" value="3" />
+    <div style="display:block">111</div>
+    <div>222</div>
+    <div>333</div>
+</div>
+<div id="div3" class="tabs">
+    <input class="active" type="button" value="1" />
+    <input type="button" value="2" />
+    <input type="button" value="3" />
+    <div style="display:block">111</div>
+    <div>222</div>
+    <div>333</div>
+</div>
+
+<input type="button" id="input1" value="方法测试" />
+
+<div id="div4" class="tabs">
+    <input class="active" type="button" value="1" />
+    <input type="button" value="2" />
+    <input type="button" value="3" />
+    <div style="display:block">111</div>
+    <div>222</div>
+    <div>333</div>
+</div>
+
+</body>
+</html>

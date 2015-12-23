@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>demo</title>
+<link rel="stylesheet" type="text/css" href="../bootstrap3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/demo.min.css">
+<style type="text/css">
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
+</style>
+</head>
+
+<body>
+	<ul class="list">
+        <li value="1" name="ask_list_cont">
+            <a href="javascript:;" class="curre">所有问题</a>
+        </li>
+        <li value="2" name="ask_list_cont">
+            <a href="javascript:;" class="">待回答问题</a>
+        </li>
+    </ul>
+    <div class="ask_list_box">
+        <div class="ask_list_cont1 show">
+               符合规范化
+        </div>
+        <div class="ask_list_cont2 hide">
+                大富大贵
+        </div>
+    </div>
+
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        tab(".list li");
+    })
+    
+    </script>
+</body>
+</html>
+
+
+         

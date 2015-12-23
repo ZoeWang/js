@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery的Chosen插件</title>
+	<!-- <link rel="stylesheet" href="docsupport/style.css">
+	<link rel="stylesheet" href="docsupport/prism.css"> -->
+	<link rel="stylesheet" href="docsupport/chosen.css">
+</head>	
+<!-- 如果不想要搜索框的话，很简单，用css把它隐藏掉就OK了： -->
+<style type="text/css">
+/*.chosen-container-single .chosen-search {
+    display: none;
+}*/
+</style>
+<body>
+
+
+<!--  -->
+<select data-placeholder="选择字母" name="dept" style="width: 150px;" id="dept" class="dept_select">
+	<option value="-1"></option>	<!-- 要想显示data-placeholder 默认文字，select 下的第一个选择项必须为空的option。 -->
+	<option value="a">af</option>
+    <option value="b">bfff</option>
+    <option value="c">cgggg</option>
+    <option value="d">ddf</option>
+    <option value="e">edfgdfgg</option>
+</select>
+<br><br><br>
+<select data-placeholder="选择字母" name="dept" multiple style="width: 450px;" id="dept" class="mult_select">
+	<option value="-1"></option>	<!-- 要想显示data-placeholder 默认文字，select 下的第一个选择项必须为空的option。 -->
+	<option value="a">af</option>
+    <option value="b">bfff</option>
+    <option value="c">cgggg</option>
+    <option value="d">ddf</option>
+    <option value="e">edfgdfgg</option>
+</select>
+<!--  -->
+<script type="text/javascript" src="../jquery-1.9.1.js"></script>
+<script type="text/javascript" src="chosen.jquery.js"></script>
+<!-- <script type="text/javascript" src="chosen.proto.js"></script> -->
+<!-- <script type="text/javascript" src="docsupport/prism.js"></script> -->
+<script type="text/javascript">
+// var config = {
+// 			'.chosen-select'					 : {},
+// 			'.chosen-select-deselect'	: {allow_single_deselect:true},
+// 			'.chosen-select-no-single' : {disable_search_threshold:10},
+// 			'.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+// 			'.chosen-select-width'		 : {width:"95%"}
+// 		}
+// 		for (var selector in config) {
+// 			$(selector).chosen(config[selector]);
+// 		}
+$(function(){
+	$('.dept_select').chosen({
+		 // max_selected_options: 5,	//当select为多选是，最多选择个数
+		no_results_text: "没有找到"		//无搜索结果显示的文本
+		// allow_single_deselect: true		//是否允许取消选择
+		//disable_search_threshold:10  		//如果有比较少的选项的时候，可以再单选select中隐藏搜索输入框
+	});
+
+	$('.mult_select').chosen({
+		max_selected_options:3,
+		width:"80%"
+	});
+
+	//多选中，如果你设置了最多选择项并且还要继续选择可以绑定事件加个自己想要的函数
+	$('.mult_select').bind("chosen:maxselected",function(){
+		alert('最多只能选3个');
+	});
+	//选择下拉框后触发change 事件
+	$(".dept_select").chosen().change(function(){
+		alert('改变了选项');
+	});
+
+	//当我们需要动态更新select下的选择项时，该怎么办呢？只要在更新选择项后触发Chosen中的liszt:updated事件就可以了：
+	//...$(".dept-select").html('...<option>部门6</option>...');
+	//$(".dept-select").trigger("chosen:updated");
+})
+ 
+
+</script>
+
+
+</body>
+</html>

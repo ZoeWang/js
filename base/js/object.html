@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>对象的介绍</title>
+</head>
+<body>
+	<h1>除了字符串、数字、true、false、null、undefined之外，JavaScript中的值都是对象</h1>
+	<br>
+	<ul>
+		<h3>属性特性(property attribute)</h3>
+		<li>可写(writable attribute)，表明是否可以设置该属性</li>
+		<li>可枚举(enumerable attribute),表明是否可以通过for/in循环返回该属性</li>
+		<li>可配置(configurable attribute)，表明是否可以删除或修改该属性</li>
+	</ul>
+	<br>
+	<ul>
+		<h3>对象特性</h3>
+		<li>对象的原型(prototype)指向另一个对象，本对象的属性继承自它的原型对象。</li>
+		<li>对象的类(class)是一个标识对象类型的字符串</li>
+		<li>对象的扩展标识(extensible flag)指明了(在ECMAScript 5中)是否可以向该对象添加新属性</li>
+	</ul>
+	<br>
+	<ul>
+		<li>内置对象(native object) 是由ECMAScript规范定义的对象或类。如:数组、函数、日期、正则表达式</li>
+		<li>宿主对象(host object)是由JavaScript解释器所嵌入的宿主环境（如web浏览器）定义的。客户端JavaScript中表示网页结构的HTMLElement对象均是宿主对象。宿主环境定义的方法可以当成普通的JavaScript函数对象，那么宿主对象可以当成内置对象</li>
+		<li>自定义对象(user-defined object)是由运行中的JavaScript代码创建的对象</li>
+		<li>自有属性(own property)是直接在对象中定义的属性</li>
+		<li>继承属性(inherited property)是在对象的原型对象中定义的属性</li>
+	</ul>
+	<br>
+	<h2>创建对象</h2>
+	<p>可以通过对象直接量、关键字new和（ECAMAScript 5中的）Object.create()函数来创建对象。</p>
+	<br>
+	<h3>对象直接量</h3>
+	<pre>
+		var empty = {};								//没有任何属性的对象
+		var point = { x:0, y:0 };					//两个属性
+		var point2 = { x:point.x, y:point.y+1 };	//更复杂的值
+		var book = {
+			"main title":"JavaScript",				//属性名里有空格，必须用字符串表示
+			"sub-title":"The Definitive Guide",		//属性名里有连字符，必须用字符串表示
+			"for":"all audiences",					//for是保留字，因此必须用引号
+			author: {								//这个属性的值是个对象
+				firstname: "David",					//注意，这里的属性名都么有引号
+				surname: "Flanagan"
+			}
+		}
+	</pre>
+	<p>对像直接量这个表达式每次运算都创建并初始化一个新的对象，</p>
+	<p>每次计算对象直接量都会计算它的每个属性的值。</p>
+	<p>如果在一个重复调用的函数中的循环体内使用了对象直接量，它将创建很多新对象，并每次创建对象的属性也有可能不同。</p>
+	<br>
+
+	<h3>通过new创建对象</h3>
+	<p>new运算符创建并初始化一个新对象。关键字new后跟随一个函数调用。这里的函数称作构造函数（constructor）,构造函数用以初始化一个新的创建的对象。JavaScript语言核心中的原始类型都包括内置构造函数。</p>
+
+	<pre>
+		var o = new Object();	//创建一个空对象，和{}一样
+		var a = new Array();	//创建一个空数组，和[]一样
+		var d = new Date();		//创建一个表示当前时间的Date对象
+		var r = new RegExp("js");	//创建一个可以进行模式匹配的RegExp对象
+		//除了这些内置的构造函数，用自定义构造函数来初始化新对象也可以。
+	</pre>
+	<br>
+
+	<h3>原型</h3>
+	<P>每一个JavaScript对象（null除外）都和另一个对象相关联。“另一个对象就是原型”，每一个对象都从原型继承属性。</P>
+	<P>所有通过对象直接量创建的对象都具有同一个原型对象，并可以通过JavaScript代码Object.prototype获得对原型对象的引用。通过关键字new和构造函数调用创建的对象的原型就是构造函数的prototype属性的值。因此，同使用{}创建对象一样，通过new Object()创建的对象也继承Object.prototype.同样，通过new Array()创建的对象的原型就是Array.prototype,通过new Date() 创建的对象的原型就是Date.prototype.</P>
+	<P>没有原型的对象为数不多，Object.prototype就是其中之一。它不继承任何属性。其他原型对象都是普通对象，普通对象都具有原型。所有的内置构造函数（以及大部分自定义的构造函数）都具有一个继承自Object.prototype的原型。如：Date.prototype的属性继承自Object.prototype,因此由new Date()创建的Date对象的属性同时继承自Date.prototype和Object.prototype.这一系列链接的原型对象就是所谓的"原型链"(prototype)</P>
+	<br>
+	<h3>Object.create()</h3>
+	<p>ECMAScript 5定义了一个名为Object.create()的方法，它创建一个新对象。</p>
+	<p>第一个参数是这个对象的原型</p>
+	<p>Object.create()提供第二个可选参数，用以对对象的属性进行进一步描述</p>
+	
+	<p>Object.create()是一个静态函数，而不是提供给某个对象调用的方法。使用它只须传入所需的原型对象即可：</p>
+	<pre>
+		var o1 = Object.create({x:1, y:2});		// o1继承了属性x和y
+	</pre>
+
+	<pre>
+		var o2 = Object.create(null);	
+		//o2是出入参数null的，没有原型的新对象，不继承任何属性和方法。
+		//也不包括基础方法 toString(),它不能和"+"运算符一起正常工作。
+	</pre>
+	
+	<pre>
+		var o3 = Object.create(Object.prototype);		//o3和{}和new Object()一样
+		//可以通过任意原型创建新对象（换句话说，可以使任意对象可继承）
+	</pre>
+	
+	<p>通过原型继承创建一个新对象</p>
+	<pre>
+		//inherit() 返回了一个继承自原型对象p的属性的新对象 不能接收 null，不能接收可选的第二参数
+		//这里使用ECMAScript 5中的Object.create()函数（如果存在的话）
+		//如果不存在Object.create(),则退化使用其他方法
+		function inherit(p) {
+			if (p==null) throw TypeError(); 	//p是一个对象，但不能是null
+			if (Object.create) 					//如果Object.create()存在
+				return Object.create(p);		//直接使用它
+			var t = typeof p;					//否则进一步检测
+			if(t !== "object" && t!== "function") throw TypeError();
+			function f() {};					//定义一个空构造函数
+			f.prototype = p;					//将其原型属性设置为p
+			return new f();						//使用f()创建p的继承对象 
+		}
+	</pre>
+	<pre>
+		var o = {x: "don't change this value "};
+		library_function(inherit(0));	//防止对o的意外修改
+	</pre>
+	<br>
+
+	<h2>属性的查询和设置</h2>
+	<pre>
+		//属性的查询
+		var author = book.author;	//得到book的author属性
+		var name = author.surname;	//得到获得author的surname属性
+		var title = book["main title"];	//得到book的"main title"属性 方括号的表达式结果一定是字符串。
+		//对象的属性名是保留字o["for"]和o["class"]
+	</pre>
+	<pre>
+		//属性的设置
+		book.edition = 6;				//给book创建一个名为"edition"的属性
+		book["main title"] = "ECMAScript";	//给"main title"属性赋值
+	</pre>
+	<br>
+
+	<h3>作为关联数组的对象</h3>
+	<pre>
+		object.property 
+		object["property"]
+		这两个表达式值相等
+	</pre>
+	<br>
+	
+	<h3>继承</h3>
+	<pre>
+		var o = {} 		//o从Object.prototype 继承对象的方法
+		o.x = 1;		//给o定义一个属性x
+		var p = inherit(o); 	//p继承o和Object.prototype
+		p.y = 2;			//给p定义一个属性y
+		var q = inherit(p);		//q继承p、o和Object.prototype
+		q.z = 3;	//给q定义一个属性z
+		var s = q.toString();	//toString继承自Object.prototype
+		q.x + q.y 			// => 3:x和y分别继承自o和p
+	</pre>
+	<p>只有在查询属性时体现继承，设置属性与继承无关，程序员可以有选择的覆盖继承属性</p>
+	<pre>
+		var unitcircle = {r:1};		//一个用来继承的对象
+		var c = inherit(unitcircle);	//c继承属性r
+		c.x = 1; c.y = 1;		//c定义两个属性
+		c.r = 2;				//c覆盖继承来的属性
+		unitcircle.r;			// => 1,原型对象没有修改
+	</pre>
+	<br>	
+	
+	<h3>属性访问错误</h3>
+	<pre>
+		接上例
+		book.subtitle;	// => undefined:属性不存在
+		var len = book.subtitle.length;		//抛出一个类型错误异常，undefined没有length属性
+	</pre>
+
+	<pre>
+		避免出错方法
+		// 一种冗余方法
+		var len = undefined;
+		if(book) {
+			if(book.subtitle) len = book.subtitle.length;
+		}
+		
+		//一种更简练的常用方法，获取subtitle的length属性或undefined
+		var len = book && book.subtitle && book.subtitle.length;
+	
+		//内置构造函数的原型是只读的
+		Object.prototype = 0;	//赋值失败，但没报错（ECMAScript 5严格模式中报错）Object.prototype没有修改
+	</pre>
+
+	<h2>删除属性</h2>
+	<p>delete只是断开属性和宿主对象的联系，不会操作属性中的属性</p>
+	<pre>
+		delete book.author;		//book不再有属性author
+		delete book["main title"]; 	//book不再有属性main title
+	
+		a = {p:{x:1}};
+		b = a.p;
+		delete a.p; 
+		b.x; 	//=>1,已经删除的属性的引用依然存在，在应用中很容易造成内存泄露，
+				//销毁对象时要遍历属性中的属性，依次删除
+
+		//delete 只删除自有属性，不能删除继承属性
+
+		o = {x:1};	//o有一个属性x，并继承属性toString
+		delete o.x;	//删除x，返回true
+		delete o.x;	//什么也没做（x已经不存在了），返回true
+		delete o.toString;	//什么也没做（toString是继承来的）返回true
+		delete 1;		//无意义，返回true
+
+		delete Object.prototype;	//不能删除，属性是不可配置的
+		var x = 1;					//声明一个全局变量
+		delete this.x;				//不能删除这个属性
+		function f() {};			//声明一个全局函数
+		delete this.f;				//不能删除这个全局函数
+	</pre>
+	<br>
+
+	<h2>检测属性</h2>
+	<pre>
+		in运算符  检测自有属性或是继承属性为true
+		var o = {x:1}
+		"x" in o;		//true:"x"是o的属性
+		"y" in o;		//false:"y"不是o的属性
+		"toString" in o;	//true: o继承toString属性
+	</pre>
+	<pre>
+		hasOwnProperty()方法 检测自有属性，继承属性false
+		var o = {x:1}
+		o.hasOwnProperty("x");		//true:o有一个自有属性x
+		o.hasOwnProperty("y");		//false:o中不存在属性y
+		o.hasOwnProperty("toString");	//false:toString是继承属性
+	</pre>
+	<pre>
+		propertyIsEnumerable() 检测自有属性且可枚举为true时返回true
+		var o = inherit({y:2});
+		o.x=1;
+		o.propertyIsEnumerable("x");	//true:o有一个可枚举的自有属性X
+		o.propertyIsEnumerable("y");	//false: y是继承来的
+		Object.prototype.propertyIsEnumerable("toString");	//false:不可枚举
+	</pre>
+	<pre>
+		undefined:
+		var o = {x:1};	
+		o.x !== undefined;		//true:o中有属性x
+		o.y !== undefined;		//false:y是继承来的
+		o.toString !==undefined;	//true: o继承了toString属性
+	</pre>
+
+	<pre>
+		in可以区分不存在的属性和存在但值为undefined的属性。
+		var o = {x:undefined} 	//属性被显式赋值为undefined
+		o.x !== undefined		//false:属性存在，但值为undefined
+		o.y !== undefined		//false:属性不存在
+		"x" in o				//true:属性存在
+		"y" in o				//false: 属性不存在
+		delete o.x;				//删除了属性x
+		"x" in o				//false:属性不再存在
+	</pre>
+	<p>注：上述代码用的是!==,而不是!=.!==可以区分undefined和null</p>
+	<br>
+	<h2>枚举属性</h2>
+	<pre>
+		对象添加属性转化为不可枚举
+		var o = {x:1,y:2,z:3};	//三个可枚举的自有属性
+		o.propertyIsEnumerable("toString")	//=>false,不可枚举
+		for(p in o)				//遍历属性
+		console.log(p);			//输出x、y和z，不会输出toString
+
+		//过滤for/in循环返回属性，下面两种方式是最常见的
+		for(p in o){
+			if(!o.hasOwnProperty(p)) continue;		//跳过继承的属性
+		}
+		for(p in o){
+			if(typeof o[p] === "function") continue;	//跳过方法
+		}
+
+		ECMAScript 5 中枚举属性名称函数
+		Object.keys(),返回一个数组，这个数组有对象中可枚举自有属性名称组成
+		Object.getOwnPropertyNames(),返回对象所有自有属性名称数组
+	</pre>
+	<br>
+
+	<h2>属性getter和setter</h2>
+	<pre>
+		var o = {
+			//普通的数据属性
+			data_prop: value,
+
+			//存取器属性都是成对定义的函数
+			get accessor_prop(){ /*这里是函数体*/ }
+			set accessor_prop(value){ /*这里是函数体*/ }
+		}
+	</pre>
+</body>
+</html>

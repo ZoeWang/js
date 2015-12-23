@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>包装对象</title>
+</head>
+<body>
+	<script>
+		var s = "hello world!";		// 一个字符串
+		var word = s.substring(s.indexOf(" ")+1, s.length);		// 使用字符串属性
+
+		var s="test", n=1, b=true;
+		var S = new String(s);
+		var N = new Number(n);
+		var B = new Boolean(b);
+		console.log(s==S);	//true 值相等
+		console.log(typeof s +'===='+typeof S);		// 类型不一样 String Object
+	</script>
+</body>
+</html>

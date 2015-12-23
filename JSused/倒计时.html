@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+	<script src="jquery-1.9.1.min.js"></script>
+	<script>
+	// 倒计时
+	var time = {};
+	time.showTimes = function (startTime, lastTime, step) {
+	    this.startTime = Date.parse(startTime);  //开始时间
+	    this.lastTime = Date.parse(lastTime);  //到期时间
+	    this.step = step * 1000;  //执行的阶段时间，一般是1秒
+	};
+	time.showTimes.prototype = {
+	    atTime: function (a, b) {
+	        //参数说明：a:到期回调方法，b:倒计时回调方法
+	        var that = this;
+	        var timeold = parseFloat(Number(that.lastTime) - Number(that.startTime));
+	        var msPerDay = 24 * 60 * 60 * 1000;
+	        var e_daysold = timeold / msPerDay
+	        var daysold = Math.floor(e_daysold);  //天
+	        var e_hrsold = (e_daysold - daysold) * 24;
+	        var hrsold = Math.floor(e_hrsold);  //小时
+	        var e_minsold = (e_hrsold - hrsold) * 60;
+	        var minsold = Math.floor((e_hrsold - hrsold) * 60);  //分钟
+	        var seconds = Math.round((e_minsold - minsold) * 60);  //秒
+	        var msSeconds = Math.ceil(Math.round(((e_minsold - minsold) * 60 - seconds) * 1000) / 100) * 10;
+	        if (msSeconds == 100) {
+	            msSeconds = 99;
+	        }
+	        if (that.startTime >= that.lastTime) {
+	            arguments[0]();
+	        } else {
+	            arguments[1](that.getStr(daysold), that.getStr(hrsold), that.getStr(minsold), that.getStr(seconds), that.getStr(msSeconds));
+	            that.startTime = parseInt(that.startTime) + that.step;
+	            window.setTimeout(function () {
+	                that.atTime(a, b);
+	            }, that.step);
+	        }
+	    },
+	    getStr: function (num) {
+	        return num.toString().length < 2 ? "0" + num : num;
+	    }
+	};
+
+	function getServerTime() {
+        var startTime = $("#startTime").text();
+        var endTime = $("#endTime").text();
+
+        countdown(startTime, endTime);
+    };
+	function countdown(startdate, enddate) {
+        //活动开始倒计时
+        var _time = new time.showTimes(startdate, enddate, 1);
+        _time.atTime(_a, _b);
+        // 结束时执行函数
+        function _a() {
+            $("#day").text(0);
+        }
+        // 正常执行函数
+        function _b() {
+            $('#day').text(arguments[0]);
+            $('#hour').text(arguments[1]);
+            $('#minute').text(arguments[2]);
+            $('#second').text(arguments[3]);
+        }
+    }
+    $(function(){
+    	getServerTime();
+    	console.log(new TypeError());
+    })
+	</script>
+</head>
+<body>
+	<div>开始时间：<span id="startTime">2015-06-23</span> 结束时间：<span id="endTime">2015-08-15</span></div>
+	<br/>
+	<div>
+		显示: <span id="day">02</span>天
+		<span id="hour">02</span>小时
+		<span id="minute">14</span>分钟
+		<span id="second">44</span>秒
+	</div>
+
+</body>
+</html>

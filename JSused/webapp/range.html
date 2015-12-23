@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>range </title>
+      <meta name="author" content="Hifang.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes"><!--  网站开启对 web app 程序的支持 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">  <!-- 指定的iphone中safari顶端的状态条的样式 -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-itunes-app" content="app-id=432274380" /><!--  iPhone显示下载AppStore的banner -->
+        <meta http-equiv="Expires" CONTENT="-1">   <!--  网页在任何时候都不能被Cache存储        -->
+        <meta http-equiv="Cache-Control" CONTENT="no-cache">           
+        <meta http-equiv="Pragma" CONTENT="no-cache">  
+		<style type="text/css">
+		.h-range {
+		  width: 300px;
+		  background: #e7e7e7;
+		  height: 8px;
+		  position: relative;
+		}
+		.h-range .h-progress {
+		  width: 275px;
+		  background: #00a3ff;
+		  height: 10px;
+		  left: 25px;
+		  position: absolute;
+		  margin-top: -1px;
+		}
+		.h-range .h-range-l,
+		.h-range .h-range-r {
+		  width: 25px;
+		  height: 40px;
+		  position: absolute;
+		  margin-top: -15px;
+		  background: #ccc;
+		}
+		.h-range .h-range-r {
+		  right: 0;
+		}
+		.h-zscope {
+		  position: relative;
+		  width: 300px;
+		  height: 90px;
+		  margin: 0 auto;
+		  border-bottom: 1px solid #e7e7e7;
+		}
+		.h-zprice {
+		  position: absolute;
+		  margin-top: 30px;
+		  color: #00a3ff;
+		  width: 300px;
+		}
+		.h-zprice .h-zprice-min {
+		  float: left;
+		}
+		.h-zprice .h-zprice-max {
+		  float: right;
+		}
+		</style>  
+    </head>
+    <body>
+        <form action="">
+       
+        <section class="h-con h-zyb">
+            
+            
+            <h2>预算价格范围？</h2>
+            
+            <div class="h-zscope">
+                <p class="h-zprice clearfix"><span class="h-zprice-min">￥<i id="min">10</i>万</span><span class="h-zprice-max"><i id="max">1000</i>万</span></p>
+                <input type="hidden" name="" value="10" id="input_min">
+                <input type="hidden" name="" value="1000" id="input_max">
+                <div class="h-range">
+                    <div class="h-progress" id="h-progress"></div>
+                    <div class="h-range-l" id="h-range-l"></div>
+                    <div class="h-range-r" id="h-range-r"></div>
+                </div>
+            </div>
+        </section>
+        </form>
+    
+    <script>
+    progress('h-range-l',event);
+    progress('h-range-r',event);
+   
+    function $id(o){return document.getElementById(o) || o;}
+    function progress(o,e){
+        $id(o).addEventListener("touchstart",function(e){
+            //手指按下。
+            var init={
+                mX : $id(o).offsetLeft,     //当前 起始 dom元素的左边 位置 0 起值
+                lX : $id('h-range-l').offsetLeft,
+                rX : $id('h-range-r').offsetLeft,
+                dX : e.targetTouches[0].pageX,  //手指按下的位置。
+            }
+
+            //手指移动
+            function fnMove(e){
+                var dist = e.changedTouches[0].pageX-init.dX,   //手指一次移动的距离
+                    len = init.mX+dist,  //总体移动的距离（即滑块走的距离，你看到的）
+                    l_x = init.lX,  
+                    r_x = init.rX;
+                    //$id(o).style.left=len+'px';
+                switch ($id(o).id){
+                    case 'h-range-l':
+                        l_x = init.lX + dist;
+                        drawMove('l');
+                        break;
+                    case 'h-range-r':
+                        r_x = init.rX + dist;
+                        drawMove('r');
+                        break;
+                    default: break;
+                }
+                 
+                function drawMove(d){
+                    if(r_x > l_x + 25 && len>=0 && len<=275 ) {
+                        $id(o).style.left=len+'px';
+                        $id('h-progress').style.left = l_x + 'px';
+                        $id('h-progress').style.width = r_x - l_x + 'px';
+                        if (d=='l') $id('min').innerHTML = Math.round(len*3.6+10);
+                        else $id('max').innerHTML = Math.round(len*3.6+10);
+                    }
+                }   
+     
+            };
+            //手指抬起
+            function fnEnd(e){
+                var endX = e.changedTouches[0].pageX;   //手指抬起，事件细节用changedTouches
+                $id('input_min').value = $id('min').innerHTML;
+                $id('input_max').value = $id('max').innerHTML;
+                //取消绑定事件。
+                document.removeEventListener("touchmove",fnMove,false);
+                document.removeEventListener("touchend",fnEnd,false);
+            };
+            //绑定事件。
+            document.addEventListener("touchmove",fnMove,false);
+            document.addEventListener("touchend",fnEnd,false);
+            //取消默认层。
+            e.preventDefault();
+        },false);
+    }
+    </script>
+    </body>
+</html>

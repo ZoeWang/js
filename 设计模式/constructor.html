@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>构造函数</title>
+</head>
+<body>
+<script>
+	//1.用于创建特定类型的对象
+	//2.这样的函数名会被人笑的
+	//3. js 开发写单引号
+	//4.js里构造函数比较特殊地方 new
+	//5.其他语言里 如 PHP 里人家实现 有一个关键字 A class
+	//6.zaomen就是构造函数 他又充当了类的概念
+	var AA = {	// 结合单例模式
+		zaomen:function(huawen){
+		if(!(this instanceof zaomen)){	// 用this 指针，判断this指向zaomen 否则 new zaomen
+			return new zaomen();
+		};
+		var _huawen = "普通";
+		if(huawen){
+			_huawen = huawen;
+		};
+		this.suo = "普通";
+		this.huawen = _huawen;
+		this.create = function(){
+			return "【锁头】"+this.suo+"【花纹】"+this.huawen;
+		}
+		}
+		
+	}
+
+	var BB = {
+		zaomen:function(huawen){
+		if(!(this instanceof zaomen)){	// 用this 指针，判断this指向zaomen 否则 new zaomen
+			return new zaomen();
+		};
+		var _huawen = "BB";
+		if(huawen){
+			_huawen = huawen;
+		};
+		this.suo = "BB";
+		this.huawen = _huawen;
+		this.create = function(){
+			return "【锁头】"+this.suo+"【花纹】"+this.huawen;
+		}
+		}
+	}
+
+	function zaomen (huawen){	//构造函数
+		if(!(this instanceof zaomen)){	// 用this 指针，判断this指向zaomen 否则 new zaomen
+			return new zaomen();
+		};
+		var _huawen = "普通";
+		if(huawen){
+			_huawen = huawen;
+		};
+		this.suo = "普通";
+		this.huawen = _huawen;
+		this.create = function(){
+			return "【锁头】"+this.suo+"【花纹】"+this.huawen;
+		}
+	}
+	
+	var xiaozhang = new AA.zaomen();	// 结合单例模式
+	alert("xiaozhang"+xiaozhang.create());
+
+	var xiaoli = new BB.zaomen("绚丽");
+	alert("xiaoli"+xiaoli.create());
+
+	var gouzao = new zaomen("构造函数");
+	alert("gouzao"+gouzao.create());
+</script>	
+</body>
+</html>

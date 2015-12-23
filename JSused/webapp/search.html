@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>search </title>
+
+      <meta name="author" content="Hifang.com">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes"><!--  网站开启对 web app 程序的支持 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">  <!-- 指定的iphone中safari顶端的状态条的样式 -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-itunes-app" content="app-id=432274380" /><!--  iPhone显示下载AppStore的banner -->
+        <meta http-equiv="Expires" CONTENT="-1">   <!--  网页在任何时候都不能被Cache存储        -->
+        <meta http-equiv="Cache-Control" CONTENT="no-cache">           
+        <meta http-equiv="Pragma" CONTENT="no-cache">  
+        <style>
+        *{
+            margin:0;
+        }
+        .h-search-box {
+          display: block;
+          padding: 10px 10px;
+          border-bottom: 1px solid #c4c4c4;
+          background: #f4f4f4;
+        }
+        .h-search-box .h-searchCon {
+          border: 1px solid #c4c4c4;
+          border-radius: 3px;
+          padding: 3px 5px;
+          color: #000;
+          margin-right: 10px;
+          height: 2rem;
+          line-height: 2rem;
+        }
+
+        .h-search-box i {
+          position: absolute;
+          margin-left: -38px;
+          margin-top: 7px;
+          font-size: 1.8rem;
+          color: #e7e7e7;
+        }
+        .h-searchbtn{
+            cursor: pointer;
+        }
+        .h-search-his {
+          margin: 10px 10px 0 10px;
+          font-size: 1.2rem;
+          color: #797979;
+          border-bottom: 1px solid #e7e7e7;
+          height: 45px;
+          line-height: 45px;
+        }
+        .h-search-item {
+          background: #ffffff;
+          padding: 0 10px;
+        }
+        .h-search-item li {
+          border-bottom: 1px solid #e7e7e7;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 45px;
+          line-height: 45px;
+        }
+        .h-search .h-btngreybord {
+          width: 60%;
+          display: block;
+          margin: 2rem auto;
+        }
+        </style>  
+    </head>
+    <body>
+        
+        <section class="h-search">
+        <form action="">
+            <label for="search" class="h-bge7 h-search-box">
+                <input type="text" placeholder="搜索" name="" class="h-searchCon" id="searchCon" value="" >
+                <i class="icon-remove-sign">X</i>   
+                <input class="h-searchbtn" type="submit" id="onSearch" name="" value="搜索" />
+            </label>
+            <ul class="h-search-item">
+                <li>历史记录</li>
+                <!-- <li>旧金山</li>
+                <li>北京</li> -->
+            </ul>
+            <a href="javascript:;" id="clearData" class="h-btngreybord">清空历史记录</a>
+        </form>
+        </section>
+
+        <script src="js/zepto.js"></script>
+        <script src="js/touch.js"></script>
+        <script>
+        
+        $(function(){
+            saveData();
+            upData();
+            clearkey();
+            searchKey();
+
+            //点击X 清空输入内容
+            $('.icon-remove-sign').tap(function(){
+              $(this).prev('input').val('');
+            })
+        })
+        function saveData(){
+            var kwdCacheKey = 'h_kwd_list';     //定义数据存储对象名
+
+            $('#onSearch').on('tap', function(){
+
+                var currentKwd = $('#searchCon').val(),     //搜索内容
+                    currentKwdKey = 'k_'+currentKwd,        //当前搜索值对应的键值
+                    currentKwdList = {},                    //创建json对象 
+                    kwdStr = localStorage.getItem(kwdCacheKey);     //获取历史搜索内容（字符串）
+                if(currentKwd.length == 0){
+                    alert('请输入搜索内容！');
+                }else{
+                    if(kwdStr !== null){
+                        var kwdList = JSON.parse(kwdStr);       //将历史搜索内容转化为对象
+                    }
+
+                    currentKwdList[currentKwdKey] = currentKwd; //将当前输入关键字动态加入新创建json对象中
+
+                    if(kwdList == undefined){   //如果不存在历史搜索内容，直接将当前搜索内容转化为字符串
+                        var kwdTxt = JSON.stringify(currentKwdList);
+                    }else{
+                        //合并对象（当前搜索内 和 历史 搜索内容）
+                        var kwdTxtObj = mergeToRepeat(currentKwdList,kwdList);
+                        //转化为序列化json字符串格式
+                        kwdTxt = JSON.stringify(kwdTxtObj);
+                    }
+                    localStorage.setItem(kwdCacheKey, kwdTxt);  //存入localStorage
+                }   
+                
+            })
+
+        }
+
+        function upData(){  //取数据
+            var kwdTxt = window.localStorage.h_kwd_list ? window.localStorage.h_kwd_list : undefined;
+            if(kwdTxt !== undefined){
+                kwdTxtObj = JSON.parse(kwdTxt);
+                //console.log(kwdTxtObj);
+
+                for(var attr in kwdTxtObj){ //遍历对象
+                    var item = '<li>'+kwdTxtObj[attr]+'</li>';
+                    $('.h-search-item').append(item);
+                }
+            }
+        }
+
+        function clearkey(){
+            //清空历史记录 并刷新页面
+           $('#clearData').on('tap', function(){
+                //localStorage.clear();   //删除所有localStorage的值
+                localStorage.removeItem('h_kwd_list'); //删除h_kwd_list这个键值的里面所有的值
+                location.reload();
+           })
+        }
+
+        function searchKey(){   //直接用历史记录查询
+            $('.h-search-item li').on('tap', function(){
+                $('#searchCon').val($(this).text());
+            })
+        }
+        function mergeToRepeat(json1,json2){    //遍历两个对象合成一个并将两个对象中重复的键值的值去掉前一个
+            var resJson={};
+            for(var i in json1){
+                resJson[i]=json1[i];
+            }
+            for (var i in json2) {
+                resJson[i]=json2[i];
+            };
+            return resJson;
+        }
+
+
+        </script>
+    </body>
+</html>
