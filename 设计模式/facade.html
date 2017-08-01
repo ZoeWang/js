@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>外观模式，又叫门面模式</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var stopEvent = function(e) {
+			// 同时阻止事件默认行为和冒泡
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+		
+
+		function addEvent(el,type,fn){
+		   	if(window.addEventListener){
+		        el.addEventListener(type,fn,false);
+		    }else if(window.attachEvent){
+		        el.attachEvent("on"+type,fn);
+		    }else{
+		        el["on"+type]=fn;
+		    }
+		}
+		// addEvent函数是一个基本的门面，有了它，就有了一种为DOM节点添加事件监听器的简便方法，你不用再为每次为一个元素添加事件监听时都得针对浏览器间的差异进行检查而烦恼。有了这个便利方法，你大可把与添加事件监听器有关的各种低层细节抛在脑后，而把心思集中在如何构建自己的应用系统上。
+		
+
+
+		// 示例：设计一个事件工具
+		var event = {
+			getEvent:function(e){
+		     	return e||window.evnet;
+		   	},
+		   	getTarget:function(e){
+		     	return e.target||e.srcElement;
+		   	},
+	      	stopPropagation:function(e){
+	            if(e.stopPropagation){
+	                e.stopPropagation();
+	            }else{
+	                e.cancelBuble = true;
+	            }
+	      	},
+	       	preventDefault:function(e){
+	            if(e.preventDefault){
+	                e.preventDefault();
+	            }else{
+	                e.returnValue = false;
+	            }
+	        },
+	        stopEvent:function(e){
+	            event.stopPropagation(e);
+	            event.preventDefault(e);
+	        }
+		}
+
+		// 尽管看起来很像，但门面模式并不是适配器模式。适配器是一种包装器，用来对接口进行适配以便在不兼容系统中使用它。而创建门面元素则是图个方便。它并不用于达到与需要特定接口的客户系统打交道这个目的，而是用于提供一个简化的接口。
+
+	</script>
+</body>
+</html>
+
+
+
+
+

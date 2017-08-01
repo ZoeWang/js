@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observer</title>
+</head>
+<body>
+<script>
+    var Observer = function(){
+        this._callbacks = {};
+        this._fired = {};
+    };
+
+    Observer.prototype.addListener = function(eventname, callback) {
+        this._callbacks[eventname]=this._callbacks[eventname]||[];
+        this._callbacks[eventname].push(callback);
+        return this;
+    }
+
+    Observer.prototype.removeListener = function(eventname,callback){
+        if(!eventname){
+            return this;
+        }
+        if(!callback){
+            this._callbacks[eventname]=[];
+        }else  if(this._callbacks[eventname]&&this._callbacks[eventname].length>0){
+            for(var i= 0,l=this._callbacks[eventname].length;i<l;i++){
+                if(this._callbacks[eventname][i]==callback){
+                    this._callbacks[eventname].splice(i,1);
+                    break;
+                }
+            }
+        }
+        return this;
+    }
+
+    Observer.prototype.fire = function(eventname,data){
+        var arr=this._callbacks[eventname];
+        if(arr&&arr.length>0){
+            for(var i= 0,len=arr.length;i<len;i++){
+                arr[i].apply(this,Array.prototype.slice.call(arguments,1));
+            }
+        }
+        return this;
+    }
+    //添加queue
+    // 
+    Observer.prototype.queue = function(queue,callback){
+        var eventName = '';
+        var index= 0;
+        var data = [];
+        var self = this;
+        var task = null;
+// queue=[offWork,backHome]
+        var _next = function(){
+            if((task = queue.shift()) != undefined){
+                eventName = 'queueEvent' + index++;
+                //task, 需要执行1s，
+                //停顿
+                task.call(this, function (val) {
+                    val=val||null;
+                    self.fire(eventName,val)//此处的val将会传到监听器里面的val;
+                });
+                self["addListener"](eventName, function(val){
+                    data.push(val);//收集task的回调传入的val;
+                    _next();
+                })
+
+            }else{
+                callback.apply(null, [data]);
+            }
+        }
+        _next();
+    }
+    //调用
+    function offWork(callback){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            callback("下班data");
+        },1000);
+    }
+
+    function backHome(callback){
+        setTimeout(function(){
+            console.log("到家了！！！")
+            callback("到家data");
+        },1000);
+        console.log("回家ing。。。")
+    }
+
+    var observer = new Observer();
+    observer.queue([offWork,backHome],function(data){
+        console.log(data)
+    });
+
+</script>
+</body>
+</html>

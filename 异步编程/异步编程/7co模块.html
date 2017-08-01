@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function offWork(callback){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            callback(1);
+        },1000);
+    }
+    function backHome(callback){
+        setTimeout(function(){
+            console.log("到家了！！！")
+            callback(2);
+        },2000);
+        console.log("回家ing。。。")
+    }
+    function co(generatorFunction){
+        var generator = generatorFunction();
+        return function(cb){
+            var iterator = null;
+            var _next = function (args){
+                iterator = generator.next(args);
+                if(iterator.done){
+                    cb&&cb(args);
+                }else{
+                    iterator.value(_next);
+                }
+            }
+            //第一次不传参;参数代表重新复制上一次yield的返回值;
+            _next();
+        }
+    }
+    co(function* () {
+        var a;
+        a = yield offWork;
+        console.log(a);
+        a = yield backHome;
+        console.log(a);
+    })(function(data) {
+        console.log(data);
+    })
+    //yield函数,必须是thunk函数;,只有一个callback的函数;
+</script>
+</body>
+</html>

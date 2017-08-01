@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Object.defineProperty</title>
+</head>
+<body>
+	<h1>Object.defineProperty 函数 （ES5 新特性）</h1>
+	<p>将属性添加到对象，或修改现有属性的特性</p>
+
+	<h2>语法</h2>
+	<pre>
+	Object.defineProperty(object, propertyname, descriptor)
+	</pre>
+
+	<h2>参数</h2>
+	<dl>
+		<dt>object</dt>
+		<dd>必需。要在其上添加或修改属性的对象。这可能是一个本机JavaScript对象（即用户定义的对象或内置对象）或DOM 对象</dd>
+		<dt>propertyname</dt>
+		<dd>必需。一个包含属性名称的字符串</dd>
+		<dt>descriptor</dt>
+		<dd>必需。属性描述符。它可以针对数据属性或访问其属性</dd>
+	</dl>
+
+	<h2>descriptor 取值</h2>
+	<ol>
+		<li>value: 属性的值</li>
+		<li>writable: 是否可读写，如果为false，属性的值就不能被重写，只能为只读了</li>
+		<li>configurable: 可配置的，总开关，一旦为false，就不能再设置他的 （value, writable, configurable）</li>
+		<li>enumerable: 是否能在for...in 循环中遍历出来或在Object.keys中列举出来。</li>
+		<li>get: 访问器属性</li>
+		<li>set： 访问器属性</li>
+	</ol>
+
+	<h2>deccriptor 默认值</h2>
+	<pre>
+	// 例子1
+	var a={};
+	Object.defineProperty(a,"b", {
+		value:123
+	});
+	console.log(a.b);
+	</pre>
+	<p>我们只设置了 value，别的并没有设置，但是 第一次的时候 可以简单的理解为（暂时这样理解）它会默认帮我们把writable，configurable，enumerable。都设上值，而且值还都是false。。也就是说，上面代码和下面是等价的的（ 仅限于第一次设置的时候 ）</p>
+	<pre>
+	var a= {}
+	Object.defineProperty(a,"b",{
+	  value:123,
+	  writable:false,
+	  enumerable:false,
+	  configurable:false
+	})
+	console.log(a.b);//123
+	</pre>
+	<p>以上非常重要哦。。并且以上理解对set 和 get 不起作用哦</p>
+
+	<h2>configurable</h2>
+	<p>总开关，第一次设置 false 之后，，第二次什么设置也不行了，比如说</p>
+	<pre>
+	var a= {}
+	Object.defineProperty(a,"b",{
+	  configurable:false
+	})
+	Object.defineProperty(a,"b",{
+	  configurable:true
+	})
+	//error: Uncaught TypeError: Cannot redefine property: b
+	</pre>
+	<p>就会报错了。。注意上面讲的默认值。。。如果第一次不设置它会怎样。。会帮你设置为false。。所以。。第二次。再设置他会怎样？。。对喽，，会报错</p>
+
+	<h2>writable</h2>
+	<p>如果设置为fasle，就变成只读了。。</p>
+
+	<pre>
+	var a = {}; 
+
+	Object.defineProperty(o, "b", { 
+	    value : 123,
+	    writable : false });
+
+	console.log(a.b); // 打印 37
+	a.b = 25; // 没有错误抛出（在严格模式下会抛出，即使之前已经有相同的值）
+	console.log(o.a); // 打印 37， 赋值不起作用。
+
+	</pre>
+	
+	<h2>enumerable</h2>
+	<p>属性特性 enumerable 定义了对象的属性是否可以在 for...in 循环和 Object.keys() 中被枚举。</p>
+	<pre>
+	var a= {}
+	Object.defineProperty(a,"b",{
+	  value:3445,
+	  enumerable:true
+	})
+	console.log(Object.keys(a));// 打印["b"]
+	</pre>
+	<p>改为false</p>
+	<pre>
+	var a= {}
+	Object.defineProperty(a,"b",{
+	  value:3445,
+	  enumerable:false //注意咯这里改了
+	})
+	console.log(Object.keys(a));// 打印[]
+
+	for...in 类似，，不赘述了
+	</pre>
+
+	<h2>set 和 get</h2>
+	<p>在 descriptor 中不能 同时 设置访问器 (get 和 set) 和 writable 或 value，否则会错，就是说想用(get 和 set)，就不能用（writable 或 value中的任何一个）</p>
+	<pre>
+	set 和 get ，他俩干啥用的的，
+	var a= {}
+	Object.defineProperty(a,"b",{
+	  set:function(newValue){
+	    console.log("你要赋值给我,我的新值是"＋newValue)
+	    },
+	  get:function(){
+	    console.log("你取我的值")
+	    return 2 //注意这里，我硬编码返回2
+	   }
+	})
+	a.b =1 //打印 你要赋值给我,我的新值是1
+	console.log(a.b)    //打印 你取我的值
+	                    //打印 2    注意这里，和我的硬编码相同的
+
+	</pre>
+
+	<script>
+		var obj = {
+			w:7,
+			h:7
+		}
+		var a = {
+			w:10,
+			h:10,
+			get area (){
+				return this.w*this.h;
+			},
+			set area (obj) {
+				this.w = obj.w;
+				this.h = obj.h;
+			}
+		}
+
+		// 调用
+		// 取值 a.area
+		// 设置 a.area = obj
+
+		var age = 18;
+		var test = {
+			get age (){
+				return age;
+			},
+			set age(value){
+				if(value > 100) age=new Date().getFullYear() - value;
+				else age = value;
+			}
+		};
+		// test.age = 1989;
+		// alert(test.age);
+
+		function Person() {
+			var age = new Date().getFullYear() - 18;
+			Object.defineProperty(this, "age", {
+				get: function () { 
+					alert("内部存储数据为:" + age); 
+					return new Date().getFullYear() - age; 
+				},
+       	 		set: function (value) { 
+       	 			age = value; 
+       	 		}
+			});
+		}
+
+		var p = new Person();
+		p.age = 1989;
+		alert("外部获取到的数据为:" + p.age);
+
+	</script>
+
+	<h2>返回值</h2>
+	<p>已修改对象</p>
+
+	<h2>备注</h2>
+	<p>可使用Object.defineProperty 函数来执行以下操作：</p>
+	<ol>
+		<li>向对象添加新属性。 当对象不具有指定的属性名称时，发生此操作。</li>
+		<li>修改现有属性的特性。 当对象已具有指定的属性名称时，发生此操作。</li>
+	</ol>
+	<p>描述符对象中会提供属性定义，用于描述数据属性或访问其属性的特征。描述符的对象是Object.defineProperty 函数的参数</p>
+	<p>若要向对象添加多个属性或修改更多现有， 可使用：Object.defineProperities</p>
+
+	<h2>异常</h2>
+	<p>如果下任一条件为true，则引发TypeError异常</p>
+	<ul>
+		<li>object 参数不是对象。</li>
+		<li>此对象不可扩展且指定的属性名称不存在。</li>
+		<li>descriptor 具有 value 或 writable 特性，并且具有 get 或 set 特性。</li>
+		<li>descriptor 具有 get 或 set 特性，上述特性不是函数且已定义。</li>
+		<li>指定的属性名称已存在，现有属性具有 false 的 configurable 特性，且 descriptor 包含一个或多个与现有属性中特性不同的特性。  但是，当现有属性具有 false 的 configurable 特性和 true 的 writable 特性时，则允许 value 或 writable 特性不同。 </li>
+	</ul>
+
+	<h2>添加数据属性</h2>
+	<p>在一下示例中，Object.defineProperty 函数向用户定义的对象添加数据属性。</p>
+
+	<pre>
+		var newLine = "<br/>";
+
+		// Create a user-defined object
+		var obj = {};
+
+		// Add a data property to the object.
+		Object.defineProperty(obj, "newDataProperty", {
+			value: 101,
+			writable: true,
+			enumerable: true,
+			configurable: true
+		});
+
+		// Set the property value.
+		obj.newDataProperty = 102;
+		document.write("Property value: " + obj.newDataProperty + newLine);
+
+		// Output:
+		// Property value: 102
+	</pre>
+
+	<p>若要列出对象属性，请将以下代码添加到此示例中</p>
+
+	<pre>
+		var names = Object.getOwnPropertyNames(obj);
+		for (var i = 0; i < names.length; i++) {
+			var prop = names[i];
+
+			document.write(prop+ ':' + obj[prop]);
+			document.write(newLine);
+		}
+
+		// Output
+		// newDataProperty: 102
+	</pre>
+
+	<h2>修改数据属性</h2>
+	<p>若要修改对象的属性特性，请将以下代码添加到前面所示的addDataProperty 函数。 descriptor参数只包含writable特性。其他数据属性特性保持不变</p>
+
+	<pre>
+		//Modify the writable attribute of the property.
+		Object.defineProperty(obj, "newDataProperty", { writable: false });
+		
+		// List the property attributes by using a descriptor
+		// Get the descriptor with Object.getOwnPropertyDescriptor.
+		 var descriptor = Object.getOwnPropertyDescriptor(obj, "newDataProperty");
+		 for (var prop in descriptor) {
+		 	document.write(prop + ':' + descriptor[prop]);
+		 	document.write(newLine);
+		 }
+
+		 //Output
+		 //value:102
+		// writable:false
+		// enumerable:true
+ 		// configurable:true
+	</pre>
+
+	<h2>添加访问器属性</h2>
+	<p>以下示例中，Object.defineProperty 函数向用户定义的对象添加访问器属性</p>
+	<pre>
+		var newLine = "<br />";
+
+		// Create a user-defined object.
+		var obj = {};
+
+		// Add an accessor property to the object.
+		Object.defineProperty(obj, "newAccessorProperty", {
+		    set: function (x) {
+		        console.log("in property set accessor" + newLine);
+		        this.newaccpropvalue = x;
+		    },
+		    get: function () {
+		        console.log("in property get accessor" + newLine);
+		        return this.newaccpropvalue;
+		    },
+		    enumerable: true,
+		    configurable: true
+		});
+
+		// Set the property value.
+		obj.newAccessorProperty = 30;
+		console.log("Property value: " + obj.newAccessorProperty + newLine);
+
+		//Output
+		//in property set accessor<br />
+		//in property get accessor<br />
+		//Property value: 30<br />
+	</pre>
+	
+	<p>若要列出对象属性，请将以下代码添加到此示例中。</p>
+	<pre>
+		var names = Object.getOwnPropertyNames(obj);
+		for (var i = 0; i < names.length; i++) {
+			var prop = names[i];
+
+			console.log(prop + ':' + obj[prop]);
+			console.log(newLine);
+		}
+		// Output:
+		// in property get accessor
+		// newAccessorProperty:30
+		// newaccpropvalue:30
+	</pre>
+
+	<h2>修改访问器属性</h2>
+	<p>若要修改对象的访问器属性，请将以下代码添加前面所示的代码。 descriptor参数只包含get访问器定义。其他属性特性保持不变</p>
+	<pre>
+	// Modify the get accessor
+	Object.defineProperty(obj, "newAccessorProperty", {
+		get: function() { return this.newaccpropvalue; }
+	});
+
+	// List the property attributes by using a descriptor.
+	// Get the descriptor with Object.getOwnPropertyDescriptor.
+
+	var descriptor = Object.getOwnPropertyDescriptor(obj, "newAccessorProperty");
+	for (var prop in descriptor) {
+		console.log(prop + ':' + descriptor[prop]);
+		console.log(newLine);
+	}
+	
+	// Output:
+	// get:function () { return this.newaccpropvalue; }
+	//	set:function (x) {
+	        console.log("in property set accessor" + newLine);
+	        this.newaccpropvalue = x;
+	    }
+	// enumerable:true
+	// configurable:true
+	</pre>
+
+	<h2>修改DOM元素上的属性</h2>
+	<p>下面的示例演示如何通过使用Object.getOwnPropertyDescriptor 函数来获取和修改属性描述符，从而自定义内置DOM属性，对于此示例中，必须通过使用ID为“div” 的DIV元素。</p>
+
+	
+	<div id="div" style="background:red; width:200px; height:100px">
+		测试div
+	</div>
+	<script>
+		var descriptor = Object.getOwnPropertyDescriptor(Element.prototype, "querySelector");
+
+		// Make the property read-only.
+		descriptor.value = "query";
+		descriptor.writable = false;	//不可写
+		// Apply the changes to the Element prototype.
+		Object.defineProperty(Element.prototype, "querySelector", descriptor);
+
+		// Get a DOM element from the HTML body.
+		var elem = document.getElementById("div");
+
+		// Attempt to change the value. This causes the revised value attribute to be called.
+		elem.querySelector = "anotherQuery";
+		document.write(elem.querySelector);
+
+		// Output
+		// query
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        a {
+            color: #333333;
+        }
+        a:hover {
+            color: #35b558;
+        }
+        li {
+            line-height: 30px;
+        }
+        input {
+            width: 200px;
+            height: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        #left {
+            position: fixed;
+            bottom: 80px;
+        }
+        #left h3 {
+            line-height: 40px;
+            font-size: 20px;
+        }
+        #left .list {
+            background: #fff;
+            border: #ccc;
+            border-radius: 5px;
+            line-height: 30px;
+            padding-left: 30px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="javascript:;" id="createFile">新建文件夹</a>
+    </div>
+    <ul id="filelist">
+        <li>第一个文件 <a href="javascript:;" class="del">x</a></li>
+        <li data-type="super">活动产生的第一个文件 <a href="javascript:;" class="del">x</a></li>
+    </ul>
+    <div class="tree" style="background: #eee; border: 1px solid #333; width: 300px;height:300px; position:fixed; right: 40px; top: 200px;">
+        <a href="javascript:;" id="bigThing">其实我是干其他事情的，比如说我想举办活动</a>
+    </div>
+    <div id="footer" style="background: #8CB3E0; font-size: 16px; text-align: center; line-height: 80px; position: fixed; bottom: 0;width: 100%; left: 0; color: #fff; ">
+        我是底部我是无辜的
+        <a href="javascript:;" id="crazy">底部也疯狂</a>
+    </div>
+
+    <div id="left" style="width: 600px; height: 300px; background: #ddd; border: 1px solid #ccc;border-radius: 10px; margin-top:  10px;">
+        <h3>我跟他们不一样</h3>
+        <div class="list" data-type="super">活动产生的第一个文件</div>
+    </div>
+    <script src="./js/sea.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        seajs.use('./js/index');
+    </script>
+</body>
+</html>

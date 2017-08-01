@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选择符 API</title>
+	<style>
+		* {
+			line-height: 1.6em;
+		}
+		section {
+			width: 1000px;
+			margin:0 auto;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<p>Selectors API Level 1 的核心是两个方法：querySelector()和querySelectorAll()。在兼容的浏
+览器中，可以通过Document 及Element 类型的实例调用它们。目前已完全支持Selectors API Level 1
+的浏览器有IE 8+、Firefox 3.5+、Safari 3.1+、Chrome 和Opera 10+。</p>
+
+		<h2>querySelector() 方法</h2>
+		<pre>
+			//取得body 元素
+			var body = document.querySelector("body");
+			//取得ID 为"myDiv"的元素
+			var myDiv = document.querySelector("#myDiv");
+			//取得类为"selected"的第一个元素
+			var selected = document.querySelector(".selected");
+			//取得类为"button"的第一个图像元素
+			var img = document.body.querySelector("img.button");
+		</pre>
+		<p>
+		通过Document类型调用querySelector() 方法时，会在文档元素的范围内查找匹配元素。而通过Element类型调用的querySelector()方法时，只会在该元素的后代元素的范围内查找匹配的元素。
+		</p>
+
+		<h2>querySelectorAll() 方法</h2>
+		<p>传入参数和querySelector（）方法一样都是css选择符，返回的是NodeList对象，底层实现类似于一组元素的快照。</p>
+		<pre>
+		//取得某<div>中的所有<em>元素（类似于getElementsByTagName("em")）
+		var ems = document.getElementById("myDiv").querySelectorAll("em");
+		//取得类为"selected"的所有元素
+		var selecteds = document.querySelectorAll(".selected");
+		//取得所有<p>元素中的所有<strong>元素
+		var strongs = document.querySelectorAll("p strong");
+		</pre>
+
+		<p>要取得返回NodeList中的每一个元素，可以使用item() 方法</p>
+		<pre>
+		var i, len, strong;
+		for(i=0; len=strongs.length; i < len; i++) {
+			strong = strongs[i];  //或者 strongs.item(i)
+			strong.className = "important";
+		}
+		</pre>
+	</section>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function offWork(callback){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            callback();
+        },1000);
+    }
+    function backHome(callback){
+        setTimeout(function(){
+            console.log("到家了！！！")
+            callback();
+        },1000);
+        console.log("回家ing。。。")
+    }
+
+    offWork(function(){
+        backHome()
+    })
+    
+
+//    offWork(function(){
+//        backHome(function(){
+//            eatFood(function(){
+//                sleep(function(){
+//                    。。。。
+//                })
+//            })
+//        })
+//
+//    })
+</script>
+</body>
+</html>

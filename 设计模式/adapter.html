@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>适配器模式</title>
+</head>
+<body>
+<script type="text/javascript">
+	// 使用一个已存在的对象，但其方法活属性接口不符合你的要求
+	// 就写法
+	var aa = {
+		test: function(){
+			console.log('旧的-test');
+		},
+		go:function() {
+			console.log('旧的-go');
+		}
+	}
+	
+	// 新写法
+	function bb(){
+		this.test =function(){
+			console.log('新的-test');
+		}
+	}
+	bb.prototype.go = function() {
+		console.log('新的-go');
+	};
+
+	// 用旧写法的调用方式也能调到新写法内容
+	function adapterAa() {
+		var b = new bb();
+		var aa = {
+			test: function() {
+				b.test();
+			},
+			go: function() {
+				b.go();
+			}
+		}
+		
+		return aa;
+	}
+
+	window.aa = aa;
+	window.bb = bb;
+	var aa = adapterAa();
+	aa.test();
+	aa.go();
+
+
+	// 参数类型不一致
+	var cObj = {
+		string1:'foo',
+		string2:'bar',
+		string3:'baz'
+	}
+
+	function interfaceM(str1,str2,str3) {
+		console.log(str1 + str2 + str3);
+	}
+
+	// 将cObj作为参数传给interfaceM方法，可使用适配器模式
+	function cInterfaceAdapter(o){
+		interfaceM(o.string1, o.string2, o.string3);
+	}
+
+	// 调用
+	cInterfaceAdapter(cObj);
+
+	// 兼容不同的数据结构
+	var getGuangdongCity = function(){
+		var guangdongCity = [
+			{
+				name: 'shenzhen',
+				id: 11,
+			},{
+				name: 'guangzhou',
+				id: 12,
+			}
+		];
+		return guangdongCity;
+	}
+
+	var render = function( fn ){
+		console.log('开始渲染广东地图');
+		document.write( JSON.stringify( fn ));
+	}
+
+	var addressAdapter = function( oldAddressfn ){
+
+		var address = {},
+			oldAddress = oldAddressfn();
+
+		for( var i=0, c; c = oldAddress[ i++]; ){
+			address[ c.name ] = c.id;
+		}
+
+		return function(){
+			return address;
+		}
+	}
+
+	render( addressAdapter( getGuangdongCity ) );
+</script>
+	
+</body>
+</html>

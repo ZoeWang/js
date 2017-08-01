@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>array-remove-repeate</title>
+<style>
+.tt{ background-color:#006699; height:3px; overflow:hidden;}
+
+</style>
+<script src="Watch.js"></script>
+<script src="demo.js"></script>
+</head>
+
+<body>
+<div class="tt"></div>
+<div class="result" id="result"></div>
+<script>
+ 
+if(!console)
+{
+	var console={};
+	console.log=function(str){alert(str);}
+}
+
+Array.prototype.unique1 = function () {
+    var r = new Array();
+    label:for(var i = 0, n = this.length; i < n; i++) {
+        for(var x = 0, y = r.length; x < y; x++) {
+            if(r[x] == this[i]) {
+                continue label;
+            }
+        }
+        r[r.length] = this[i];
+    }
+    return r;
+}
+
+Array.prototype.unique2 = function () {
+    return this.sort().join(",,").replace(/(,|^)([^,]+)(,,\2)+(,|$)/g,"$1$2$4").replace(/,,+/g,",").replace(/,$/,"").split(",");
+}
+
+Array.prototype.unique3 = function() {
+    var temp = {}, len = this.length;
+    for(var i=0; i < len; i++)  {
+        var tmp = this[i];
+        if(!temp.hasOwnProperty(tmp)) {
+            temp[this[i]] = "my god";
+        }
+    }
+ 
+    len = 0;
+	var tempArr=[];
+    for(var i in temp) {
+        tempArr[len++] = i;
+    }
+    return tempArr;
+}
+Array.prototype.unique4 = function () {
+    var temp = new Array();
+      this.sort();
+      for(i = 0; i < this.length; i++) {
+          if( this[i] == this[i+1]) {
+            continue;
+        }
+          temp[temp.length]=this[i];
+      }
+      return temp;
+ 
+}
+Array.prototype.unique5 = function() {
+	var res = [], hash = {};
+    for(var i=0, elem; (elem = this[i]) != null; i++)  {
+		if (!hash[elem])
+		{
+			res.push(elem);
+			hash[elem] = true;
+		}
+    }
+	return res;
+}
+ 
+var test=(function()
+{
+	var arr2=[];
+	for(var i=0;i<20000;i++)
+	{
+		var t=i;
+		t=parseInt(Math.random()*2000)+1;
+		arr2[i]=(t.toString());
+	}
+	
+	return function(){return arr2};
+})();
+window.onload=function(){
+    	//---serf
+	Watch.start("Cost times5:");
+    arr= test();
+    console.log(arr.length);
+    arr=arr.unique5();
+    console.log(arr.length);
+    Watch.stop(); 
+	
+	
+	//
+    Watch.start("Cost times1:");
+    var arr= test();
+    console.log(arr.length );
+    arr=arr.unique1();
+    console.log(arr.length);
+    Watch.stop();
+
+
+    //
+	Watch.start("Cost times2:");
+	arr= test();
+    console.log(arr.length);
+    arr=arr.unique2();
+    console.log(arr.length);
+    Watch.stop();
+
+
+    //
+	Watch.start("Cost times3:");
+	arr= test();
+    console.log(arr.length );
+	arr=arr.unique3();//数组很大时，最快
+    console.log(arr.length );
+    Watch.stop();
+
+ 
+	
+    //
+    Watch.start("Cost times4:");
+    arr= test();
+    console.log(arr.length);
+    arr=arr.unique4();
+    console.log(arr.length);
+    Watch.stop();
+
+    Watch.report();
+}
+</script>
+</body>
+</html>

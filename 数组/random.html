@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组随机排序</title>
+</head>
+<body>
+
+<script type="text/javascript">
+Array.prototype.shuffle=function(){
+    _this=this;
+    this.re=[];
+    this.t=this.length;
+    for(var i=0;i<this.t;i++){
+        (function(i){
+            var temp=_this;
+            var m=Math.floor(Math.random()*temp.length);
+            _this.re[i]=temp[m];
+            _this.splice(m,1);
+        })(i)    
+    }
+    return this.re
+}
+
+
+var arr=[0,1,2,3,4,5,6,7];
+var arrs=["00","11","22","33","44","55","66","77"];
+alert(arrs.shuffle());
+alert(arr.shuffle());
+</script>
+
+</body>
+</html>

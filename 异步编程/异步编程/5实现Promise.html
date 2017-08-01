@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    _deffered与这个Promise是对应的,是调用deffered产生的这个Promise
+    var Promise = function(_deffered){
+        this.queue = [];//调用then后面的.
+        this.isPromise = true;
+        this._d = _deffered;
+        this.status = 'started';//three status  started   resolved  rejected
+
+    }
+
+    Promise.prototype.then = function(onfulled,onrejected){
+        var handler = {};
+        var _d = this._d;
+        var status = this.status;
+        if (onfulled) {
+            handler['resolve'] = onfulled;
+        }
+        if (onrejected) {
+            handler['reject'] = onrejected;
+        }
+        this.queue.push(handler);
+        //如果一开始就非开始
+        if (status == 'resolved') _d.resolve();
+        if (status == 'rejected') _d.reject();
+        return this;//链式调用
+    }
+    var Deffered = function(){
+        this.promise = new Promise(this);
+        this.lastReturnValue = '';
+    }
+    Deffered.prototype.resolve = function(obj){
+        var handlelist = this.promise.queue;
+        var handler = null;
+        //data存储
+        if(obj) this.lastReturnValue = obj;
+        this.promise.status = 'resolved';
+        //队列
+        while((handler = handlelist.shift()) != undefined){
+            if (handler&&handler.resolve) {
+                //执行并存储返回值
+                this.lastReturnValue = handler.resolve.call(this,this.lastReturnValue);
+                //返回值如果还是promise,那么终止循环;将剩下的队列交给交给这个返回值.
+                //this.lastReturnValue指向then里面的返回promise;所以,当这个then里面调用resolve时,能得到
+                //这个promise上面的队列;
+                if (this.lastReturnValue && this.lastReturnValue.isPromise) {
+                    this.lastReturnValue.queue = handlelist;
+                    return;
+                }
+            }
+        }
+    }
+    Deffered.prototype.reject = function(obj){
+        var handlelist = this.promise.queue;
+        var handler = null;
+        //var returnVal = obj;
+        if(obj) this.lastReturnValue = obj;
+        this.promise.status = 'rejected';
+        while((handler = handlelist.shift()) != undefined){
+            if (handler&&handler.reject) {
+                this.lastReturnValue = handler.reject.call(this,this.lastReturnValue);
+                if (this.lastReturnValue && this.lastReturnValue.isPromise) {
+                    this.lastReturnValue.queue = handlelist;
+                    return;
+                }
+            }
+        }
+    }
+    //用法;
+    function start(){
+        var d = new Deffered();
+
+        offWork(function(){
+            d.resolve('done----offWork');
+        })
+        return d.promise;
+    }
+    start().then(function(){
+        var d = new Deffered();
+        backHome(function(){
+            d.resolve('done----backhome');
+        })
+        return d.promise;
+    }).then(function(){
+        /** var d = new Deffered();
+         eatFood(function(){
+       	d.resolve('done----eatFood');
+    })
+         return d.promise;**/
+        console.log('eating');
+    }).then(function () {
+        console.log("结束")
+    })
+    //基础函数
+    function offWork(callback){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            callback();
+        },1000);
+    }
+
+    function backHome(callback){
+        setTimeout(function(){
+            console.log("到家了！！！")
+            callback();
+        },1000);
+        console.log("回家ing。。。")
+    }
+
+
+//Promise 的最大问题是代码冗余，原来的任务被Promise 包装了一下，不管什么操作，一眼看去都是一堆 then，原来的语义变得很不清楚。
+</script>
+</body>
+</html>

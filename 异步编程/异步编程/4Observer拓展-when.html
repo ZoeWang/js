@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observer</title>
+</head>
+<body>
+<script>
+    var Observer = function(){
+        this._callbacks = {};
+        this._fired = {};
+    };
+
+    Observer.prototype.addListener = function(eventname, callback) {
+        this._callbacks[eventname]=this._callbacks[eventname]||[];
+        this._callbacks[eventname].push(callback);
+        return this;
+    }
+
+    Observer.prototype.removeListener = function(eventname,callback){
+        if(!eventname){
+            return this;
+        }
+        if(!callback){
+            this._callbacks[eventname]=[];
+        }else  if(this._callbacks[eventname]&&this._callbacks[eventname].length>0){
+            for(var i= 0,l=this._callbacks[eventname].length;i<l;i++){
+                if(this._callbacks[eventname][i]==callback){
+                    this._callbacks[eventname].splice(i,1);
+                    break;
+                }
+            }
+        }
+        return this;
+    }
+
+    Observer.prototype.fired = function(eventname,data){
+        var arr=this._callbacks[eventname];
+        if(arr&&arr.length>0){
+            for(var i= 0,len=arr.length;i<len;i++){
+                arr[i].apply(this,Array.prototype.slice.call(arguments,1));
+            }
+        }
+        return this;
+    }
+    //添加queue
+    Observer.prototype.queue = function(queue,callback){
+        var eventName = '';
+        var index= 0;
+        var data = [];
+        var self = this;
+        var task = null;
+
+        var _next = function(){
+            if((task = queue.shift()) != undefined){
+                eventName = 'queueEvent' + index++;
+                self["addListener"](eventName, function(val){
+                    data.push(val);
+                    _next();
+                })
+                task.call(this,_getFireCb(eventName));
+            }else{
+                callback.apply(null, [data]);
+            }
+        }
+        _next();
+        var _getFireCb = function(ename){
+            //每个函数具体的回调;val为传入的值;
+            return function(val){
+                val = val || null;
+                self.fired(ename,val);
+            }
+        }
+
+
+    }
+
+    Observer.prototype.when = function(){
+        var events,callback,i,l,self,argsLength;
+        argsLength = arguments.length;
+        events = Array.prototype.slice.apply(arguments, [0, argsLength - 1]);
+        callback = arguments[argsLength - 1];
+
+        if (typeof callback !== "function") {
+            return this;
+        }
+        self = this;
+        l = events.length;
+
+        var _bind =function(key){
+            self["addListener"](key, function(data){
+                self._fired[key] = self._fired[key] || {};
+                self._fired[key].data = data;
+                _isOk();
+            })
+        }
+        for(i=0;i<l;i++){
+            _bind(events[i]);
+        }
+// 
+        var _isOk = function(){
+            var data = [];
+            var isok = true;
+            for (var i = 0; i < l; i++) {
+                //看有没有事件名这个属性,以及下面挂载的data属性;
+                if(!self._fired.hasOwnProperty(events[i])||
+                    !self._fired[events[i]].hasOwnProperty("data")){
+                    isok = false;
+                    break;
+                }
+                //如果确实以及fired,将其data添加到data数组,以便最终返回;
+                var d = self._fired[events[i]].data;
+                data.push(d);
+            }
+            if(isok) callback.apply(null, [data]);
+
+        }
+
+
+        return this;
+    }
+
+
+    //调用
+    function aEat(callback){
+
+        setTimeout(function(){
+            console.log("a吃完了。。。")
+            callback("回调参数a");
+        },2000);
+    }
+
+    function bEat(callback){
+        setTimeout(function(){
+            console.log("b吃完了。。。")
+            callback("回调参数b");
+        },1000);
+
+    }
+    var observer = new Observer();
+    observer.when("a-eat-ok","b-eat-ok",function(data){
+        console.log(data)
+        console.log("结账");
+    });
+
+    aEat(function(data){
+        observer.fired('a-eat-ok',data);
+    })
+
+    bEat(function(data){
+        observer.fired('b-eat-ok',data);
+    });
+
+
+</script>
+</body>
+</html>

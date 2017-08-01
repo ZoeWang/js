@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>随机数的几中用法</title>
+	<script type="text/javascript">
+		function GetRandomNum(Min,Max)
+		{   
+		var Range = Max - Min;   
+		var Rand = Math.random();   
+		return(Min + Math.round(Rand * Range));   
+		}   
+		var num = GetRandomNum(1,10);   
+		// console.log(num);   
+
+		var chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+		function generateMixed(n) {
+		     var res = "";
+		     for(var i = 0; i < n ; i ++) {
+		         var id = Math.ceil(Math.random()*35);
+		         res += chars[id];
+		     }
+		     return res;
+		}
+
+		// 1.Math.random(); 结果为0-1间的一个随机数(包括0,不包括1) 
+		// 2.Math.floor(num); 参数num为一个数值，函数结果为num的整数部分。 
+		// 3.Math.round(num); 参数num为一个数值，函数结果为num四舍五入后的整数。
+
+		// Math：数学对象，提供对数据的数学计算。
+		// Math.random(); 返回0和1间(包括0,不包括1)的一个随机数。
+
+		// Math.ceil(n); 返回大于等于n的最小整数。
+		// 用Math.ceil(Math.random()*10);时，主要获取1到10的随机整数，取0的几率极小。
+
+		// Math.round(n); 返回n四舍五入后整数的值。
+		// 用Math.round(Math.random());可均衡获取0到1的随机整数。
+		// 用Math.round(Math.random()*10);时，可基本均衡获取0到10的随机整数，其中获取最小值0和最大值10的几率少一半。
+
+		// Math.floor(n); 返回小于等于n的最大整数。
+		// 用Math.floor(Math.random()*10);时，可均衡获取0到9的随机整数。
+	</script>
+	<style type="text/css">
+		div{
+			width: 200px;
+			height: 200px;
+		}
+		.a{
+			background-color: red;
+		}
+		.b{
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="bg">看背景颜色</div>
+	
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+		function getCookie(c_name)
+		{
+			if (document.cookie.length>0)
+			{
+				c_start=document.cookie.indexOf(c_name + "=")
+				if (c_start!=-1)
+				{ 
+				    c_start=c_start + c_name.length+1 
+				    c_end=document.cookie.indexOf(";",c_start)
+				    if (c_end==-1) c_end=document.cookie.length
+				    return unescape(document.cookie.substring(c_start,c_end))
+				} 
+			}
+			return "";
+		}
+
+		function setCookie(c_name,value,expiredays)
+		{
+			var exdate=new Date()
+			exdate.setDate(exdate.getDate()+expiredays)
+			document.cookie=c_name+ "=" +escape(value)+
+			((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+		}
+
+		/**
+		 * 产品需求
+		 * 访问AB页面随机出现
+		 * 判断优先级 uid优先 cookie 其次
+		 *
+		 * 逻辑
+		 * 先读取cookie,没有时：如果未登录随机一个并刷新cookie；如果是登录uid奇数为A，偶数为B,并刷新cookie
+		 * 处理规则：uid 奇数为 A，偶数为B。
+		 * 
+		 * eg：（uid为2的用户张三）
+		 * 首次未登录访问，随机一个，假定为A；（将A存于cookie）
+		 * 第二次未登录访问，应该直接到A；（因为上一次cookie记住了A）
+		 * 第三次登录访问，跳转到B，（因为uid为偶数），并退出；（将cookie刷新成B）
+		 * 第四次未登录访问，直接到B，（因为上一次登录cookie被刷新为B）
+		 *
+		 * 测试例子，把页面AB换成背景色ab
+		 */
+		
+		
+		// var abtemp = new Date().getTime();
+		// var rand = arr[abtemp%2];  随时间奇偶数变化
+		// var rand = Math.floor(Math.random()*arr.length); 随机
+
+		var arr = ['a','b'];
+		var rand = "";
+
+		 var uid = "";			//初始化 仿登录 uid
+		 var page_s = getCookie('page_s');
+		 if(page_s == "0") {
+		 	rand = 0;
+		 }else if(page_s == "1") {
+		 	rand = 1;
+		 }else{
+
+		 	if(uid) {
+			 	rand = uid%2;
+			 	setCookie('page_s',rand, 7);
+			 } else{
+			 	rand = Math.floor(Math.random()*arr.length);
+			 	setCookie('page_s',rand, 7);
+			 }
+		 }
+		 
+		
+		 // 添加随机背景
+		$("#bg").addClass(arr[rand]);
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>代理模式——小明送花</title>
+	<style type="text/css">
+	p{
+		line-height: 1.8em;
+	}
+	button{
+		padding: 15px;
+		margin: 20px;
+	}
+	div{
+		line-height: 2em;
+	}
+	</style>
+</head>
+<body>
+	<section>	
+		<!-- <p>小明要向女神A 送花，但小明很内向，于是决定找 小明和女神A 共同的朋友B 让B 代替自己向女神A 送花。</p> -->
+		<button id="xm" type="button">小明送花给女神A</button>
+		<button id="b" type="button">朋友B帮小明送花给女神A</button>
+		<script type="text/javascript">
+		
+		var Flower = function(name){
+			this.name = name;
+		};
+
+		var xiaoming = {
+			sendFlower: function( target , name){
+				var flower = new Flower(name);
+				target.receiveFlower( flower.name );
+			}
+		};
+
+		var A = {
+			receiveFlower: function( flower ){
+				var oDiv = document.createElement("div");
+				oDiv.innerHTML = ' 收到 ' + flower;
+				document.body.appendChild(oDiv);
+			}
+		};
+
+		var B = {	// 添加代理B
+			receiveFlower: function( flower ){
+				A.receiveFlower( flower );
+			}
+		};
+
+		
+		function $(id){
+			return document.getElementById(id);
+		}
+		$('xm').onclick = function(){
+			// 不用代理模式 小明直接送花给 女神 
+			xiaoming.sendFlower( A , '小明送花给女神A');
+		}
+		
+		$('b').onclick = function(){
+			// 代理B向小明送花 此处的代理毫无用处，它所做的只是把请求简单的转交给本体
+			xiaoming.sendFlower( B , '朋友B帮小明送花给女神A')
+		}
+
+		
+
+		</script>
+	</section>
+	
+	<section>
+		<!-- <p>改版故事背景设定，当A 的心情好的时候收到花，小明的表白成功几率有60%，而当A在心情差的时候收到花，小明的表白成功几率约等于0.小明刚刚认识A，无法辨别A的心情，B和A是好友，很了解A，因此小明只管把花交给B，B会监听A的心情变化，然后在A 心情好的时候把花转交给A</p> -->
+
+		<button id="b2" type="button">保护代理-B监听A的心情，帮小明送花</button>
+		<button id="b3" type="button">虚拟代理-B监听A的心情，帮小明送花</button>
+
+		<script type="text/javascript">
+			var Flower2 = function(name){
+				this.name = name;
+			};
+
+			var xiaoming2 = {
+				sendFlower: function( target, name ){
+					var flower = new Flower2(name);
+					target.receiveFlower(flower.name);
+				}
+			};
+
+			var B2 = {
+				receiveFlower: function( flower ){
+					A2.listenGoodMood(function(){	//监听A的好心情
+						A2.receiveFlower(flower);
+					});
+				}
+			};
+
+			// 虚拟代理
+			var xiaoming3 = {
+				sendFlower: function( target, name ){
+					target.receiveFlower(name);
+				}
+			};
+
+			var B3 = {
+				receiveFlower: function(name){
+					A2.listenGoodMood(function(){	//监听A的好心情
+						var flower = new Flower2(name);
+						A2.receiveFlower(flower.name);
+					});
+				}
+			};
+
+			var A2 = {
+				receiveFlower: function(flower){
+					alert(' 收到花 ' + flower);
+				},
+				listenGoodMood: function(fn){
+					setTimeout(function(){	//假设10秒之后A 的心情变好
+						fn();
+					}, 2000);
+				}
+			};
+
+			$('b2').onclick = function(){
+				xiaoming2.sendFlower( B2 , '保护代理-B监听A的心情，帮小明送花');
+			}
+
+			$('b3').onclick = function(){
+				xiaoming3.sendFlower( B3 , '虚拟代理-B监听A的心情，帮小明送花');
+			}
+			
+			
+
+		</script>
+
+		<!-- <h2>保护代理和虚拟代理</h2> -->
+		<!-- <p>虽然这只是个虚拟的例子，但我们可以从中找到两种代理模式的身影。代理B 可以帮助 A 过滤掉一些请求，比如送花的人中年龄太大的或者没有宝马的，这种请求就可以直接在代理 B 处被拒绝。这种代理叫做  保护代理。  A 和 B 一个充当白脸，一个充当黑脸。白脸A 继续保持良好的女神形象，不希望直接拒绝任何人，于是找个黑脸 B 来控制对A 的访问。也叫 安全代理</p> -->
+		
+		<!-- <p>另外，假设现实中的花的价格不菲，导致在程序的世界里，new Flower 也是一个代价昂贵的操作，那么我们可以把new FLower 的操作交给代理B 去执行，代理B 会选择在 A 心情好时在执行 new Flower ，这是代理的另一种形式，叫虚拟代理。虚拟代理把一些开销很大的对象，延迟到真正需要它的时候才去创建。</p> -->
+
+		<!-- <p>保护代理用于控制不同权限的对象对目标对象的访问，但在Javascript并不容易实现保护代理，因为我们无法判断谁访问了某个对象。而虚拟代理是最常用的一种代理模式。</p>		 -->
+
+
+
+	</section>
+
+</body>
+</html>

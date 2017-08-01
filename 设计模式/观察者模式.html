@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://img.mukewang.com/down/540812440001e40e00000000.js" type="text/javascript"></script>
+<title>观察着模式</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+
+function show(data) {
+  $("body").append('<li>' + data + '</li>')
+}
+
+var Observable = {
+  callbacks: [],
+  add: function(fn) {
+    this.callbacks.push(fn);
+  },
+  fire: function() {
+    this.callbacks.forEach(function(fn) {
+      fn();
+    })
+  }
+}
+
+//使用add开始订阅：
+Observable.add(function() {
+  show('订阅慕课网jquery教程上')
+})
+Observable.add(function() {
+ show('订阅慕课网jquery教程下')
+})
+
+
+//使用fire发布慕课网的jQuery教程
+Observable.fire(); 
+
+
+</script>
+
+<!-- 理解观察者模式
+讲解jQuery回调对象之前，我们有必要先理解其背后的设计思想 - “观察者模式”。
+观察者模式 (pub/sub) 的背后，总的想法是在应用程序中增强松耦合性。并非是在其它对象的方法上的单个对象调用。一个对象作为特定任务或是另一对象的活动的观察者，并且在这个任务或活动发生时，通知观察者。观察者也被叫作订阅者（Subscriber），它指向被观察的对象，既被观察者（Publisher 或 subject)。当事件发生时，被观察者（Publisher）就会通知观察者（subscriber）。
+观察者的使用场合
+观察者的使用场合就是：当一个对象的改变需要同时改变其它对象，并且它不知道具体有多少对象需要改变的时候，就应该考虑使用观察者模式。先看官网的demo这个例子，涉及到了 add 与 fire方法，熟悉设计模式的童鞋呢，一眼就能看出，其实又是基于发布订阅（Publish/Subscribe）的观察者模式的设计。
+作为 $.Callbacks() 的创建组件的一个演示，只使用回调函数列表，就可以实现 Pub/Sub 系统，将 $.Callbacks 作为一个队列。
+我们来模拟常规下最简单的实现：
+JS里对观察者模式的实现是通过回调来实现的，我们来先定义一个Observable对象，其内部包含了2个方法：订阅add方法与发布fire方法，如下代码：
+var Observable = {
+  callbacks: [],
+  add: function(fn) {
+    this.callbacks.push(fn);
+  },
+  fire: function() {
+    this.callbacks.forEach(function(fn) {
+      fn();
+    })
+  }
+}
+使用add开始订阅：
+Observable.add(function() {
+  alert(1)
+})
+
+Observable.add(function() {
+  alert(2)
+})
+使用fire开始发布：
+Observable.fire(); // 1, 2
+设计的原理：
+开始构建一个存放回调的数组，如this.callbacks= [] 添加回调时，将回调push进this.callbacks，执行则遍历this.callbacks执行回调，也弹出1跟2了。当然这只是简洁的设计，便于理解，整体来说设计的思路代码都是挺简单的，那么我们从简单的设计深度挖掘下这种模式的优势。
+注意：如果没有做过复杂交互设计，或者大型应用的开发者，可能一开始无法理解这模式的好处，就简单的设计而言用模式来处理问题，有点把简单的问题复杂化。我们不是为了使用模式而使用的。
+组件开发为了保证组件可以在不同的项目中都适用，其必须是对其常用功能抽象出来加以实现，绝不会包含具体的业务逻辑而某一特定的项目使用者在其业务场景中使用组件时不可避免的要加入不同场景的业务逻辑。 -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -67,3 +67,24 @@ function redirect(url)
 function $id(o){
     return document.getElementById(o) || o;
 }
+
+/**
+Tool.getQueryString(id);
+*/
+var Tool = Tool || {
+   getQueryString: function(name){
+       var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+       var r = window.location.search.substr(1).match(reg);
+       if(r!=null)return  unescape(r[2]); return null;
+   }
+}
+
+function host(){
+  var url = window.location.host;
+  if(url.indexOf("http") > 0){
+    url = url;
+  }else{
+    url ="http://"+url;
+  }
+  return url;
+}

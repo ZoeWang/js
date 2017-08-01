@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>js设计模式——代理模式</title>
 </head>
 <script>
-	//代理模式需要3方
+	/**
+	 * 代理模式需要3方
+	 */
 	// 买家
 	function maijia(argument){
 		this.name = "小米";
 	}
 	// 中介卖房
 	function zhongjie(){
-
 	}
 	zhongjie.prototype.maifang = function() {
 		new fangdong(new maijia()).maifang("20万");
@@ -26,6 +27,41 @@
 	}
 	//new zhongjie().maifang();
 	(new zhongjie).maifang();
+
+	/**
+	 * dudu 送 小妹 蓝色妖姬 托Tom 去送
+	 */
+	// 声明小妹对象
+	var girl = function (name){
+		this.name = name;
+	};
+
+	// dudu
+	var dudu = function (girl) {
+		this.girl = girl;
+		this.sendGift = function(gift) {
+			alert("Hi " + girl.name + ", dudu送你礼物：" + gift);
+		}
+	};
+
+	// Tom 是代理
+	var proxyTom = function (girl) {
+		this.girl = girl;
+		this.dudu = null;
+		this._initialize = function(){
+			if(this.dudu === null){
+				this.dudu = new dudu(this.girl)
+			}
+		}
+		this.sendGift = function (gift) {
+			this._initialize();
+        	this.dudu.sendGift(gift);
+		}
+	};
+
+	// 调用
+	var proxy = new proxyTom(new girl("小妹"));
+	proxy.sendGift("蓝色妖姬");
 </script>
 <body>
 	

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>装饰者模式</title>
+	<style type="text/css">
+	p{
+		text-indent: 2em;
+	}
+	button{
+		padding: 15px;
+		margin: 20px;
+	}
+	img{
+		width: 200px;
+		height: 200px;
+		/*display: block;*/
+	}
+	div,h3{
+		margin: 30px;
+	}
+	</style>
+</head>
+<body>
+	<!-- <h3>模拟传统面向对象语言的装饰者模式</h3> -->
+	
+	<!-- <p>假设我们在编写一个飞机大战的游戏,随着经验值的增加,我们操作的飞机对象可以升级成 更厉害的飞机,一开始这些飞机只能发射普通的子弹,升到第二级时可以发射导弹,升到第三级 时可以发射原子弹。</p> -->
+	<button id="plane1" type="button">传统面向对象语言的装饰者模式</button>
+	<script type="text/javascript">
+		function $$(id){
+			return document.getElementById(id);
+		}
+
+		function createDiv(obj){
+			var oDom = document.createElement( 'div' );
+			oDom.innerHTML = obj;
+			document.body.appendChild( oDom );
+		}
+
+		// 首先是原始的飞机类:
+		var Plane = function(){}
+
+		Plane.prototype.fire = function(){ 
+			// console.log( '发射普通子弹' );
+			createDiv('发射普通子弹');
+		}
+  		// 接下来增加两个装饰类,分别是导弹和原子弹:
+		var MissileDecorator = function( plane ){ 
+			this.plane = plane;
+		}
+		MissileDecorator.prototype.fire = function(){ 
+			this.plane.fire();
+			// console.log( '发射导弹' );
+			createDiv('发射导弹');
+		}
+		var AtomDecorator = function( plane ){ 
+			this.plane = plane;
+		}
+		AtomDecorator.prototype.fire = function(){ 
+			this.plane.fire();
+			// console.log( '发射原子弹' );
+			createDiv('发射原子弹');
+		}
+
+		
+		var plane = new Plane();
+		plane = new MissileDecorator( plane ); 
+		plane = new AtomDecorator( plane );
+
+		
+		$$('plane1').onclick = function(){
+			plane.fire();
+		}
+
+	</script>
+	
+	<!-- <p>导弹类和原子弹类的构造函数都接受参数 plane 对象,并且保存好这个参数,在它们的 fire方法中,除了执行自身的操作之外,还调用 plane 对象的 fire 方法。</p> -->
+
+	<!-- <h3>回到JavaScript的装饰者</h3> -->
+
+	<!-- <p>JavaScript 语言动态改变对象相当容易,我们可以直接改写对象或者对象的某个方法,并不 需要使用“类”来实现装饰者模式,代码如下:</p> -->
+	<button id="plane2" type="button">直接改写对象或是对象方法装饰者模式</button>
+	<script type="text/javascript">
+		var plane2 = {
+			fire: function(){
+				// console.log( '发射普通子弹' ); 
+				createDiv('发射普通子弹2');
+			}
+		}
+		var missileDecorator2 = function(){ 
+			// console.log( '发射导弹' );
+			createDiv('发射导弹2');
+		}
+		var atomDecorator2 = function(){ 
+			// console.log( '发射原子弹' );
+			createDiv('发射原子弹2');
+		}
+		var fire1 = plane2.fire;
+
+		plane2.fire = function(){ 
+			fire1();
+			missileDecorator2(); 
+		}
+		var fire2 = plane2.fire;
+
+		plane2.fire = function(){ 
+			fire2();
+			atomDecorator2(); 
+		}
+		$$('plane2').onclick = function(){
+			plane2.fire(); // 分别输出: 发射普通子弹2、发射导弹2、发射原子弹2
+		}
+		
+	</script>
+
+
+	<!-- <h3>装饰函数</h3> -->
+	<!-- <p>1、通过保存原引用的方式就可以改写某个 函数:</p> -->
+
+	<button id="a1">保存原引用的方式就可以改写某个函数</button>
+	
+	<button id="document"></button>
+	<script type="text/javascript">
+	var a = function(){
+		alert(1);
+	}
+
+	var _a = a;
+
+	a=function(){
+		_a();
+		alert(a);
+	}
+	// a();
+
+	$$('a1').onclick = function(){
+		a();
+	}
+
+	// 这是实际开发中很常见的一种做法,比如我们想给 window 绑定 onload 事件,但是又不确定 这个事件是不是已经被其他人绑定过,为了避免覆盖掉之前的 window.onload 函数中的行为,我 们一般都会先保存好原先的 window.onload,把它放入新的 window.onload 里执行:
+	// window.onload = function(){ 
+	// 	alert ('onload1');
+	// }
+
+	// var _onload = window.onload || function(){};
+
+	// window.onload = function(){ 
+	// 	_onload();
+	// 	alert ('onload2'); 
+	// }
+
+	/**
+	 * 这样的代码当然是符合开放封闭原则的,我们在增加新功能的时候,确实没有修改原来的 window.onload 代码,但是这种方式存在以下两个问题。
+	 *
+	 *	必须维护_onload 这个中间变量,虽然看起来并不起眼,但如果函数的装饰链较长,或者 需要装饰的函数变多,这些中间变量的数量也会越来越多。
+	 *
+	 *	其实还遇到了 this 被劫持的问题,在 window.onload 的例子中没有这个烦恼,是因为调用 普通函数_onload 时,this 也指向 window,跟调用 window.onload 时一样(函数作为对象的 方法被调用时,this 指向该对象,所以此处 this 也只指向 window)。现在把 window.onload 换成 document.getElementById,代码如下:
+	 * 
+	 */
+	
+	var _getElementById = document.getElementById;
+
+	document.getElementById = function( id ){ 
+		alert (1);
+		return _getElementById( id ); // (1) 
+	}
+	var button = document.getElementById( 'document' ); 
+	
+
+	// 执行这段代码,我们看到在弹出 alert(1)之后,紧接着控制台抛出了异常: 
+	// 输出: Uncaught TypeError: Illegal invocation
+	
+	// 异常发生在(1) 处的_getElementById( id )这句代码上,此时_getElementById 是一个全局函数, 当调用一个全局函数时,this 是指向 window 的,而 document.getElementById 方法的内部实现需要 使用 this 引用,this 在这个方法内预期是指向 document,而不是 window, 这是错误发生的原因, 所以使用现在的方式给函数增加功能并不保险。
+
+	// var _getElementById = document.getElementById;
+
+	// document.getElementById = function(){ 
+	// 	alert (11);
+	// 	return _getElementById.apply( document, arguments ); 
+	// }
+	// var button = document.getElementById( 'document' );
+
+	// 但这样做显然很不方便
+	</script>
+
+	<!-- <h3>用AOP装饰函数</h3> -->
+	<!-- <p>首先给出 Function.prototype.before 方法和 Function.prototype.after 方法:</p> -->
+	<script type="text/javascript">
+		Function.prototype.before = function( beforefn ){
+			var _self = this; // 保存原函数的引用
+			return function(){ // 返回包含了原函数和新函数的"代理"函数
+				beforefn.apply( this, arguments ); // 执行新函数,且保证 this 不被劫持,新函数接受的参数 // 也会被原封不动地传入原函数,新函数在原函数之前执行
+				return _self.apply( this, arguments ); // 执行原函数并返回原函数的执行结果, 2 // 并且保证 this 不被劫持
+			} 
+		}
+
+		Function.prototype.after = function( afterfn ){ 
+			var _self = this;
+			return function(){
+				var ret = _self.apply( this, arguments ); 
+				afterfn.apply( this, arguments );
+				return ret;
+			} 
+		};
+	</script>
+	
+	<!-- <p>Function.prototype.before 接受一个函数当作参数,这个函数即为新添加的函数,它装载了 新添加的功能代码。</p> -->
+
+	<!-- <p>接下来把当前的 this 保存起来,这个 this 指向原函数,然后返回一个“代理”函数,这个“代理”函数只是结构上像代理而已,并不承担代理的职责(比如控制对象的访问等)。它的工作 是把请求分别转发给新添加的函数和原函数,且负责保证它们的执行顺序,让新添加的函数在原函数之前执行(前置装饰),这样就实现了动态装饰的效果。</p> -->
+
+	<!-- <p>我们注意到,通过 Function.prototype.apply 来动态传入正确的 this,保证了函数在被装饰之后,this 不会被劫持。</p> -->
+	
+	<!-- <p>Function.prototype.after 的原理跟 Function.prototype.before 一模一样,唯一不同的地方在于让新添加的函数在原函数执行之后再执行。</p> -->
+
+	<!-- <p>下面来试试用 Function.prototype.before 的威力:</p> -->
+	<button id="doc2">测试 Function.prototype.before</button>
+
+	<script>
+		Function.prototype.before = function( beforefn ){
+			var _self = this; 
+			return function(){
+				beforefn.apply(this,arguments); 
+				return _self.apply( this, arguments ); 
+			}
+		}
+
+		function beforetest(){
+			document.getElementById = document.getElementById.before(function(){ 
+				// alert ('before');
+				createDiv('测试 Function.prototype.before');
+			});
+
+			var button = document.getElementById( 'doc2' );
+		}
+		
+		$$('doc2').onclick = function(){
+			beforetest();
+		}
+
+	</script> 
+
+	<!-- <p>再回到 window.onload 的例子,看看用 Function.prototype.before 来增加新的 window.onload 事件是多么简单:</p> -->
+
+	<script type="text/javascript">
+		// window.onload = function(){ 
+		// 	alert ('AOP1');
+		// }
+		// window.onload = ( window.onload || function(){} ).after(function(){ 
+		// 	alert ('AOP2');
+		// }).after(function(){ 
+		// 	alert ('AOP3');
+		// }).after(function(){ 
+		// 	alert ('AOP4');
+		// });
+
+	</script>
+
+	<!-- <p>值得提到的是,上面的 AOP 实现是在 Function.prototype 上添加 before 和 after 方法,但许 多人不喜欢这种污染原型的方式,那么我们可以做一些变通,把原函数和新函数都作为参数传入 before 或者 after 方法:</p> -->
+	<button id="a2">原函数和新函数都作为参数传入 before 或者 after 方法</button>
+	<script type="text/javascript">
+	var before = function(fn, beforefn){
+		return function(){
+			beforefn.apply(this, arguments);
+			return fn.apply(this, arguments);
+		}
+	}
+
+	var a = before(
+		function(){alert('new 3')},
+		function(){alert('new 2')}
+	);
+
+	a = before(a, function(){alert('new 1');});
+
+	$$('a2').onclick = function(){
+		a();
+	}
+
+	</script>
+
+	<!-- <h2>AOP 的应用实例</h2> -->
+
+	<!-- <h3>插件式的表单验证</h3> -->
+
+	<!-- <p>在一个 Web 项目中,可能存在非常多的表单,如 注册、登录、修改用户信息等。在表单数据提交给后台之前,常常要做一些校验,比如登录的时 候需要验证用户名和密码是否为空,代码如下:</p> -->
+	<div>
+		用户名:<input id="username" type="text"/>
+		密码: <input id="password" type="password"/>
+		<input id="submitBtn" type="button" value="普通提交">
+		<input id="submitBtn2" type="button" value="分离校验和提交">
+		<input id="submitBtn3" type="button" value="完全分离">
+	</div>
+	
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script>
+	var username = $$( 'username' ),
+		password = $$( 'password' ), 
+		submitBtn = $$( 'submitBtn' ),
+		submitBtn2 = $$('submitBtn2');
+		submitBtn3 = $$('submitBtn3');
+
+		var formSubmit = function(){
+			if ( username.value === '' ){
+				return alert ( '用户名不能为空' ); }
+			if ( password.value === '' ){
+				return alert ( '密码不能为空' );
+			}
+
+			var param = {
+				username: username.value, 
+				password: password.value
+			}
+			$.ajax({
+				type: 'POST',
+				url: 'ajax.php',
+				data: param,
+				dataType: 'json',
+				success: function(res){
+					if(res){
+						createDiv(res.name);
+						createDiv(res.pwd);
+					}
+				},
+				error: function(){
+					alert('网络错误');
+				}
+			});	// ajax 具体实现略
+		}
+
+		submitBtn.onclick = function(){ 
+			formSubmit();
+		} 
+	</script>
+
+	<!-- <p>formSubmit 函数在此处承担了两个职责,除了提交 ajax 请求之外,还要验证用户输入的合法性。这种代码一来会造成函数臃肿,职责混乱,二来谈不上任何可复用性。</p> -->
+
+	<!-- <p>本节的目的是分离校验输入和提交 ajax 请求的代码,我们把校验输入的逻辑放到 validata函数中,并且约定当 validata 函数返回 false 的时候,表示校验未通过,代码如下:</p> -->
+
+	<script type="text/javascript">
+		var validata2 = function(){
+			if ( username.value === '' ){
+				alert ( '用户名不能为空' );
+				return false; 
+			}
+			if ( password.value === '' ){ 
+				alert ( '密码不能为空' ); 
+				return false;
+			} 
+		}
+
+		var formSubmit2 = function(){
+			if ( validata2() === false ){	//校验未通过
+				return; 
+			}
+			var param = {
+				username: username.value,
+				password: password.value 
+			}
+			$.ajax({
+				type: 'POST',
+				url: 'ajax.php',
+				data: param,
+				dataType: 'json',
+				success: function(res){
+					if(res){
+						createDiv(res.name);
+						createDiv(res.pwd);
+					}
+				},
+				error: function(){
+					alert('网络错误');
+				}
+			});	// ajax 具体实现略 
+		}
+
+		submitBtn2.onclick = function(){
+			formSubmit2();
+		}
+
+
+	</script>
+
+	<!-- <p>现在的代码已经有了一些改进，我们把校验的逻辑都放到了validata 函数中，但 formSubmit 函数的内部还要计算validata函数的返回值，因为返回值的结果表明了是否通过校验</p> -->
+
+	<!-- <p>进一步优化这段代码，使validata和formSubmit完全分离开来。首先要改写Function.prototype.before,如果 beforefn 的执行结果返回 false,表示不再执行后面的原函数,代码如下:</p> -->
+
+	<script type="text/javascript">
+		Function.prototype.beforeLogin = function( beforefn ){
+			var __self = this; 
+			return function(){
+				if ( beforefn.apply( this, arguments ) === false ){
+					// beforefn 返回 false 的情况直接 return,不再执行后面的原函数 
+					return;
+				}
+				return __self.apply( this, arguments ); 
+			}
+		}
+
+		var validata3 = function(){
+			if ( username.value === '' ){
+				alert ( '用户名不能为空' );
+				return false; 
+			}
+			if ( password.value === '' ){ 
+				alert ( '密码不能为空' ); 
+				return false;
+			} 
+		}
+
+		var  formSubmit3 = function(){
+			var param = {
+				username: username.value,
+				password: password.value
+			}
+			$.ajax({
+				type: 'POST',
+				url: 'ajax.php',
+				data: param,
+				dataType: 'json',
+				success: function(res){
+					if(res){
+						createDiv(res.name);
+						createDiv(res.pwd);
+					}
+				},
+				error: function(){
+					alert('网络错误');
+				}
+			});	// ajax 具体实现略 
+		}
+
+		formSubmit3 = formSubmit3.beforeLogin( validata3 );
+
+		submitBtn3.onclick = function(){ 
+			formSubmit3();
+		}
+
+	</script>
+
+	<!-- <p>在这段代码中,校验输入和提交表单的代码完全分离开来,它们不再有任何耦合关系, formSubmit = formSubmit.before( validata )这句代码,如同把校验规则动态接在 formSubmit 函数 之前,validata 成为一个即插即用的函数,它甚至可以被写成配置文件的形式,这有利于我们分 开维护这两个函数。再利用策略模式稍加改造,我们就可以把这些校验规则都写成插件的形式, 用在不同的项目当中。</p> -->
+
+	<!-- <p>值得注意的是,因为函数通过 Function.prototype.before 或者 Function.prototype.after 被装 饰之后,返回的实际上是一个新的函数,如果在原函数上保存了一些属性,那么这些属性会丢失。 代码如下:</p> -->
+	
+	<button id="aaa">注意原函数丢失属性</button>
+
+	<script type="text/javascript">
+		var func = function(){ 
+			alert( 1 );
+		}
+		func.a = 'aaa';
+
+		func = func.after( function(){ 
+			alert( 2 );
+		});
+
+		$$('aaa').onclick = function(){
+			alert ( func.a ); // 输出:undefined
+		}
+		
+
+		// 另外,这种装饰方式也叠加了函数的作用域,如果装饰的链条过长,性能上也会受到一些 影响。
+	</script>
+
+	
+</body>
+</html>

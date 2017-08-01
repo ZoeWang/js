@@ -1,1 +1,59 @@
-<script src="aop.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>aop -- 面向切面编程</title>
+	<script src="aop.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		
+	// function test() {
+	// 	alert(2);
+
+	// 	return 'test me';
+	// }
+
+	// Function.prototype.before = function(fn){
+	// 	var __self = this;
+	// 	return function(){	//挂载到顶层原型链上
+	// 		// this 指向windows
+	// 		fn.apply(this, arguments);
+	// 		var a = __self.apply(__self, arguments);
+			
+	// 		console.log("before",this);
+	// 		console.log("before",a);
+	// 		// console.log("before",d);
+			
+	// 	}
+		
+		
+	// };
+
+	// Function.prototype.after = function(fn){
+	// 	var __self = this;
+	// 	return function(){
+	// 		var b = __self.apply(__self, arguments);
+	// 		fn.apply(this, arguments);
+
+	// 		console.log("after",this);
+	// 		console.log("after",b);
+	// 		// console.log("after",c);
+	// 	}
+		
+	// }
+
+	// test.before(function(){
+	// 	alert(1);
+	// 	// return false;
+	// }).after(function(){
+	// 	alert(3);
+	// })();
+
+	
+
+	</script>
+
+</body>
+</html>

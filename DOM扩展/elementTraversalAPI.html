@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>元素遍历</title>
+</head>
+<body>
+	<p>支持Element Traversal 的浏览器有IE9+、Firefox3.5+、Safari 4+、Chrome 和 Opera 10 +</p>
+	<p>为DOM元素添加了5个属性</p>
+	<ol>
+		<li>childElementCount: 返回子元素（不包括文本节点和注释）的个数</li>
+		<li>firstElementChild: 指向第一个子元素； firstChild的元素版</li>
+		<li>lastElementChild: 指向最后一个子元素； lastChild 的元素版</li>
+		<li>previousElementSibling: 指向前一个同辈元素； previousSibling的元素版</li>
+		<li>nextElementSibling： 指向最后一个同辈元素； nextSibling的元素版</li>
+	</ol>
+
+	<pre>
+		// 以前这样写
+		var i,
+			len,
+			child = element.firstChild;
+		while(child != element.lastChild) {
+			if(child.nodeType == 1){	//检查是不是元素
+				processChild(child);
+			}
+			child = child.nextSibling;
+		}
+
+		// 现在可以这样
+		var i,
+			len,
+			child = element.firstElementChild;
+		while(child != element.lastElementChild) {
+			processChild(child);	// 已知其是元素
+			child = child.nextElementSibling;
+		}
+	</pre>
+</body>
+</html>

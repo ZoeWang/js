@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    function* start() {
+        var a = yield 'start';
+        console.log(a);
+        var b = yield 'running';
+        console.log(b);
+        var c = yield 'end';
+        console.log(c);
+        return 'over';
+    }
+
+    var it = start();
+    console.log(it.next(11));//Object {value: "start", done: false}
+    console.log(it.next(22));//22  object {value: 'running', done: false}
+    console.log(it.next(333));//333 Object {value: 'end', done: false}
+    console.log(it.next(444));//444 Object {value: "over", done: true}
+
+//    虽然 Generator 函数将异步操作表示得很简洁，
+//    但是流程管理却不方便（即何时执行第一阶段、何时执行第二阶段）。
+
+
+
+
+
+</script>
+</body>
+</html>

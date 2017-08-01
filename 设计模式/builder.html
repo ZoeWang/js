@@ -1,0 +1,88 @@
+<meta charset = "utf-8">	
+<script type="text/javascript">
+	// 1.发送一个请求 白富美
+	// 2. $.ajax 建造者模式  包工头
+	// 3. 工人 完整的工程
+	// $.ajax({
+	// 	url:'a.php',
+	// 	success:function(){
+
+	// 	}
+	// })
+	// $('<p>aaa</p>') => jquery 内部去找工人给我们实现
+	//
+	
+
+	/**
+	 * 1.产出房子 不太形象
+	 * 2. 包工头 调用工人进行开个，而且他很清楚工人们具体的某个大项
+	 * 3. 工人是盖房子的 工人可以建卧室 建客厅 建厨房
+	 * 4. 包工头只是一个接口，不干活
+	 */
+	function Fangzi (argument) {
+		this.woshi = "";
+		this.keting = "";
+		this.chufang = "";
+	}
+
+	function Baogongtou(){
+		this.gaifangzi = function(gongren){
+
+			gongren.jian_woshi();
+			gongren.jian_keting();
+			gongren.jian_chufang();
+		}
+	}
+
+	function Gongren(){
+		this.jian_woshi = function(){
+			console.log('卧室我建好了');
+		}
+
+		this.jian_keting = function(){
+			console.log('客厅建好了');
+		}
+
+		this.jian_chufang = function(){
+			console.log('厨房建好了');
+		}
+		this.jiaogong = function(){
+			var _fangzi = new Fangzi();
+			_fangzi.woshi = 'ok';
+			_fangzi.keting = 'ok';
+			_fangzi.chufang = 'ok';
+			return _fangzi;
+		}
+	}
+	
+	var gongren = new Gongren();
+	var baogongtou = new Baogongtou();
+	baogongtou.gaifangzi(gongren);
+	// 主人要房子
+	var myfangzi = gongren.jiaogong();
+	console.log(myfangzi);
+
+	/**
+	 * http://www.cnblogs.com/TomXu/archive/2012/02/22/2353341.html
+	 * getBeerByIdBridge 包工头
+	 * getBeerById 工人
+	 * el.addEventListener 客户
+	 */
+	function getBeerById(id, callback) {
+	    // 使用ID来请求数据，然后返回数据.
+	    asyncRequest('GET', 'beer.uri?id=' + id, function (resp) {
+	        // callback调用 response
+	        callback(resp.responseText);
+	    });
+	}
+
+	var el = document.querySelector('#test');
+	el.addEventListener('click', getBeerByIdBridge, false);
+
+	function getBeerByIdBridge(e) {
+	    getBeerById(this.id, function (beer) {
+	        console.log('Requested Beer: ' + beer);
+	    });
+	}
+
+</script>

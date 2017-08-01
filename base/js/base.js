@@ -56,6 +56,43 @@ function tab(obj){
 	})
 }
 
+function tab2(){
+	$('.tabs .tabs-nav a').click(function(e) {
+ 
+        $('.tabs .tabs-nav a.current').removeClass('current');
+        $(this).addClass('current');
+        $('.tabs div:not(:hidden)').hide();
+        $(this.hash).show();
+ 
+        e.preventDefault;
+ 
+    });
+}
+
+function tab3(){
+
+    $(".tab li").click(function(){
+    $(".tab li").eq($(this).index()).addClass("cur").siblings().removeClass('cur');
+$("div").hide().eq($(this).index()).show();
+   //另一种方法: $("div").eq($(".tab li").index(this)).addClass("on").siblings().removeClass('on'); 
+
+    });
+
+}
+
+function tab4(){
+	$('.tabtitle li').click(function () {
+		var index = $(this).index();
+		$(this).attr('class',"tabhover").siblings('li').attr('class','taba');
+		$('.tabcontent').eq(index).show(200).siblings('.tabcontent').hide();
+		});
+  var t = 0;
+  var timer = setInterval(function(){
+    if( t == $('.tabtitle li').length ) t = 0;
+    $('.tabtitle li:eq('+t+')').click();
+    t++;
+  }, 700)
+}
 /**
  * 实现方式，最简洁的tab
  */
@@ -790,4 +827,52 @@ console.log(baseUrl);
 function hideTel( tel ){
 	var reg = /(\d{3})\d{4}(\d{4})/;
 	return tel.replace(reg, "$1****$2");
+}
+
+/**
+ * 智能浮动
+ * @return {[type]} [description]
+ */
+$.fn.smartFloat = function() {
+    var position = function(element) {
+        var top = element.position().top, pos = element.css("position");
+        $(window).scroll(function() {
+            var scrolls = $(this).scrollTop();
+            if (scrolls > top) {
+                if (window.XMLHttpRequest) {
+                    element.css({
+                        position: "fixed",
+                        top: 0
+                    });    
+                } else {
+                    element.css({
+                        top: scrolls
+                    });    
+                }
+            }else {
+                element.css({
+                    position: "absolute",
+                    top: top
+                });    
+            }
+        });
+    };
+    return $(this).each(function() {
+        position($(this));                         
+    });
+};
+
+//绑定
+$("#float").smartFloat();
+
+
+// 下拉
+function togglePull(){
+	var dot = $(".toggle");
+	dot.click(function(){
+		var _this = $(this);
+		_this.next('.text').slideToggle(function(){
+			_this.toggleClass("active");
+		});
+	});
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observer</title>
+</head>
+<body>
+<script>
+    var Observer = function(){
+        this._callbacks = {
+        };
+        // this._fired = {};
+    };
+
+    Observer.prototype.addListener = function(eventname, callback) {
+        this._callbacks[eventname]=this._callbacks[eventname]||[];
+        this._callbacks[eventname].push(callback);
+        return this;
+    }
+
+    Observer.prototype.removeListener = function(eventname,callback){
+        if(!eventname){
+            return this;
+        }
+        if(!callback){
+            this._callbacks[eventname]=[];
+        }else  if(this._callbacks[eventname]&&this._callbacks[eventname].length>0){
+            for(var i= 0,l=this._callbacks[eventname].length;i<l;i++){
+                if(this._callbacks[eventname][i]==callback){
+                    this._callbacks[eventname].splice(i,1);
+                    break;
+                }
+            }
+        }
+        return this;
+    }
+
+    Observer.prototype.fire = function(eventname,data){
+        var arr=this._callbacks[eventname];
+        if(arr&&arr.length>0){
+            for(var i= 0,len=arr.length;i<len;i++){
+                arr[i].apply(this,Array.prototype.slice.call(arguments,1));
+            }
+        }
+        return this;
+    }
+    //调用
+    function offWork(callback){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            callback();
+        },1000);
+    }
+
+    function backHome(callback){
+        setTimeout(function(){
+            console.log("到家了！！！")
+            callback();
+        },2000);
+        console.log("回家ing。。。")
+    }
+
+    var observer = new Observer();
+  
+
+    // observer.fire("hellow")
+    // offWork(function(){
+    //     observer.fire('offworked');
+    // })
+    
+    // observer.addListener('offworked',function(){
+    //     backHome(function(){
+    //         observer.fire('backHomed');
+    //     });
+    // })
+    // observer.addListener('backHomed',function(){
+    //     // eatFood(function(){
+    //     // });
+    // })
+
+    
+
+</script>
+</body>
+</html>

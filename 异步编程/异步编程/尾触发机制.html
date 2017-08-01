@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function offWork(data,next){
+        console.log("上班ing。。。")
+        setTimeout(function(){
+            console.log("下班了。。。")
+            next('传给下个任务的数据');
+        },1000);
+    }
+
+    function backHome(data,next){
+        console.log('上个任务传过来的数据为：'+data);
+        setTimeout(function(){
+            console.log("到家了！！！")
+            next('传给下个任务的数据');
+        },1000);
+        console.log("回家ing。。。")
+    }
+
+    App = {
+        handles:[],
+        use:function(handle){
+            if(typeof handle == 'function')
+                App.handles.push(handle);
+        },
+        next:function(data){
+            var handlelist = App.handles;
+            var handle = null;
+            var _next = App.next;
+            if((handle = handlelist.shift()) != undefined){
+                handle.call(App,data,_next);
+            }
+        },
+        start:function(data){
+            App.next(data);
+        }
+    }
+    App.use(offWork);
+    App.use(backHome);
+    App.start();
+</script>
+</body>
+</html>

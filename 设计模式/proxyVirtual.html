@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>虚拟代理——实现图片预加载</title>
+	<style type="text/css">
+	p{
+		line-height: 1.8em;
+		text-indent: 2em;
+	}
+	button{
+		padding: 15px;
+		margin: 20px;
+	}
+	img{
+		width: 200px;
+		height: 200px;
+		/*display: block;*/
+	}
+	div,h3{
+		margin: 30px;
+	}
+	</style>
+</head>
+<body>
+	<button type="button" id="comImg">正常加载图片</button>
+	<button type="button" id="proxyImg">虚拟代理实现图片预加载</button>
+
+	<script type="text/javascript">
+	function $(id){
+		return document.getElementById(id);
+	}
+
+	function createDiv(obj){
+		var oDom = document.createElement( 'div' );
+		oDom.innerHTML = obj;
+		document.body.appendChild( oDom );
+	}
+
+	var myImage = (function(){		//创建一个本体对象
+		var imgNode = document.createElement( 'img' );		
+		//网页面中创建一个标签
+		document.body.appendChild( imgNode );
+
+		return {
+			setSrc: function(src){		
+			// 提供一个对外的setSrc 接口，可以给img 标签设置src属性
+				imgNode.src = src;
+			}
+		}
+	})();
+
+	$('comImg').onclick = function(){
+		myImage.setSrc("http://jiuye.jikexueyuan.com/Current/home/images/web/ban.jpg");
+	}
+
+
+	var proxyImage = (function(){
+		var img = new Image;
+		img.onload = function(){
+			myImage.setSrc(this.src);
+		}
+		return {
+			setSrc: function(src){
+				myImage.setSrc('file:///www/test/js/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/images/loading.gif');
+				img.src = src;
+			}
+		}
+	})();
+
+	$('proxyImg').onclick = function(){
+		// alert("虚拟代理实现图片预加载");
+		proxyImage.setSrc("http://jiuye.jikexueyuan.com/Current/home/images/web/ban.jpg");
+	}
+
+	</script>
+	<!-- <img src="images/loading.gif"> -->
+
+	<!-- <p>现在我们通过proxyImage间接的访问MyImage。proxyImage控制了客户对MyImage的访问，并且在此过程中加入了一些额外的操作，比如在真正的图片加载好之前，先把img节点的src设置为一张本地的loading图</p> -->
+
+	<!-- <h3>代理的意义</h3> -->
+	<!-- <p>不用代理的预加载图片的函数实现</p> -->
+	
+	<button type="button" id="comImg2">不用代理的预加载图片</button>
+
+	<script type="text/javascript">
+	var MyImage2 = (function(){
+		var imgNode = document.createElement('img');
+		document.body.appendChild( imgNode );
+		var img = new Image;
+		
+		img.onload = function(){
+			imgNode.src = img.src;
+		};
+
+		return {
+			setSrc: function(src){
+				imgNode.src = 'file:///www/test/js/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/images/loading.gif';
+				img.src = src;
+			}
+		}
+	})();
+
+	$('comImg2').onclick = function(){
+		// alert("不用代理的预加载图片");
+		MyImage2.setSrc("http://jiuye.jikexueyuan.com/Current/home/images/web/ban.jpg");
+	}
+
+	</script>
+	
+	<!-- <h3>代理和本体接口的一致性</h3> -->
+	<!-- <p>如果代理对象和本体对象都为一个函数(函数也是对象),函数必然都 能被执行,则可以认为它们也具有一致的“接口”,代码如下:</p> -->
+
+	<button type="button" id="proxyImg2">代理和本体接口的一致性</button>
+
+	<script type="text/javascript">
+		var myImage3 = (function(){
+			var imgNode = document.createElement( 'img' ); 
+			document.body.appendChild( imgNode );
+
+			return function( src ){ 
+				imgNode.src = src;
+			} 
+		})();
+		var proxyImage3 = (function(){ 
+			var img = new Image;
+			img.onload = function(){ 
+				myImage3( this.src );
+			}
+
+			return function( src ){
+				myImage3( 'file:///www/test/js/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/images/loading.gif' ); 
+				img.src = src;
+			}
+		})();
+
+		$('proxyImg2').onclick = function(){
+			// alert("代理和本体接口的一致性");
+			proxyImage3( 'http://jiuye.jikexueyuan.com/Current/home/images/web/ban.jpg' );
+		}
+		
+	</script>
+
+	<h3>虚拟代理合并HTTP请求</h3>
+	<!-- <p>这个例子很容易引起共鸣，在web开发中,也许最大的开销就是网络请求。假设我们在做一个文件同步的功能，当我们选中一个checkbox的时候，它对应的文件就会被同步到另外一台备用服务器上面</p> -->
+	<button type="button" id="comHttp">正常HTTP请求</button>
+	<button type="button" id="proxyHttp">虚拟代理合并HTTP请求</button>
+	<div>
+		<input type="checkbox" name="" id="1">1  
+		<input type="checkbox" name="" id="2">2	 
+		<input type="checkbox" name="" id="3">3	 
+		<input type="checkbox" name="" id="4">4  
+		<input type="checkbox" name="" id="5">5  
+		<input type="checkbox" name="" id="6">6  
+		<input type="checkbox" name="" id="7">7  
+		<input type="checkbox" name="" id="8">8  
+		<input type="checkbox" name="" id="9">9  
+	</div>
+	<!-- <p>
+		给这些 checkbox 绑定点击事件，并且在点击的同时往另一台服务器同步文件：
+	</p> -->
+	<script type="text/javascript">
+	function comHttp(){
+		var synchronousFile = function(id){
+			createDiv('开始同步文件，id为：' + id);
+		};
+
+		var checkbox = document.getElementsByTagName('input');
+
+		for(var i = 0, c; c = checkbox[ i++ ]; ){
+			// console.log(i,c);
+			c.onclick = function(){
+				if( this.checked === true ){
+					synchronousFile( this.id );
+				}
+			}
+		};
+	}
+	
+	$('comHttp').onclick = function(){
+		comHttp();
+	};
+
+	// 当我们选中3个checkbox的时候，依次往服务器发送了3次同步文件的请求。而点击一个checkbox并不是很复杂的操作，一秒钟可以点击多次，如此频繁的网络请求将会带来相当大的开销。
+	// 解决方案是，我们可以通过一个代理函数proxySynchronousFile来收集一段时间内的请求，最后一次性的发送给服务器。可以减少服务器的压力
+	
+	function proxyHttp(){
+		var synchronousFile = function(id){
+			var http = document.createElement( 'div' );
+			http.innerHTML =  '开始同步文件，id为：' + id
+			document.body.appendChild( http );
+			// console.log(' 开始同步文件，id 为： '+ id);
+		}; 
+
+		var proxySynchronousFile = (function(){
+			var cache = [],		//保存一段时间内需要同步的ID
+				timer;		//定时器
+			return function(id){
+				cache.push(id);
+				if(timer){		// 保证不会覆盖已启动的定时器
+					return;
+				}
+
+				timer = setTimeout(function(){
+					synchronousFile( cache.join(",") );		// 2秒后向本体发送需要同步的ID 集合
+					clearTimeout(timer);	// 清空定时器
+					timer = null;
+					cache.length = 0;	// 清空ID集合
+				}, 2000);
+			}
+		})();
+
+		var checkbox = document.getElementsByTagName('input');
+
+		for(var i = 0, c; c= checkbox[i++]; ){
+			c.onclick = function(){
+				if( this.checked === true ){
+					proxySynchronousFile( this.id );
+				}
+			}
+		}
+	}
+	
+	$('proxyHttp').onclick = function(){
+		proxyHttp();
+	};
+
+	
+	</script>
+
+	
+	<!-- <h3>缓存代理</h3> -->
+	<!-- <p>缓存代理可以为一些开销大的运算结果提供暂时的存储，在下次运算时，如果传递进来的参数跟之前一致，则可以直接返回前面存储的运算结果。</p> -->
+	
+	<h3>缓存代理的例子——计算乘积</h3>
+
+	<button type="button" id="mult">普通计算乘积</button>
+
+	<button type="button" id="proxyMult">缓存代理计算乘积</button>
+
+	<script type="text/javascript">
+		// 先创建一个用于求乘积的函数
+		var mult = function(){
+			createDiv('开始计算乘积');
+
+			// console.log('开始计算乘积');
+			var a = 1;
+			for(var i = 0, l = arguments.length; i < l; i++ ){
+				a = a * arguments[i];
+			}
+			return a;
+		};
+
+		$('mult').onclick = function(){
+			
+			createDiv(mult(2,3,4));
+
+		}
+		
+
+		// // 现在加入缓存代理
+		var proxyMult = (function(){
+			var cache = {};
+			return function(){
+				var args = Array.prototype.join.call(arguments, ',');
+				if(args in cache){
+					alert('缓存');
+					return cache[ args ];
+				}
+				return cache[ args ] = mult.apply(this, arguments );
+			}
+		})();
+
+		$('proxyMult').onclick = function(){
+			createDiv(proxyMult(3,2,3,4));
+		}
+
+		// 当我们第二次调用 proxyMult( 1, 2, 3, 4 )的时候,本体 mult 函数并没有被计算,proxyMult直接返回了之前缓存好的计算结果。
+		// 通过增加缓存代理的方式,mult 函数可以继续专注于自身的职责——计算乘积,缓存的功能 是由代理对象实现的。
+
+	</script>
+	
+	<h3>用高阶函数动态创建代理</h3>
+	<!-- <p>通过传入高阶函数这种更加灵活的方式,可以为各种计算方法创建缓存代理。现在这些计算方法被当作参数传入一个专门用于创建缓存代理的工厂中, 这样一来,我们就可以为乘法、加法、减法等创建缓存代理,代码如下:</p> -->
+	
+	<button type="button" id="gmult">高阶函数——乘积</button>
+	<button type="button" id="gplus">高阶函数——加和</button>
+
+	<script type="text/javascript">
+		/**************** 计算乘积 *****************/ 
+		var mult2 = function(){
+			var a = 1;
+			for(var i = 0, l = arguments.length; i < l; i++ ){
+				a = a * arguments[i];
+			}
+			return a;
+		};
+		/**************** 计算加和 *****************/
+		var plus2 = function(){
+			var a = 0;
+			for(var i = 0, l = arguments.length; i < l; i++ ){
+				a = a + arguments[i];
+			}
+			return a;
+		};
+		/**************** 创建缓存代理的工厂 *****************/
+		var createProxyFactory = function(fn){
+			var cache = {};
+			return function(){
+				var args = Array.prototype.join.call(arguments, ',');
+				if( args in cache ){
+					alert('高阶-缓存');
+					return cache[args];
+				}
+				return cache[args] = fn.apply(this, arguments );
+			}
+		};
+
+		var proxyMult2 = createProxyFactory(mult2),
+		proxyPlus2 = createProxyFactory(plus2);
+
+
+		$('gmult').onclick = function(){
+			createDiv(proxyMult2(1,2,3,4));
+		}
+
+		$('gplus').onclick = function(){
+			createDiv( proxyPlus2(1,2,3,4));
+		}
+
+	</script>
+</body>
+</html>
